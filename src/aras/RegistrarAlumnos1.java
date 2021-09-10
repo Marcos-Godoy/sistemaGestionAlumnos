@@ -7,6 +7,8 @@ package aras;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
@@ -23,6 +25,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
     public RegistrarAlumnos1() {
         initComponents();
         
+        
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -30,6 +33,8 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        txt_nombre.setText(fechaActual()); //cambiar despues por otro txt.
     }
     
     //Reemplazar el icono de java por default
@@ -217,6 +222,13 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static String fechaActual(){
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+        
+        return formatoFecha.format(fecha);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
