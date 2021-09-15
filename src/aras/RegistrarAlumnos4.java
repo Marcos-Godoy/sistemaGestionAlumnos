@@ -140,6 +140,8 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
             }
         }
         */
+        //int contador = RegistrarAlumnos3.cont;
+        String nombre_alumno = RegistrarAlumnos1.nombre;
         if(jTable1.getRowCount()>0){
             for(int i = 0; i < jTable1.getRowCount(); i++){
                 try {
@@ -152,7 +154,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                             +jTable1.getValueAt(i, 3)+")");*/
                     PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?)");
                     pst.setInt(1, 0);
-                    pst.setInt(2, 1);
+                    pst.setString(2, nombre_alumno);
                     pst.setString(3, (String) jTable1.getValueAt(i, 0));
                     pst.setString(4, (String) jTable1.getValueAt(i, 1));
                     pst.setString(5, (String) jTable1.getValueAt(i, 2));

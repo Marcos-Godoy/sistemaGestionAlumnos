@@ -1,21 +1,32 @@
 package aras;
 
+import clases.Conexion;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mjgod
  */
 public class RegistrarAlumnos3 extends javax.swing.JFrame {
-
+    public static int cont = 0;
+    
     /**
      * Creates new form RegistrarAlumnos1
      */
     public RegistrarAlumnos3() {
         initComponents();
+        
+        
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
@@ -32,6 +43,13 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/cuatroVientos.jpg"));
         return retValue;
     }
+    
+    public static String fechaActual(){
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+        
+        return formatoFecha.format(fecha);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,23 +64,23 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JTextField();
+        txt_alergias = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_nombre1 = new javax.swing.JTextField();
+        txt_cobertura = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txt_nombre2 = new javax.swing.JTextField();
+        txt_condicion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton_inscripcion = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton_cuota = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox_sangre = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        txt_nombre4 = new javax.swing.JTextField();
+        txt_retira_con = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea_observaciones = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -82,36 +100,36 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         jLabel2.setText("Alergias:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
 
-        txt_nombre.setBackground(new java.awt.Color(51, 102, 255));
-        txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
-        txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 25));
+        txt_alergias.setBackground(new java.awt.Color(51, 102, 255));
+        txt_alergias.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_alergias.setForeground(new java.awt.Color(255, 255, 255));
+        txt_alergias.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_alergias.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_alergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cobertura médica:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        txt_nombre1.setBackground(new java.awt.Color(51, 102, 255));
-        txt_nombre1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_nombre1.setForeground(new java.awt.Color(255, 255, 255));
-        txt_nombre1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_nombre1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, -1));
+        txt_cobertura.setBackground(new java.awt.Color(51, 102, 255));
+        txt_cobertura.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_cobertura.setForeground(new java.awt.Color(255, 255, 255));
+        txt_cobertura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_cobertura.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_cobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Padece de alguna condición médica:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
-        txt_nombre2.setBackground(new java.awt.Color(51, 102, 255));
-        txt_nombre2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_nombre2.setForeground(new java.awt.Color(255, 255, 255));
-        txt_nombre2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_nombre2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 210, -1));
+        txt_condicion.setBackground(new java.awt.Color(51, 102, 255));
+        txt_condicion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_condicion.setForeground(new java.awt.Color(255, 255, 255));
+        txt_condicion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_condicion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 210, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,10 +141,10 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         jLabel10.setText("Grupo sanguíneo:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("SI");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, -1));
+        buttonGroup1.add(jRadioButton_inscripcion);
+        jRadioButton_inscripcion.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton_inscripcion.setText("SI");
+        getContentPane().add(jRadioButton_inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,34 +156,34 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         jLabel13.setText("Paga Cuota:");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setText("SI");
-        getContentPane().add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+        buttonGroup2.add(jRadioButton_cuota);
+        jRadioButton_cuota.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton_cuota.setText("SI");
+        getContentPane().add(jRadioButton_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("NO");
         getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-", "0+", "A-", "A+", "B-", "B+", "AB" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        jComboBox_sangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-", "0+", "A-", "A+", "B-", "B+", "AB" }));
+        getContentPane().add(jComboBox_sangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Observaciones:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
-        txt_nombre4.setBackground(new java.awt.Color(51, 102, 255));
-        txt_nombre4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_nombre4.setForeground(new java.awt.Color(255, 255, 255));
-        txt_nombre4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_nombre4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 210, 25));
+        txt_retira_con.setBackground(new java.awt.Color(51, 102, 255));
+        txt_retira_con.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_retira_con.setForeground(new java.awt.Color(255, 255, 255));
+        txt_retira_con.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_retira_con.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_retira_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 210, 25));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextArea_observaciones.setColumns(20);
+        jTextArea_observaciones.setRows(5);
+        jScrollPane1.setViewportView(jTextArea_observaciones);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 210, 90));
 
@@ -191,6 +209,11 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Finalizar >");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 140, 50));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
@@ -203,6 +226,92 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         registrarAlumnos2.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        int sangre;
+        String nombre, lugar, localidad, domicilio, nombre_madre, nombre_padre, telefono, nombre_escuela, grado, division, repite, repitio, alergias, cobertura, condicion, retira_con, observaciones, inscripcion, cuota;
+        int dni, dni_madre, dni_padre, grado_repetido, numero_escuela;
+        
+        nombre = RegistrarAlumnos1.nombre;
+        nombre_madre = RegistrarAlumnos1.nombre_madre;
+        nombre_padre = RegistrarAlumnos1.nombre_padre;
+        lugar = RegistrarAlumnos1.lugar;
+        localidad = RegistrarAlumnos1.localidad;
+        domicilio = RegistrarAlumnos1.domicilio;
+        telefono = RegistrarAlumnos1.telefono;
+        dni = Integer.parseInt(RegistrarAlumnos1.dni);
+        dni_madre = Integer.parseInt(RegistrarAlumnos1.dni_madre);
+        dni_padre = Integer.parseInt(RegistrarAlumnos1.dni_padre);
+        
+        nombre_escuela = RegistrarAlumnos2.nombre_escuela;
+        numero_escuela = Integer.parseInt(RegistrarAlumnos2.numero_escuela);
+        grado = RegistrarAlumnos2.grado;
+        division = RegistrarAlumnos2.division;
+        repite = RegistrarAlumnos2.repite;
+        repitio = RegistrarAlumnos2.repitio;
+        grado_repetido = RegistrarAlumnos2.grado_repetido;
+        
+        alergias = txt_alergias.getText().trim();
+        cobertura = txt_cobertura.getText().trim();
+        condicion = txt_condicion.getText().trim();
+        retira_con = txt_retira_con.getText().trim();
+        observaciones = jTextArea_observaciones.getText();
+        sangre = jComboBox_sangre.getSelectedIndex() + 1;
+        
+        if(jRadioButton_inscripcion.isSelected()){
+            inscripcion = "SI";
+        } else {
+            inscripcion = "NO";
+        }
+        
+        if(jRadioButton_cuota.isSelected()){
+            cuota = "SI";
+        } else {
+            cuota = "NO";
+        }
+        
+        
+        try {
+            Connection cn2 = Conexion.conectar();
+            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            
+            pst2.setInt(1, cont);
+            pst2.setString(2, nombre);
+            pst2.setInt(3, dni);
+            pst2.setString(4, lugar);
+            pst2.setString(5, domicilio);
+            pst2.setString(6, localidad);
+            pst2.setString(7, nombre_madre);
+            pst2.setInt(8, dni_madre);
+            pst2.setString(9, nombre_padre);
+            pst2.setInt(10, dni_padre);
+            pst2.setString(11, telefono);
+            pst2.setInt(12, numero_escuela);
+            pst2.setString(13, nombre_escuela);
+            pst2.setString(14, grado);
+            pst2.setString(15, division);
+            pst2.setString(16, repite);
+            pst2.setString(17, repitio);
+            pst2.setInt(18, grado_repetido);
+            pst2.setInt(19, sangre);
+            pst2.setString(20, alergias);
+            pst2.setString(21, cobertura);
+            pst2.setString(22, condicion);
+            pst2.setString(23, retira_con);
+            pst2.setString(24, observaciones);
+            pst2.setString(25, inscripcion);
+            pst2.setString(26, cuota);
+            pst2.setString(27, fechaActual());
+                        
+            pst2.executeUpdate();
+            cn2.close();
+            this.dispose();
+                        
+            } catch (SQLException e) {
+                System.err.println("Error en Registrar usuario. " + e);
+                JOptionPane.showMessageDialog(null, "¡ERROR al registrar alumno!, contacte al administrador.");
+    }//GEN-LAST:event_jButton2ActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -246,7 +355,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_sangre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -257,15 +366,15 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_Wallpaper;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton_cuota;
+    private javax.swing.JRadioButton jRadioButton_inscripcion;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_nombre1;
-    private javax.swing.JTextField txt_nombre2;
-    private javax.swing.JTextField txt_nombre4;
+    private javax.swing.JTextArea jTextArea_observaciones;
+    private javax.swing.JTextField txt_alergias;
+    private javax.swing.JTextField txt_cobertura;
+    private javax.swing.JTextField txt_condicion;
+    private javax.swing.JTextField txt_retira_con;
     // End of variables declaration//GEN-END:variables
 }
