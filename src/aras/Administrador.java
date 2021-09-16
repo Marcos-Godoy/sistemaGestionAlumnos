@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package aras;
+package aras; //paquete al que pertenece la clase
 
 import java.sql.*;
 import clases.Conexion;
@@ -24,14 +19,15 @@ public class Administrador extends javax.swing.JFrame {
      */
     public Administrador() {
         initComponents();
-        
-        setSize(650,430);
+        // metodos para poder modificar la interfaz visual por codigo
+        setSize(650,430); 
         setResizable(false);
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
-        
+        //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
+        //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -77,12 +73,27 @@ public class Administrador extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
 
         jButton_RegistrarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addUser.png"))); // NOI18N
+        jButton_RegistrarAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistrarAlumnosActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, 100));
 
         jButton_GestionarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informationuser.png"))); // NOI18N
+        jButton_GestionarAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GestionarAlumnosActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 120, 100));
 
         jButton_ListarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/opciones.png"))); // NOI18N
+        jButton_ListarAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarAlumnosActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton_ListarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 120, 100));
 
         jLabel_RegistrarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,6 +111,25 @@ public class Administrador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_RegistrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarAlumnosActionPerformed
+        // TODO add your handling code here:
+        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        registrarAlumnos.setVisible(true);
+    }//GEN-LAST:event_jButton_RegistrarAlumnosActionPerformed
+
+    private void jButton_GestionarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarAlumnosActionPerformed
+        
+        GestionarAlumnos gestionarAlumnos = new GestionarAlumnos();
+        gestionarAlumnos.setVisible(true);
+        
+    }//GEN-LAST:event_jButton_GestionarAlumnosActionPerformed
+
+    private void jButton_ListarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarAlumnosActionPerformed
+        // TODO add your handling code here:
+        ListarAlumnos listarAlumnos = new ListarAlumnos();
+        listarAlumnos.setVisible(true);
+    }//GEN-LAST:event_jButton_ListarAlumnosActionPerformed
 
     /**
      * @param args the command line arguments
