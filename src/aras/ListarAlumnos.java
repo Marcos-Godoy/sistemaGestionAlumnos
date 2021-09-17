@@ -3,10 +3,19 @@ package aras;
 
 import java.sql.*;
 import clases.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -99,6 +108,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_gestionarAlumnos = new javax.swing.JTable();
         cmb_filtro = new javax.swing.JComboBox<>();
+        Imprimir = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,7 +125,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 210, 35));
+        getContentPane().add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 210, 35));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +149,18 @@ public class ListarAlumnos extends javax.swing.JFrame {
 
         cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1", "2", "3", "4", "5" }));
         getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 130, -1));
+
+        Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        Imprimir.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        Imprimir.setForeground(new java.awt.Color(255, 255, 255));
+        Imprimir.setText("Imprimir");
+        Imprimir.setBorder(null);
+        Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImprimirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 210, 35));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -188,6 +210,92 @@ public class ListarAlumnos extends javax.swing.JFrame {
 ObtenerDatosTabla();
     }//GEN-LAST:event_MostrarActionPerformed
 
+    private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
+        
+        String seleccion = cmb_filtro.getSelectedItem().toString();
+        String query = "";
+        
+        Document documento = new Document(); //creo objeto de la clase document
+        try {
+            String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/ListadoAsistencia.pdf")); //complementamos la ruta
+            
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+            header.scaleToFit(300, 900); //tamaño del header
+            header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
+            
+            Paragraph parrafo = new Paragraph(); //creo el parrafo del pdf
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Listado de asistencia\n\n");
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
+            
+            documento.open();
+            documento.add(header); //le agrego los elementos al documento
+            documento.add(parrafo);
+            
+            PdfPTable tabla = new PdfPTable(25); //agrego las columnas
+            
+            // Set Table Total Width
+            //tabla.setTotalWidth(50);
+            
+            // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
+// EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
+            float var = 0.15f;
+            float[] medidaCeldas = {1.5f, var, var, var, var, var, var, var, var, var, var,
+                var, var, var, var, var, var, var, var, var, var, var, var, var, var};
+            /*
+            medidaCeldas[0] = 1.0f;
+            for (int i=1; i < 25; i++){
+                medidaCeldas[i] = var;      
+            }*/
+
+// ASIGNAS LAS MEDIDAS A LA TABLA (ANCHO)
+            tabla.setWidths(medidaCeldas);
+            
+            tabla.addCell("Nombre y Apellido");
+            
+            for(int i = 0; i < 24; i++){
+                tabla.addCell("");
+            }
+            
+            if (seleccion.equals("Todos")) {
+                    query = "select nombre from alumnos";
+            } else {
+                query = "select nombre from alumnos where grado = '" + seleccion + "'";
+            }
+            
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement(query);
+
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    do {                        
+                        
+                        tabla.addCell(rs.getString(1));
+                        
+                        for(int i = 0; i < 24; i++){
+                            tabla.addCell("");
+                        }
+                        
+                    } while (rs.next());
+                    documento.add(tabla);
+                }
+                
+            } catch (SQLException e) {
+                System.out.println("Error al generar lista de alumnos. " + e);
+            }
+            
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
+            
+        } catch (Exception e) {
+            System.out.println("Error al generar PDF. " + e);
+        }
+        
+    }//GEN-LAST:event_ImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,6 +333,7 @@ ObtenerDatosTabla();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Imprimir;
     private javax.swing.JButton Mostrar;
     private javax.swing.JComboBox<String> cmb_filtro;
     private javax.swing.JLabel jLabel1;
