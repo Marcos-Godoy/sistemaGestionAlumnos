@@ -56,7 +56,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id, nombre, dni, nombre_escuela, grado from alumnos");
+                    "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido");
             //selecciona esos valores de la tabla
             
             ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
@@ -65,14 +65,15 @@ public class ListarAlumnos extends javax.swing.JFrame {
 
             model.addColumn(" "); //agrego los titulos de las columnas
             model.addColumn("Nombre");
+            model.addColumn("Apellido");
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
 
             while (rs.next()) { //para ver si encontro resultados o coincidencias
-                Object[] fila = new Object[5]; //son 4 columnas
+                Object[] fila = new Object[6]; //son 6 columnas
 
-                for (int i = 0; i < 5; i++) { //voy ingresando lo que vaya encontrando en la bd
+                for (int i = 0; i < 6; i++) { //voy ingresando lo que vaya encontrando en la bd
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); //añado al modelo toda la fila
@@ -105,9 +106,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
 
         Mostrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cmb_filtro = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_gestionarAlumnos = new javax.swing.JTable();
-        cmb_filtro = new javax.swing.JComboBox<>();
         Imprimir = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
@@ -132,6 +133,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jLabel1.setText("Listar Alumnos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
+        cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1º grado", "2º grado", "3º grado", "4º grado", "5º grado", "6º grado", "7º grado", "1º año", "2º año", "3º año", "4º año", "5º año" }));
+        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, -1));
+
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -146,9 +150,6 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 290));
-
-        cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1", "2", "3", "4", "5" }));
-        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 130, -1));
 
         Imprimir.setBackground(new java.awt.Color(153, 153, 255));
         Imprimir.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
@@ -178,9 +179,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
             Connection cn = Conexion.conectar();
 
             if (seleccion.equals("Todos")) {
-                query = "select id, nombre, dni, nombre_escuela, grado from alumnos";
+                query = "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido";
             } else {
-                query = "select id, nombre, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "'";
+                query = "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -191,13 +192,14 @@ public class ListarAlumnos extends javax.swing.JFrame {
 
             model.addColumn(" ");
             model.addColumn("Nombre");
+            model.addColumn("Apellido");
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
 
             while(rs.next()){
-                Object [] fila = new Object[5];
-                for (int i = 0; i < 5; i++) {
+                Object [] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila);
@@ -233,7 +235,7 @@ ObtenerDatosTabla();
             documento.add(header); //le agrego los elementos al documento
             documento.add(parrafo);
             
-            PdfPTable tabla = new PdfPTable(25); //agrego las columnas
+            PdfPTable tabla = new PdfPTable(26); //agrego las columnas
             
             // Set Table Total Width
             //tabla.setTotalWidth(50);
@@ -241,7 +243,7 @@ ObtenerDatosTabla();
             // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
 // EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
             float var = 0.15f;
-            float[] medidaCeldas = {1.5f, var, var, var, var, var, var, var, var, var, var,
+            float[] medidaCeldas = {1.0f, 1.0f, var, var, var, var, var, var, var, var, var, var,
                 var, var, var, var, var, var, var, var, var, var, var, var, var, var};
             /*
             medidaCeldas[0] = 1.0f;
@@ -252,16 +254,18 @@ ObtenerDatosTabla();
 // ASIGNAS LAS MEDIDAS A LA TABLA (ANCHO)
             tabla.setWidths(medidaCeldas);
             
-            tabla.addCell("Nombre y Apellido");
+            tabla.addCell("Apellido");
+            tabla.addCell("Nombre");
+            
             
             for(int i = 0; i < 24; i++){
                 tabla.addCell("");
             }
             
             if (seleccion.equals("Todos")) {
-                    query = "select nombre from alumnos";
+                    query = "select apellido, nombre from alumnos order by apellido";
             } else {
-                query = "select nombre from alumnos where grado = '" + seleccion + "'";
+                query = "select apellido, nombre from alumnos where grado = '" + seleccion + "' order by apellido";
             }
             
             try {
@@ -274,6 +278,7 @@ ObtenerDatosTabla();
                     do {                        
                         
                         tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
                         
                         for(int i = 0; i < 24; i++){
                             tabla.addCell("");

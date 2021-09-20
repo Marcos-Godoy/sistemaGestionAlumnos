@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aras;
 
 import java.awt.Image;
@@ -16,12 +11,11 @@ import javax.swing.ImageIcon;
  */
 public class RegistrarAlumnos2 extends javax.swing.JFrame {
     
-    public static String nombre_escuela, numero_escuela, grado, division, repite, repitio;
-    public static int grado_repetido;
+    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
     
     public RegistrarAlumnos2() {
         initComponents();
-        
+
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -47,7 +41,6 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,19 +48,14 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_numero_escuela = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txt_grado = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txt_division = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton_repite = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
         jRadioButton_repitio = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jComboBox_grado_repetido = new javax.swing.JComboBox<>();
+        jComboBox_grado = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox_grado_repetido = new javax.swing.JComboBox<>();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,62 +96,38 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         jLabel4.setText("Grado / Curso:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
-        txt_grado.setBackground(new java.awt.Color(51, 102, 255));
-        txt_grado.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_grado.setForeground(new java.awt.Color(255, 255, 255));
-        txt_grado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_grado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 210, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("División:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
-
-        txt_division.setBackground(new java.awt.Color(51, 102, 255));
-        txt_division.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        txt_division.setForeground(new java.awt.Color(255, 255, 255));
-        txt_division.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_division.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_division, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 210, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Repite:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("¿Qué grado repitió?");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
-
-        buttonGroup1.add(jRadioButton_repite);
-        jRadioButton_repite.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton_repite.setText("SI");
-        getContentPane().add(jRadioButton_repite, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("NO");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Repitió alguna vez?");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
 
         buttonGroup2.add(jRadioButton_repitio);
         jRadioButton_repitio.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton_repitio.setText("SI");
-        getContentPane().add(jRadioButton_repitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, -1));
+        jRadioButton_repitio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton_repitioItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(jRadioButton_repitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, -1, -1));
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("NO");
-        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
+        jRadioButton4.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton4ItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, -1, -1));
 
-        jComboBox_grado_repetido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
-        getContentPane().add(jComboBox_grado_repetido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
+        jComboBox_grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1º grado", "2º grado", "3º grado", "4º grado", "5º grado", "6º grado", "7º grado", "1º año", "2º año", "3º año", "4º año", "5º año" }));
+        getContentPane().add(jComboBox_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -188,6 +152,14 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 140, 50));
+
+        jComboBox_grado_repetido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1º grado", "2º grado", "3º grado", "4º grado", "5º grado", "6º grado", "7º grado", "1º año", "2º año", "3º año", "4º año", "5º año" }));
+        jComboBox_grado_repetido.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_grado_repetidoItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(jComboBox_grado_repetido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -203,14 +175,7 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         nombre_escuela = txt_nombre_escuela.getText().trim();
         numero_escuela = txt_numero_escuela.getText().trim();
-        grado = txt_grado.getText().trim();
-        division = txt_division.getText().trim();
         
-        if(jRadioButton_repite.isSelected()){
-            repite = "SI";
-        } else {
-            repite = "NO";
-        }
         
         if(jRadioButton_repitio.isSelected()){
             repitio = "SI";
@@ -218,12 +183,39 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
             repitio = "NO";
         }
         
-        grado_repetido = jComboBox_grado_repetido.getSelectedIndex() + 1;
+        //grado_repetido = jComboBox_grado_repetido.getSelectedIndex() + 1;
         
+        //grado = jComboBox_grado.getSelectedIndex() + 1;
+        
+        grado_repetido = jComboBox_grado_repetido.getSelectedItem().toString();
+        
+        grado = jComboBox_grado.getSelectedItem().toString();
         
         RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
         registrarAlumnos3.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    private void jComboBox_grado_repetidoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_grado_repetidoItemStateChanged
+        /*
+        jComboBox_grado_repetido.disable(); //deshabilitado por defecto
+        
+        if(jRadioButton_repitio.isSelected()){
+            jComboBox_grado_repetido.enable();
+        }*/
+    }//GEN-LAST:event_jComboBox_grado_repetidoItemStateChanged
+
+    private void jRadioButton4ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton4ItemStateChanged
+        
+        jComboBox_grado_repetido.disable();
+        
+    }//GEN-LAST:event_jRadioButton4ItemStateChanged
+
+    private void jRadioButton_repitioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton_repitioItemStateChanged
+        
+        jComboBox_grado_repetido.enable();
+        
+    }//GEN-LAST:event_jRadioButton_repitioItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -262,10 +254,10 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox_grado;
     private javax.swing.JComboBox<String> jComboBox_grado_repetido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -273,15 +265,9 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_Wallpaper;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton_repite;
     private javax.swing.JRadioButton jRadioButton_repitio;
-    private javax.swing.JTextField txt_division;
-    private javax.swing.JTextField txt_grado;
     private javax.swing.JTextField txt_nombre_escuela;
     private javax.swing.JTextField txt_numero_escuela;
     // End of variables declaration//GEN-END:variables

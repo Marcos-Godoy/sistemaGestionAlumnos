@@ -228,17 +228,19 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        int sangre;
-        String nombre, lugar, localidad, domicilio, nombre_madre, nombre_padre, telefono, nombre_escuela, grado, division, repite, repitio, alergias, cobertura, condicion, retira_con, observaciones, inscripcion, cuota;
-        int dni, dni_madre, dni_padre, grado_repetido, numero_escuela;
+        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
+        int dni, dni_madre, dni_padre, numero_escuela;
         
         nombre = RegistrarAlumnos1.nombre;
+        apellido = RegistrarAlumnos1.apellido;
         nombre_madre = RegistrarAlumnos1.nombre_madre;
         nombre_padre = RegistrarAlumnos1.nombre_padre;
         lugar = RegistrarAlumnos1.lugar;
+        fecha = RegistrarAlumnos1.fecha;
         localidad = RegistrarAlumnos1.localidad;
         domicilio = RegistrarAlumnos1.domicilio;
         telefono = RegistrarAlumnos1.telefono;
+        telefono2 = RegistrarAlumnos1.telefono2;
         dni = Integer.parseInt(RegistrarAlumnos1.dni);
         dni_madre = Integer.parseInt(RegistrarAlumnos1.dni_madre);
         dni_padre = Integer.parseInt(RegistrarAlumnos1.dni_padre);
@@ -246,8 +248,6 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         nombre_escuela = RegistrarAlumnos2.nombre_escuela;
         numero_escuela = Integer.parseInt(RegistrarAlumnos2.numero_escuela);
         grado = RegistrarAlumnos2.grado;
-        division = RegistrarAlumnos2.division;
-        repite = RegistrarAlumnos2.repite;
         repitio = RegistrarAlumnos2.repitio;
         grado_repetido = RegistrarAlumnos2.grado_repetido;
         
@@ -256,7 +256,8 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         condicion = txt_condicion.getText().trim();
         retira_con = txt_retira_con.getText().trim();
         observaciones = jTextArea_observaciones.getText();
-        sangre = jComboBox_sangre.getSelectedIndex() + 1;
+        //sangre = jComboBox_sangre.getSelectedIndex() + 1;
+        sangre = jComboBox_sangre.getSelectedItem().toString();
         
         if(jRadioButton_inscripcion.isSelected()){
             inscripcion = "SI";
@@ -273,35 +274,36 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         
         try {
             Connection cn2 = Conexion.conectar();
-            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
             pst2.setInt(1, cont);
             pst2.setString(2, nombre);
-            pst2.setInt(3, dni);
-            pst2.setString(4, lugar);
-            pst2.setString(5, domicilio);
-            pst2.setString(6, localidad);
-            pst2.setString(7, nombre_madre);
-            pst2.setInt(8, dni_madre);
-            pst2.setString(9, nombre_padre);
-            pst2.setInt(10, dni_padre);
-            pst2.setString(11, telefono);
-            pst2.setInt(12, numero_escuela);
-            pst2.setString(13, nombre_escuela);
-            pst2.setString(14, grado);
-            pst2.setString(15, division);
-            pst2.setString(16, repite);
-            pst2.setString(17, repitio);
-            pst2.setInt(18, grado_repetido);
-            pst2.setInt(19, sangre);
-            pst2.setString(20, alergias);
-            pst2.setString(21, cobertura);
-            pst2.setString(22, condicion);
-            pst2.setString(23, retira_con);
-            pst2.setString(24, observaciones);
-            pst2.setString(25, inscripcion);
-            pst2.setString(26, cuota);
-            pst2.setString(27, fechaActual());
+            pst2.setString(3, apellido);
+            pst2.setInt(4, dni);
+            pst2.setString(5, fecha);
+            pst2.setString(6, lugar);
+            pst2.setString(7, domicilio);
+            pst2.setString(8, localidad);
+            pst2.setString(9, nombre_madre);
+            pst2.setInt(10, dni_madre);
+            pst2.setString(11, nombre_padre);
+            pst2.setInt(12, dni_padre);
+            pst2.setString(13, telefono);
+            pst2.setString(14, telefono2);
+            pst2.setInt(15, numero_escuela);
+            pst2.setString(16, nombre_escuela);
+            pst2.setString(17, grado);
+            pst2.setString(18, repitio);
+            pst2.setString(19, grado_repetido);
+            pst2.setString(20, sangre);
+            pst2.setString(21, alergias);
+            pst2.setString(22, cobertura);
+            pst2.setString(23, condicion);
+            pst2.setString(24, retira_con);
+            pst2.setString(25, observaciones);
+            pst2.setString(26, inscripcion);
+            pst2.setString(27, cuota);
+            pst2.setString(28, fechaActual());
                         
             pst2.executeUpdate();
             cn2.close();
