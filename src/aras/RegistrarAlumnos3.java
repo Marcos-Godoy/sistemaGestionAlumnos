@@ -1,11 +1,24 @@
 package aras;
 
 import clases.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPage;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -313,7 +326,113 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 System.err.println("Error en Registrar usuario. " + e);
                 JOptionPane.showMessageDialog(null, "¡ERROR al registrar alumno!, contacte al administrador.");
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+        
+        Document documento = new Document(); //creo objeto de la clase document
+        try {
+            String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Ficha.pdf")); //complementamos la ruta
+            
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+            header.scaleToFit(300, 900); //tamaño del header
+            header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
+            
+            Paragraph parrafo = new Paragraph(); //creo el parrafo del pdf
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.add("Ficha de Inscripción\n\n");
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
+            
+            documento.open();
+            documento.add(header); //le agrego los elementos al documento
+            documento.add(parrafo);
+            
+            documento.add(new Paragraph("Fecha de inscripción: " + fechaActual() + "\n"));
+            documento.add(new Paragraph("Nombre: " + nombre + "                Apellido: " + apellido + "\n"));
+            //documento.add(new Paragraph("Apellido: " + apellido));
+            documento.add(new Paragraph("DNI: " + dni + "                Lugar de nacimiento: " + lugar + "                Fecha de nacimiento: " + fecha + "\n"));
+            //documento.add(new Paragraph("Lugar de nacimiento: " + lugar));
+            //documento.add(new Paragraph("Fecha de nacimiento: " + fecha));
+            documento.add(new Paragraph("Domicilio: " + domicilio + "                Localidad: " + localidad + "\n"));
+            //documento.add(new Paragraph("Localidad: " + localidad));
+            documento.add(new Paragraph("Nombre de la Madre: " + nombre_madre + "                DNI: " + dni_madre + "\n"));
+            //documento.add(new Paragraph("DNI: " + dni_madre));
+            documento.add(new Paragraph("Nombre del Padre: " + nombre_padre + "                DNI: " + dni_padre + "\n"));
+            //documento.add(new Paragraph("DNI: " + dni_padre));
+            documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n"));
+            documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n"));
+            
+            documento.add(new Paragraph("Grupo familiar del alumno:\n\n"));
+            PdfPTable tabla = new PdfPTable(4); //agrego las columnas
+
+            
+            tabla.addCell("NOMBRE Y APELLIDO");
+            tabla.addCell("PARENTESCO");
+            tabla.addCell("EDAD");
+            tabla.addCell("OCUPACION");
+            
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst = cn.prepareStatement("select nombre_familiar, parentesco, edad, ocupacion from familiares where id = '" + nombre +"'");
+
+                ResultSet rs = pst.executeQuery();
+                
+                if (rs.next()) {
+                    do {                        
+                        
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(4));
+                        
+                    } while (rs.next());
+                    documento.add(tabla);
+                }
+                
+            } catch (SQLException e) {
+                System.out.println("Error al generar lista de alumnos. " + e);
+            }
+            
+            documento.add(new Paragraph("Nombre de Escuela a la que asiste: " + nombre_escuela + "                Número: " + numero_escuela + "\n"));
+            //documento.add(new Paragraph("Número: " + numero_escuela));
+            documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n"));
+            //documento.add(new Paragraph("Repitió grado alguna vez: " + repitio));
+            //documento.add(new Paragraph("¿Qué Grado repitió? " + grado_repetido));
+            
+            documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "                Cobertura médica: " + cobertura + "\n"));
+            //documento.add(new Paragraph("Alergias: " + alergias));
+            //documento.add(new Paragraph("Cobertura médica: " + cobertura));
+            documento.add(new Paragraph("Padece de alguna condición médica: " + condicion + "\n"));
+            documento.add(new Paragraph("Se retira acompañado de: " + retira_con + "\n"));
+            documento.add(new Paragraph("Observaciones: " + observaciones + "\n"));
+            documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n\n"));
+            //documento.add(new Paragraph("Paga Cuota: " + cuota));
+            
+            
+            Paragraph parrafo2 = new Paragraph(); //creo el parrafo del pdf
+            parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo2.add("________________________________________________________");
+            documento.add(parrafo2);
+            
+            Paragraph terminos = new Paragraph("\nPor la presente, autorizo a mi hijo que concurra y participe en todas las actividades"
+                    + " en el Centro Educativo Cuatro Vientos. Dejo constancia que estoy de acuerdo con los términos "
+                    + "y condiciones de la inscripción del alumno.\n");
+            terminos.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.DARK_GRAY));
+            documento.add(terminos);
+            
+            documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n"));
+            documento.add(new Paragraph("Aclaración y Parentesco:\n"));
+            documento.add(new Paragraph("DNI:\n"));
+            
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Ficha de alumno creada correctamente.");
+            
+        } catch (Exception e) {
+            System.out.println("Error al generar PDF. " + e);
+        }
+    
     }
+    
     /**
      * @param args the command line arguments
      */
