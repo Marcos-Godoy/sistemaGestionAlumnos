@@ -1,21 +1,29 @@
 package aras;
 
+import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author mjgod
  */
-public class RegistrarAlumnos2 extends javax.swing.JFrame {
+public class InformaciónAlumnos2 extends javax.swing.JFrame {
     
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
+    String user_update = "";
     
-    public RegistrarAlumnos2() {
+    public InformaciónAlumnos2() {
         initComponents();
-
+        user_update = GestionarAlumnos.user_update;
+        
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -23,6 +31,34 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+            "select * from alumnos where nombre = '" + user_update + "'"); //selecciono los datos del usuario elegido
+            ResultSet rs = pst.executeQuery();
+            
+            if(rs.next()){
+                //ID = rs.getInt("id");
+                //Realizo el vaciado de datos en los jtextfield.
+                txt_nombre_escuela.setText(rs.getString("nombre_escuela"));
+                txt_numero_escuela.setText(rs.getString("numero_escuela"));
+                
+                
+                jComboBox_grado_repetido.setSelectedItem(rs.getString("grado_repetido"));
+                jComboBox_grado.setSelectedItem(rs.getString("grado"));
+                
+                /*
+                if("SI".equals(rs.getString("repitio"))){
+                        jRadioButton_repitio.setState();
+                }*/
+                
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar usuario. " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
+        }
     }
     
     //Reemplazar el icono de java por default
@@ -182,16 +218,12 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
             repitio = "NO";
         }
         
-        //grado_repetido = jComboBox_grado_repetido.getSelectedIndex() + 1;
-        
-        //grado = jComboBox_grado.getSelectedIndex() + 1;
-        
         grado_repetido = jComboBox_grado_repetido.getSelectedItem().toString();
         
         grado = jComboBox_grado.getSelectedItem().toString();
         
-        RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
-        registrarAlumnos3.setVisible(true);
+        InformaciónAlumnos3 InformaciónAlumnos3 = new InformaciónAlumnos3();
+        InformaciónAlumnos3.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -233,21 +265,23 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistrarAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformaciónAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistrarAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformaciónAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistrarAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformaciónAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistrarAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformaciónAlumnos2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrarAlumnos2().setVisible(true);
+                new InformaciónAlumnos2().setVisible(true);
             }
         });
     }

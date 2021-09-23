@@ -81,13 +81,13 @@ public class GestionarAlumnos extends javax.swing.JFrame {
                //le indicamos la fila que selecciono el usuario
                int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
                //seleccionamos por defecto la columna 1 (nombre)
-               int columna_point = 2;
+               int columna_point = 1;
                
                
                if(fila_point > -1){
                    user_update = (String)model.getValueAt(fila_point, columna_point); //nos devuelve el nombre
-                   GestionarAlumnos1 gestionar_alumnos1 = new GestionarAlumnos1(); //abro la proxima interfaz
-                   gestionar_alumnos1.setVisible(true);
+                   InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1(); //abro la proxima interfaz
+                   informacion_alumnos1.setVisible(true);
                }
                
             }
