@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 public class InformaciónAlumnos1 extends javax.swing.JFrame {
     
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
+    public static InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
     int ID;
     String user_update = "";
     
@@ -317,8 +318,9 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         dni_padre = txt_dni_padre.getText().trim();
         dni_madre = txt_dni_madre.getText().trim();
         
-        InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
-        informacionAlumnos2.setVisible(true);
+        //InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
+        informacionAlumnos4.setVisible(true);
+        //GestionarAlumnos.informacion_alumnos1.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

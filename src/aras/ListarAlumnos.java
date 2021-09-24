@@ -43,7 +43,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");

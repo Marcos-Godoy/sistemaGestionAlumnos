@@ -21,6 +21,8 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
 
     DefaultTableModel model = new DefaultTableModel();
     String user_update = "";
+    int cantfilas = 0;
+    public static InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
     /**
      * Creates new form RegistrarAlumnos1
      */
@@ -58,9 +60,11 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); //añado al modelo toda la fila
+                cantfilas++;
             }
             cn.close(); //cierra la conexion
-
+            
+            System.out.println(cantfilas);
         } catch (SQLException e) {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
@@ -170,18 +174,14 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                 try {
                     
                     Connection cn = Conexion.conectar();
-                    /*PreparedStatement pst = cn.prepareStatement("insert into familiares values ("
-                            +jTable1.getValueAt(i, 0)+", "
-                            +jTable1.getValueAt(i, 1)+", "
-                            +jTable1.getValueAt(i, 2)+", "
-                            +jTable1.getValueAt(i, 3)+")");*/
-                    PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?)");
-                    pst.setInt(1, 0);
-                    pst.setString(2, nombre_alumno);
-                    pst.setString(3, (String) jTable1.getValueAt(i, 0));
-                    pst.setString(4, (String) jTable1.getValueAt(i, 1));
-                    pst.setString(5, (String) jTable1.getValueAt(i, 2));
-                    pst.setString(6, (String) jTable1.getValueAt(i, 3));
+                    PreparedStatement pst = cn.prepareStatement("update familiares set nombre_familiar=?,"
+                            + "parentesco=?,edad=?,ocupacion=? where id = '" + user_update + "'");
+                    //pst.setInt(1, 0);
+                    //pst.setString(2, nombre_alumno);
+                    pst.setString(1, (String) jTable1.getValueAt(i, 0));
+                    pst.setString(2, (String) jTable1.getValueAt(i, 1));
+                    pst.setInt(3, (int) jTable1.getValueAt(i, 2));
+                    pst.setString(4, (String) jTable1.getValueAt(i, 3));
                     pst.executeUpdate();
                     cn.close();
                     this.dispose();
@@ -195,8 +195,9 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
         
-        RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
-        registrarAlumnos2.setVisible(true);
+        //InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
+        informacionAlumnos2.setVisible(true);
+        InformaciónAlumnos1.informacionAlumnos4.setVisible(false); //oculto pantalla al cerrarse
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_agregarActionPerformed

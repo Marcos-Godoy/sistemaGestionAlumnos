@@ -48,10 +48,12 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
                 jComboBox_grado_repetido.setSelectedItem(rs.getString("grado_repetido"));
                 jComboBox_grado.setSelectedItem(rs.getString("grado"));
                 
-                /*
+                
                 if("SI".equals(rs.getString("repitio"))){
-                        jRadioButton_repitio.setState();
-                }*/
+                        jRadioButton_repitio.setSelected(true);
+                } else {
+                    jRadioButton4.setSelected(true);
+                }
                 
             }
             cn.close();
@@ -224,6 +226,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         
         InformaciónAlumnos3 InformaciónAlumnos3 = new InformaciónAlumnos3();
         InformaciónAlumnos3.setVisible(true);
+        InformaciónAlumnos4.informacionAlumnos2.setVisible(false); //oculto pantalla al cerrarse
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

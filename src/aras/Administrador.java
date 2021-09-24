@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
  */
 public class Administrador extends javax.swing.JFrame {
 
+    public static RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
     /**
      * Creates new form Administrador
      */
@@ -44,6 +45,8 @@ public class Administrador extends javax.swing.JFrame {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/cuatroVientos.jpg"));
         return retValue;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,7 +117,7 @@ public class Administrador extends javax.swing.JFrame {
 
     private void jButton_RegistrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarAlumnosActionPerformed
         // TODO add your handling code here:
-        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
         registrarAlumnos.setVisible(true);
     }//GEN-LAST:event_jButton_RegistrarAlumnosActionPerformed
 

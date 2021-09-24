@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
+    public static RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
     /**
      * Creates new form RegistrarAlumnos1
      */
@@ -121,8 +122,9 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
-        registrarAlumnos.setVisible(true);
+        //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        Administrador.registrarAlumnos.setVisible(true);
+        RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -167,8 +169,9 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
         
-        RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
+        //RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
         registrarAlumnos2.setVisible(true);
+        RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_agregarActionPerformed

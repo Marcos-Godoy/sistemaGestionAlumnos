@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 public class RegistrarAlumnos2 extends javax.swing.JFrame {
     
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
+    public static RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
     
     public RegistrarAlumnos2() {
         initComponents();
@@ -166,8 +167,9 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
-        registrarAlumnos4.setVisible(true);
+        //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
+        RegistrarAlumnos1.registrarAlumnos4.setVisible(true);
+        RegistrarAlumnos4.registrarAlumnos2.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -190,8 +192,9 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         
         grado = jComboBox_grado.getSelectedItem().toString();
         
-        RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
+        //RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
         registrarAlumnos3.setVisible(true);
+        RegistrarAlumnos4.registrarAlumnos2.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

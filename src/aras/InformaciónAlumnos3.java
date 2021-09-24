@@ -64,6 +64,18 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 txt_retira_con.setText(rs.getString("retira_con"));
                 jTextArea_observaciones.setText(rs.getString("observaciones"));
                 jComboBox_sangre.setSelectedItem(rs.getString("sangre"));
+                
+                if("SI".equals(rs.getString("cuota"))){
+                        jRadioButton_cuota.setSelected(true);
+                } else {
+                    jRadioButton4.setSelected(true);
+                }
+                
+                if("SI".equals(rs.getString("inscripcion"))){
+                    jRadioButton_inscripcion.setSelected(true);
+                } else {
+                    jRadioButton2.setSelected(true);
+                }
 
             }
             cn.close();
@@ -250,7 +262,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 140, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 140, 50));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -267,32 +279,31 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
         int dni, dni_madre, dni_padre, numero_escuela;
         
-        nombre = RegistrarAlumnos1.nombre;
-        apellido = RegistrarAlumnos1.apellido;
-        nombre_madre = RegistrarAlumnos1.nombre_madre;
-        nombre_padre = RegistrarAlumnos1.nombre_padre;
-        lugar = RegistrarAlumnos1.lugar;
-        fecha = RegistrarAlumnos1.fecha;
-        localidad = RegistrarAlumnos1.localidad;
-        domicilio = RegistrarAlumnos1.domicilio;
-        telefono = RegistrarAlumnos1.telefono;
-        telefono2 = RegistrarAlumnos1.telefono2;
-        dni = Integer.parseInt(RegistrarAlumnos1.dni);
-        dni_madre = Integer.parseInt(RegistrarAlumnos1.dni_madre);
-        dni_padre = Integer.parseInt(RegistrarAlumnos1.dni_padre);
+        nombre = InformaciónAlumnos1.nombre;
+        apellido = InformaciónAlumnos1.apellido;
+        nombre_madre = InformaciónAlumnos1.nombre_madre;
+        nombre_padre = InformaciónAlumnos1.nombre_padre;
+        lugar = InformaciónAlumnos1.lugar;
+        fecha = InformaciónAlumnos1.fecha;
+        localidad = InformaciónAlumnos1.localidad;
+        domicilio = InformaciónAlumnos1.domicilio;
+        telefono = InformaciónAlumnos1.telefono;
+        telefono2 = InformaciónAlumnos1.telefono2;
+        dni = Integer.parseInt(InformaciónAlumnos1.dni);
+        dni_madre = Integer.parseInt(InformaciónAlumnos1.dni_madre);
+        dni_padre = Integer.parseInt(InformaciónAlumnos1.dni_padre);
         
-        nombre_escuela = RegistrarAlumnos2.nombre_escuela;
-        numero_escuela = Integer.parseInt(RegistrarAlumnos2.numero_escuela);
-        grado = RegistrarAlumnos2.grado;
-        repitio = RegistrarAlumnos2.repitio;
-        grado_repetido = RegistrarAlumnos2.grado_repetido;
+        nombre_escuela = InformaciónAlumnos2.nombre_escuela;
+        numero_escuela = Integer.parseInt(InformaciónAlumnos2.numero_escuela);
+        grado = InformaciónAlumnos2.grado;
+        repitio = InformaciónAlumnos2.repitio;
+        grado_repetido = InformaciónAlumnos2.grado_repetido;
         
         alergias = txt_alergias.getText().trim();
         cobertura = txt_cobertura.getText().trim();
         condicion = txt_condicion.getText().trim();
         retira_con = txt_retira_con.getText().trim();
         observaciones = jTextArea_observaciones.getText();
-        //sangre = jComboBox_sangre.getSelectedIndex() + 1;
         sangre = jComboBox_sangre.getSelectedItem().toString();
         
         if(jRadioButton_inscripcion.isSelected()){
@@ -310,7 +321,11 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         
         try {
             Connection cn2 = Conexion.conectar();
-            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst2 = cn2.prepareStatement("update alumnos set id=?,nombre=?,apellido=?,dni=?,nacimiento=?,lugar_nacimiento=?,"
+                    + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
+                    + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
+                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,fecha=?"
+                    + " where nombre ='" + user_update + "'");
             
             pst2.setInt(1, cont);
             pst2.setString(2, nombre);
@@ -339,7 +354,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(25, observaciones);
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
-            pst2.setString(28, fechaActual());
+            pst2.setString(28, fechaActual()); //despues cambiar por fecha de inscripcion
                         
             pst2.executeUpdate();
             cn2.close();

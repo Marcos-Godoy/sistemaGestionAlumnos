@@ -21,7 +21,7 @@ import clases.Conexion;
 public class RegistrarAlumnos1 extends javax.swing.JFrame {
     
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
-    
+    public static RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
     
     /**
      * Creates new form RegistrarAlumnos1
@@ -106,6 +106,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_nombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 210, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -220,7 +221,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Siguiente >");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -291,8 +292,9 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         dni_padre = txt_dni_padre.getText().trim();
         dni_madre = txt_dni_madre.getText().trim();
         
-        RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
+        //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
         registrarAlumnos4.setVisible(true);
+        Administrador.registrarAlumnos.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
