@@ -22,7 +22,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
     
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
     public static RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
-    
+    public static int dni_numerico = 0;
     /**
      * Creates new form RegistrarAlumnos1
      */
@@ -291,6 +291,9 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         dni = txt_dni.getText().trim();
         dni_padre = txt_dni_padre.getText().trim();
         dni_madre = txt_dni_madre.getText().trim();
+        
+        dni_numerico = Integer.parseInt(dni);
+        System.out.println(dni_numerico);
         
         //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
         registrarAlumnos4.setVisible(true);

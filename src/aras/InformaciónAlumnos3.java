@@ -31,11 +31,10 @@ import javax.swing.JOptionPane;
  * @author mjgod
  */
 public class InformaciónAlumnos3 extends javax.swing.JFrame {
-    public static int cont = 0;
-    String user_update = "";
-    /**
-     * Creates new form RegistrarAlumnos1
-     */
+    int cont = 32, ID;
+    // String user_update = "";
+    int user_update;
+   
     public InformaciónAlumnos3() {
         initComponents();
         
@@ -52,11 +51,11 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select * from alumnos where nombre = '" + user_update + "'"); //selecciono los datos del usuario elegido
+            "select * from alumnos where dni = '" + user_update + "'"); //selecciono los datos del usuario elegido
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                //ID = rs.getInt("id");
+                ID = rs.getInt("id");
                 //Realizo el vaciado de datos en los jtextfield.
                 txt_alergias.setText(rs.getString("alergias"));
                 txt_cobertura.setText(rs.getString("cobertura"));
@@ -325,9 +324,9 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                     + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
                     + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
                     + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,fecha=?"
-                    + " where nombre ='" + user_update + "'");
+                    + " where dni ='" + user_update + "'");
             
-            pst2.setInt(1, cont);
+            pst2.setInt(1, ID);
             pst2.setString(2, nombre);
             pst2.setString(3, apellido);
             pst2.setInt(4, dni);
@@ -355,13 +354,15 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
             pst2.setString(28, fechaActual()); //despues cambiar por fecha de inscripcion
+            
+            cont++;
                         
             pst2.executeUpdate();
             cn2.close();
             this.dispose();
                         
             } catch (SQLException e) {
-                System.err.println("Error en Registrar usuario. " + e);
+                System.err.println("Error en Registrar alumno. " + e);
                 JOptionPane.showMessageDialog(null, "¡ERROR al registrar alumno!, contacte al administrador.");
     }//GEN-LAST:event_jButton2ActionPerformed
     

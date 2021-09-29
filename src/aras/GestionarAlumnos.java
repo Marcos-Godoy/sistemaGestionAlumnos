@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GestionarAlumnos extends javax.swing.JFrame {
 
-    public static String user_update = "";
+    public static int user_update;
     //public static InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1();
     DefaultTableModel model = new DefaultTableModel();
     /**
@@ -86,7 +86,8 @@ public class GestionarAlumnos extends javax.swing.JFrame {
                
                
                if(fila_point > -1){
-                   user_update = (String)model.getValueAt(fila_point, columna_point); //nos devuelve el nombre
+                   user_update = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
+                   System.out.println(user_update);
                    InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1(); //abro la proxima interfaz
                    informacion_alumnos1.setVisible(true);
                }

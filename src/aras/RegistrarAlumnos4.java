@@ -18,12 +18,15 @@ import javax.swing.table.DefaultTableModel;
 public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     public static RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
+    //public String nombre_alumno = RegistrarAlumnos1.nombre;
+    //public int dni_alumno = RegistrarAlumnos1.dni_numerico;
     /**
      * Creates new form RegistrarAlumnos1
      */
     public RegistrarAlumnos4() {
         initComponents();
-        
+        //nombre_alumno = RegistrarAlumnos1.nombre;
+        //dni_alumno = RegistrarAlumnos1.dni_numerico;
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -129,6 +132,8 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        String nombre_alumno = RegistrarAlumnos1.nombre;
+        int dni_alumno = RegistrarAlumnos1.dni_numerico;
         /*for(int i = 0; i < jTable1.getRowCount(); i++){
             for(int j = 0; j < jTable1.getColumnCount(); j++){
                 if(((String) jTable1.getValueAt(i, j)) == ""){
@@ -138,7 +143,6 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         }
         */
         //int contador = RegistrarAlumnos3.cont;
-        String nombre_alumno = RegistrarAlumnos1.nombre;
         if(jTable1.getRowCount()>0){
             for(int i = 0; i < jTable1.getRowCount(); i++){
                 try {
@@ -150,8 +154,9 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                             +jTable1.getValueAt(i, 2)+", "
                             +jTable1.getValueAt(i, 3)+")");*/
                     PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?)");
-                    pst.setInt(1, 0);
-                    pst.setString(2, nombre_alumno);
+                    //pst.setInt(1, 0);
+                    pst.setString(1, nombre_alumno);
+                    pst.setInt(2, dni_alumno);
                     pst.setString(3, (String) jTable1.getValueAt(i, 0));
                     pst.setString(4, (String) jTable1.getValueAt(i, 1));
                     pst.setString(5, (String) jTable1.getValueAt(i, 2));

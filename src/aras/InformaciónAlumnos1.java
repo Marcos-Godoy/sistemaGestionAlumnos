@@ -23,7 +23,9 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
     public static InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
     int ID;
-    String user_update = "";
+    //String user_update = "";
+    int user_update;
+    public static int dni_numerico = 0;
     
     /**
      * Creates new form RegistrarAlumnos1
@@ -31,6 +33,11 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     public InformaciónAlumnos1() {
         initComponents();
         user_update = GestionarAlumnos.user_update;
+        
+        setResizable(false);
+        setTitle("Sistema de Registro");
+        //cuando se cierra la ventana, termina de ejecutarse el programa
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
@@ -43,7 +50,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select * from alumnos where nombre = '" + user_update + "'"); //selecciono los datos del usuario elegido
+            "select * from alumnos where dni = '" + user_update + "'"); //selecciono los datos del alumno elegido
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
@@ -62,9 +69,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
                 txt_dni.setText(rs.getString("dni"));
                 txt_dni_padre.setText(rs.getString("dni_padre"));
                 txt_dni_madre.setText(rs.getString("dni_madre"));
-                
-                //cmb_niveles.setSelectedItem(rs.getString("tipo_nivel"));
-                //cmb_estatus.setSelectedItem(rs.getString("estatus"));
+
             }
             cn.close();
         } catch (SQLException e) {
@@ -317,6 +322,8 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         dni = txt_dni.getText().trim();
         dni_padre = txt_dni_padre.getText().trim();
         dni_madre = txt_dni_madre.getText().trim();
+        
+        dni_numerico = Integer.parseInt(dni);
         
         //InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
         informacionAlumnos4.setVisible(true);

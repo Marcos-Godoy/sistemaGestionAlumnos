@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
 public class InformaciónAlumnos2 extends javax.swing.JFrame {
     
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
-    String user_update = "";
+    //String user_update = "";
+    int user_update;
     
     public InformaciónAlumnos2() {
         initComponents();
@@ -35,7 +36,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-            "select * from alumnos where nombre = '" + user_update + "'"); //selecciono los datos del usuario elegido
+            "select * from alumnos where dni = '" + user_update + "'"); //selecciono los datos del usuario elegido
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
