@@ -181,10 +181,12 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
             for(int i = 0; i < jTable1.getRowCount(); i++){
                 if(i < cantfilas){
                     try {
+                        String dato = String.valueOf(model.getValueAt(i,0));
 //no anda porque no estoy siendo especifico a quien quiero modificar, habria q agregar una id, toda la familia va a tener el mismo id familiar
+                        //el nombre debe permanecer igual para que funcione.
                         Connection cn = Conexion.conectar();
                         PreparedStatement pst = cn.prepareStatement("update familiares set id=?, dni_familiar=?, nombre_familiar=?,"
-                                + "parentesco=?,edad=?,ocupacion=? where dni_familiar = '" + user_update + "'");
+                                + "parentesco=?,edad=?,ocupacion=? where dni_familiar = '" + user_update + "' and nombre_familiar = '" + dato + "'");
                         System.out.println(nombre_alumno + dni_alumno);
                         pst.setString(1, nombre_alumno);
                         pst.setInt(2, dni_alumno);
