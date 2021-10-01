@@ -15,13 +15,24 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import jxl.Workbook;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.*;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.WriteException;
 
 
 /**
@@ -110,6 +121,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_gestionarAlumnos = new javax.swing.JTable();
         Imprimir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,6 +174,14 @@ public class ListarAlumnos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 210, 35));
+
+        jButton1.setText("Guardar Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -301,6 +321,118 @@ ObtenerDatosTabla();
         
     }//GEN-LAST:event_ImprimirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Connection cn = Conexion.conectar();
+        String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+        File file = new File(ruta + "/Desktop/CuatroVientos.xls");
+        int row = 0;
+        WritableSheet excelSheet = null;
+        WritableWorkbook workbook = null;
+        
+        try {
+            workbook = Workbook.createWorkbook(file);
+            
+            workbook.createSheet("dato", 0);
+            
+            excelSheet = workbook.getSheet(0);
+            System.out.println("creando la hoja de excel...");
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+        String sql = "select id,nombre,apellido,dni,nacimiento,lugar_nacimiento,"
+                    + "domicilio,localidad,nombre_madre,dni_madre,nombre_padre,dni_padre,telefono,"
+                    + "telefono2,numero_escuela,nombre_escuela,grado,repitio,grado_repetido,"
+                    + "sangre,alergias,cobertura,condicion,retira_con,observaciones,inscripcion,cuota,fecha"
+                    + " from alumnos order by grado";
+        
+        try {
+            PreparedStatement pst = cn.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+            System.out.println("obteniendo registros...");
+            while(rs.next()){
+                Number id = new Number(0, row, rs.getLong("Id"));
+                Label nombre = new Label(1, row, rs.getString("Nombre"));
+                Label apellido = new Label(2, row, rs.getString("Apellido"));
+                Number dni = new Number(3, row, rs.getLong("DNI"));
+                Number fecha_nacimiento = new Number(4, row, rs.getLong("nacimiento"));
+                Label lugar_nacimiento = new Label(5, row, rs.getString("Lugar_nacimiento"));
+                Label domicilio = new Label(6, row, rs.getString("Domicilio"));
+                Label localidad = new Label(7, row, rs.getString("Localidad"));
+                Label nombre_madre = new Label(8, row, rs.getString("Nombre_Madre"));
+                Number dni_madre = new Number(9, row, rs.getLong("DNI_Madre"));
+                Label nombre_padre = new Label(10, row, rs.getString("Nombre_Padre"));
+                Number dni_padre = new Number(11, row, rs.getLong("DNI_Padre"));
+                Label telefono = new Label(12, row, rs.getString("Telefono"));
+                Label telefono2 = new Label(13, row, rs.getString("Telefono2"));
+                Number numero_escuela = new Number(14, row, rs.getLong("Numero_Escuela"));
+                Label nombre_escuela = new Label(15, row, rs.getString("Nombre_Escuela"));
+                Label grado = new Label(16, row, rs.getString("Grado"));
+                Label repitio = new Label(17, row, rs.getString("Repitio"));
+                Label grado_repetido = new Label(18, row, rs.getString("Grado_Repetido"));
+                Label sangre = new Label(19, row, rs.getString("Sangre"));
+                Label alergias = new Label(20, row, rs.getString("Alergias"));
+                Label cobertura = new Label(21, row, rs.getString("Cobertura"));
+                Label condicion = new Label(22, row, rs.getString("Condicion"));
+                Label retira_con = new Label(23, row, rs.getString("retira_con"));
+                Label observaciones = new Label(24, row, rs.getString("Observaciones"));
+                Label inscripcion = new Label(25, row, rs.getString("Inscripcion"));
+                Label cuota = new Label(26, row, rs.getString("Cuota"));
+                Label fecha = new Label(27, row, rs.getString("Fecha"));
+                row++;
+                
+                try {
+                    excelSheet.addCell(id);
+                    excelSheet.addCell(nombre);
+                    excelSheet.addCell(apellido);
+                    excelSheet.addCell(dni);
+                    excelSheet.addCell(fecha_nacimiento);
+                    excelSheet.addCell(lugar_nacimiento);
+                    excelSheet.addCell(domicilio);
+                    excelSheet.addCell(localidad);
+                    excelSheet.addCell(nombre_madre);
+                    excelSheet.addCell(dni_madre);
+                    excelSheet.addCell(nombre_padre);
+                    excelSheet.addCell(dni_padre);
+                    excelSheet.addCell(telefono);
+                    excelSheet.addCell(telefono2);
+                    excelSheet.addCell(numero_escuela);
+                    excelSheet.addCell(nombre_escuela);
+                    excelSheet.addCell(grado);
+                    excelSheet.addCell(repitio);
+                    excelSheet.addCell(grado_repetido);
+                    excelSheet.addCell(sangre);
+                    excelSheet.addCell(alergias);
+                    excelSheet.addCell(cobertura);
+                    excelSheet.addCell(condicion);
+                    excelSheet.addCell(retira_con);
+                    excelSheet.addCell(observaciones);
+                    excelSheet.addCell(inscripcion);
+                    excelSheet.addCell(cuota);
+                    excelSheet.addCell(fecha);
+                } catch (WriteException e) {
+                    System.err.println(e.getMessage());
+                }
+                
+                
+                
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            workbook.write();
+            workbook.close();
+            System.out.println("escribiendo en el disco...");
+        } catch (IOException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (WriteException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -341,6 +473,7 @@ ObtenerDatosTabla();
     private javax.swing.JButton Imprimir;
     private javax.swing.JButton Mostrar;
     private javax.swing.JComboBox<String> cmb_filtro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
