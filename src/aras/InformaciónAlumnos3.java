@@ -25,6 +25,7 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -39,6 +40,11 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         initComponents();
         
         user_update = GestionarAlumnos.user_update;
+        
+        setResizable(false);
+        setTitle("Sistema de Registro");
+        //cuando se cierra la ventana, termina de ejecutarse el programa
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
@@ -268,9 +274,9 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
-        registrarAlumnos2.setVisible(true);
+
+        InformaciónAlumnos4.informacionAlumnos2.setVisible(true);
+        InformaciónAlumnos2.informacionAlumnos3.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -20,6 +20,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
     //String user_update = "";
     int user_update;
+    public static InformaciónAlumnos3 informacionAlumnos3 = new InformaciónAlumnos3();
     
     public InformaciónAlumnos2() {
         initComponents();
@@ -205,8 +206,9 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
-        registrarAlumnos4.setVisible(true);
+
+        InformaciónAlumnos1.informacionAlumnos4.setVisible(true);
+        InformaciónAlumnos4.informacionAlumnos2.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -29,7 +29,11 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
     public RegistrarAlumnos1() {
         initComponents();
         
-        
+        setResizable(false);
+        setTitle("Sistema de Registro");
+        setLocationRelativeTo(null);
+        //cuando se cierra la ventana, termina de ejecutarse el programa
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),

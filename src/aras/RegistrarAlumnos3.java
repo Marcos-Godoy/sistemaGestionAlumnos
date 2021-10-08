@@ -25,6 +25,7 @@ import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -39,7 +40,10 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
     public RegistrarAlumnos3() {
         initComponents();
         
-        
+        setResizable(false);
+        setTitle("Sistema de Registro");
+        //cuando se cierra la ventana, termina de ejecutarse el programa
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
