@@ -49,7 +49,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
     public ListarAlumnos() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
-        setSize(700,500); 
+
         setResizable(false);
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
@@ -57,7 +57,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -67,14 +67,14 @@ public class ListarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido");
+                    "select nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido");
             //selecciona esos valores de la tabla
             
             ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
             jTable_gestionarAlumnos = new JTable(model); //declaramos la tabla y ponemos el model
             jScrollPane1.setViewportView(jTable_gestionarAlumnos); //la tabla esta contenida dentro de un jscrollpane
 
-            model.addColumn(" "); //agrego los titulos de las columnas
+            //agrego los titulos de las columnas
             model.addColumn("Nombre");
             model.addColumn("Apellido");
             model.addColumn("DNI");
@@ -82,9 +82,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
             model.addColumn("Curso");
 
             while (rs.next()) { //para ver si encontro resultados o coincidencias
-                Object[] fila = new Object[6]; //son 6 columnas
+                Object[] fila = new Object[5]; //son 5 columnas
 
-                for (int i = 0; i < 6; i++) { //voy ingresando lo que vaya encontrando en la bd
+                for (int i = 0; i < 5; i++) { //voy ingresando lo que vaya encontrando en la bd
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); //añado al modelo toda la fila
@@ -140,7 +140,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         });
         getContentPane().add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 210, 35));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Listar Alumnos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
@@ -175,13 +175,16 @@ public class ListarAlumnos extends javax.swing.JFrame {
         });
         getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 210, 35));
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 255));
+        jButton1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Guardar Excel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 120, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -199,9 +202,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
             Connection cn = Conexion.conectar();
 
             if (seleccion.equals("Todos")) {
-                query = "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido";
+                query = "select nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido";
             } else {
-                query = "select id, nombre, apellido, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
+                query = "select nombre, apellido, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -210,7 +213,6 @@ public class ListarAlumnos extends javax.swing.JFrame {
             jTable_gestionarAlumnos = new JTable(model);
             jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-            model.addColumn(" ");
             model.addColumn("Nombre");
             model.addColumn("Apellido");
             model.addColumn("DNI");
@@ -218,8 +220,8 @@ public class ListarAlumnos extends javax.swing.JFrame {
             model.addColumn("Curso");
 
             while(rs.next()){
-                Object [] fila = new Object[6];
-                for (int i = 0; i < 6; i++) {
+                Object [] fila = new Object[5];
+                for (int i = 0; i < 5; i++) {
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila);
@@ -413,8 +415,73 @@ ObtenerDatosTabla();
                 } catch (WriteException e) {
                     System.err.println(e.getMessage());
                 }
+                                              
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            workbook.write();
+            workbook.close();
+            System.out.println("escribiendo en el disco...");
+            JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
+        } catch (IOException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (WriteException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Lo mismo pero con la lista de familiares
+        //Se reutilizaran algunas de las variables usadas en el proceso anterior
+        cn = Conexion.conectar();
+        ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+        file = new File(ruta + "/Desktop/CuatroVientosFamiliares.xls");
+        row = 0;
+        excelSheet = null;
+        workbook = null;
+        
+        try {
+            workbook = Workbook.createWorkbook(file);
+            
+            workbook.createSheet("dato", 0);
+            
+            excelSheet = workbook.getSheet(0);
+            System.out.println("creando la hoja de excel...");
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+        sql = "select id,apellido,dni_familiar,nombre_familiar,parentesco,edad,ocupacion"
+                    + " from familiares order by id";
+        
+        try {
+            PreparedStatement pst = cn.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+            System.out.println("obteniendo registros...");
+            while(rs.next()){
+                Label id = new Label(0, row, rs.getString("Id"));
+                Label apellido = new Label(1, row, rs.getString("apellido"));
+                Number dni_familiar = new Number(2, row, rs.getLong("Dni_familiar"));
+                Label nombre_familiar = new Label(3, row, rs.getString("nombre_familiar"));
+                Label parentesco = new Label(4, row, rs.getString("Parentesco"));
+                Number edad = new Number(5, row, rs.getLong("Edad"));
+                Label ocupacion = new Label(6, row, rs.getString("Ocupacion"));
+                row++;
                 
-                
+                try {
+                    excelSheet.addCell(id);   
+                    excelSheet.addCell(apellido);
+                    excelSheet.addCell(dni_familiar);
+                    excelSheet.addCell(nombre_familiar);
+                    excelSheet.addCell(parentesco);
+                    excelSheet.addCell(edad);
+                    excelSheet.addCell(ocupacion);
+                    
+                } catch (WriteException e) {
+                    System.err.println(e.getMessage());
+                }    
                 
             }
             rs.close();
@@ -426,6 +493,7 @@ ObtenerDatosTabla();
             workbook.write();
             workbook.close();
             System.out.println("escribiendo en el disco...");
+            JOptionPane.showMessageDialog(null, "Lista de familiares creada correctamente.");
         } catch (IOException ex) {
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (WriteException ex) {
