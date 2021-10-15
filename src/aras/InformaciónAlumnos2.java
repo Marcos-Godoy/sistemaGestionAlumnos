@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -26,8 +27,10 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         initComponents();
         user_update = GestionarAlumnos.user_update;
         
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -102,7 +105,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información Escolar");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
@@ -227,8 +230,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         
         grado = jComboBox_grado.getSelectedItem().toString();
         
-        InformaciónAlumnos3 InformaciónAlumnos3 = new InformaciónAlumnos3();
-        InformaciónAlumnos3.setVisible(true);
+        informacionAlumnos3.setVisible(true);
         InformaciónAlumnos4.informacionAlumnos2.setVisible(false); //oculto pantalla al cerrarse
     }//GEN-LAST:event_jButton2ActionPerformed
 

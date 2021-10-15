@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
  */
 public class Administrador extends javax.swing.JFrame {
 
-    public static RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+    //public static RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
     /**
      * Creates new form Administrador
      */
@@ -29,7 +29,7 @@ public class Administrador extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -64,18 +64,21 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_RegistrarAlumnos = new javax.swing.JLabel();
         jLabel_ListarAlumnos = new javax.swing.JLabel();
         jLabel_GestionarAlumnos = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Sistema de Registro De Alumnos");
+        jLabel1.setText("Sistema de Registro de Alumnos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
 
-        jButton_RegistrarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/addUser.png"))); // NOI18N
+        jButton_RegistrarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/agregar.png"))); // NOI18N
+        jButton_RegistrarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton_RegistrarAlumnos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton_RegistrarAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_RegistrarAlumnosActionPerformed(evt);
@@ -83,15 +86,17 @@ public class Administrador extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, 100));
 
-        jButton_GestionarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/informationuser.png"))); // NOI18N
+        jButton_GestionarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
+        jButton_GestionarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton_GestionarAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_GestionarAlumnosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 120, 100));
+        getContentPane().add(jButton_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 120, 100));
 
-        jButton_ListarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/opciones.png"))); // NOI18N
+        jButton_ListarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/listar.png"))); // NOI18N
+        jButton_ListarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton_ListarAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ListarAlumnosActionPerformed(evt);
@@ -110,6 +115,14 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_GestionarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_GestionarAlumnos.setText("Gestionar Alumnos");
         getContentPane().add(jLabel_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+
+        jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 383, 40, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 430));
 
         pack();
@@ -117,7 +130,7 @@ public class Administrador extends javax.swing.JFrame {
 
     private void jButton_RegistrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarAlumnosActionPerformed
         // TODO add your handling code here:
-        //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
         registrarAlumnos.setVisible(true);
     }//GEN-LAST:event_jButton_RegistrarAlumnosActionPerformed
 
@@ -133,6 +146,11 @@ public class Administrador extends javax.swing.JFrame {
         ListarAlumnos listarAlumnos = new ListarAlumnos();
         listarAlumnos.setVisible(true);
     }//GEN-LAST:event_jButton_ListarAlumnosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Ayuda ayuda = new Ayuda();
+        ayuda.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +188,7 @@ public class Administrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_GestionarAlumnos;
     private javax.swing.JButton jButton_ListarAlumnos;
     private javax.swing.JButton jButton_RegistrarAlumnos;

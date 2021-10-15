@@ -64,7 +64,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Grupo familiar");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
@@ -126,13 +126,14 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
-        Administrador.registrarAlumnos.setVisible(true);
+        //Administrador.registrarAlumnos.setVisible(true);
         RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String nombre_alumno = RegistrarAlumnos1.nombre;
+        String apellido_alumno = RegistrarAlumnos1.apellido; //--
         int dni_alumno = RegistrarAlumnos1.dni_numerico;
         /*for(int i = 0; i < jTable1.getRowCount(); i++){
             for(int j = 0; j < jTable1.getColumnCount(); j++){
@@ -153,14 +154,15 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                             +jTable1.getValueAt(i, 1)+", "
                             +jTable1.getValueAt(i, 2)+", "
                             +jTable1.getValueAt(i, 3)+")");*/
-                    PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?)");
+                    PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
                     //pst.setInt(1, 0);
                     pst.setString(1, nombre_alumno);
-                    pst.setInt(2, dni_alumno);
-                    pst.setString(3, (String) jTable1.getValueAt(i, 0));
-                    pst.setString(4, (String) jTable1.getValueAt(i, 1));
-                    pst.setString(5, (String) jTable1.getValueAt(i, 2));
-                    pst.setString(6, (String) jTable1.getValueAt(i, 3));
+                    pst.setString(2, apellido_alumno); //--
+                    pst.setInt(3, dni_alumno);
+                    pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                    pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                    pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                    pst.setString(7, (String) jTable1.getValueAt(i, 3));
                     pst.executeUpdate();
                     cn.close();
                     this.dispose();

@@ -33,7 +33,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -95,7 +95,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información del Alumno");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
@@ -301,7 +301,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         
         //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
         registrarAlumnos4.setVisible(true);
-        Administrador.registrarAlumnos.setVisible(false);
+        //Administrador.registrarAlumnos.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

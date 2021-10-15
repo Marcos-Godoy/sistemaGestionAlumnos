@@ -47,7 +47,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -143,7 +143,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información Médica");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
@@ -255,7 +255,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 140, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 140, 50));
 
         jButton2.setBackground(new java.awt.Color(51, 102, 255));
         jButton2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -267,7 +267,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 140, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 140, 50));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -277,6 +277,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
 
         InformaciónAlumnos4.informacionAlumnos2.setVisible(true);
         InformaciónAlumnos2.informacionAlumnos3.setVisible(false);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -329,7 +330,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             PreparedStatement pst2 = cn2.prepareStatement("update alumnos set id=?,nombre=?,apellido=?,dni=?,nacimiento=?,lugar_nacimiento=?,"
                     + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
                     + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
-                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,fecha=?"
+                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?"
                     + " where dni ='" + user_update + "'");
             
             pst2.setInt(1, ID);
@@ -359,7 +360,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(25, observaciones);
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
-            pst2.setString(28, fechaActual()); //despues cambiar por fecha de inscripcion
+            //pst2.setString(28, fechaActual()); //despues cambiar por fecha de inscripcion
             
             cont++;
                         
@@ -378,7 +379,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Ficha.pdf")); //complementamos la ruta
             
-            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerFicha.jpg"); //agrego el header
             header.scaleToFit(300, 900); //tamaño del header
             header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
             
@@ -472,10 +473,16 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             documento.close();
             JOptionPane.showMessageDialog(null, "Ficha de alumno creada correctamente.");
             
+        
+            
         } catch (Exception e) {
             System.out.println("Error al generar PDF. " + e);
         }
-    
+        //InformaciónAlumnos1.informacionAlumnos4.setVisible(true);
+        //InformaciónAlumnos1.informacionAlumnos4.dispose();
+        //InformaciónAlumnos4.informacionAlumnos2.setVisible(true);
+        //InformaciónAlumnos4.informacionAlumnos2.dispose();
+        //InformaciónAlumnos2.informacionAlumnos3.dispose();
     }
     
     /**

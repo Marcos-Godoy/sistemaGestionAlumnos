@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,17 +25,16 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
     int user_update;
     int cantfilas = 0, filasAgregadas = 0;
     public static InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
-    //public String nombre_alumno;
-    //public String dni_alumno;
     
     public InformaciónAlumnos4() {
         initComponents();
         user_update = GestionarAlumnos.user_update;
         String nombre_alumno = InformaciónAlumnos1.nombre;
-        //String dni_alumno = InformaciónAlumnos1.dni;
         int dni_alumno = InformaciónAlumnos1.dni_numerico;
+        
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -104,7 +104,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Grupo familiar");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
@@ -164,18 +164,19 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
-        registrarAlumnos.setVisible(true);
+        
+        //GestionarAlumnos.informacion_alumnos1.setVisible(true);
+        InformaciónAlumnos1.informacionAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         //int contador = RegistrarAlumnos3.cont;
         String nombre_alumno = InformaciónAlumnos1.nombre;
+        String apellido_alumno = InformaciónAlumnos1.apellido;
         int dni_alumno = InformaciónAlumnos1.dni_numerico;
         user_update = GestionarAlumnos.user_update;
-        //String nombre_alumno = RegistrarAlumnos1.nombre;
+
         System.out.println(cantfilas);
         if(jTable1.getRowCount()>0){
             for(int i = 0; i < jTable1.getRowCount(); i++){
@@ -185,15 +186,16 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
 //no anda porque no estoy siendo especifico a quien quiero modificar, habria q agregar una id, toda la familia va a tener el mismo id familiar
                         //el nombre debe permanecer igual para que funcione.
                         Connection cn = Conexion.conectar();
-                        PreparedStatement pst = cn.prepareStatement("update familiares set id=?, dni_familiar=?, nombre_familiar=?,"
+                        PreparedStatement pst = cn.prepareStatement("update familiares set id=?, apellido=?, dni_familiar=?, nombre_familiar=?,"
                                 + "parentesco=?,edad=?,ocupacion=? where dni_familiar = '" + user_update + "' and nombre_familiar = '" + dato + "'");
                         System.out.println(nombre_alumno + dni_alumno);
                         pst.setString(1, nombre_alumno);
-                        pst.setInt(2, dni_alumno);
-                        pst.setString(3, (String) jTable1.getValueAt(i, 0));
-                        pst.setString(4, (String) jTable1.getValueAt(i, 1));
-                        pst.setInt(5, (int) jTable1.getValueAt(i, 2));
-                        pst.setString(6, (String) jTable1.getValueAt(i, 3));
+                        pst.setString(2, apellido_alumno); //--
+                        pst.setInt(3, dni_alumno);
+                        pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                        pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                        pst.setInt(6, (int) jTable1.getValueAt(i, 2));
+                        pst.setString(7, (String) jTable1.getValueAt(i, 3));
                         pst.executeUpdate();
                         cn.close();
                         this.dispose();
@@ -206,13 +208,14 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                     try {
 
                         Connection cn = Conexion.conectar();
-                        PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?)");
+                        PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
                         pst.setString(1, nombre_alumno);
-                        pst.setInt(2, dni_alumno);
-                        pst.setString(3, (String) jTable1.getValueAt(i, 0));
-                        pst.setString(4, (String) jTable1.getValueAt(i, 1));
-                        pst.setString(5, (String) jTable1.getValueAt(i, 2));
-                        pst.setString(6, (String) jTable1.getValueAt(i, 3));
+                        pst.setString(2, apellido_alumno); //--
+                        pst.setInt(3, dni_alumno);
+                        pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                        pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                        pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                        pst.setString(7, (String) jTable1.getValueAt(i, 3));
                         pst.executeUpdate();
                         cn.close();
                         this.dispose();

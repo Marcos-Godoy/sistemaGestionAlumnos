@@ -107,7 +107,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información Médica");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
@@ -337,7 +337,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Ficha.pdf")); //complementamos la ruta
             
-            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerFicha.jpg"); //agrego el header
             header.scaleToFit(300, 900); //tamaño del header
             header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
             

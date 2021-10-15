@@ -37,15 +37,17 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Sistema de Registro");
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        txt_dni.setEnabled(false); //bloqueo el dni para que no se pueda modificar
         
         try {
             Connection cn = Conexion.conectar();
@@ -61,7 +63,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
                 txt_nombre_padre.setText(rs.getString("nombre_padre"));
                 txt_nombre_madre.setText(rs.getString("nombre_madre"));
                 txt_lugar_nacimiento.setText(rs.getString("lugar_nacimiento"));
-                txt_lugar.setText(rs.getString("fecha"));
+                txt_lugar.setText(rs.getString("nacimiento"));
                 txt_domicilio.setText(rs.getString("domicilio"));
                 txt_telefono.setText(rs.getString("telefono"));
                 txt_telefono2.setText(rs.getString("telefono2"));
@@ -123,7 +125,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 2, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información del Alumno");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
