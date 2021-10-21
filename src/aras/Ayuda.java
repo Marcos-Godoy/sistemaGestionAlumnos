@@ -30,7 +30,7 @@ public class Ayuda extends javax.swing.JFrame {
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
-        jTextArea1.setEnabled(false);
+        jTextArea1.setEditable(false);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
