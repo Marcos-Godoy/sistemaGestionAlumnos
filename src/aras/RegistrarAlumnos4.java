@@ -28,6 +28,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         //nombre_alumno = RegistrarAlumnos1.nombre;
         //dni_alumno = RegistrarAlumnos1.dni_numerico;
         //establece la imagen como fondo de la aplicacion
+        setLocationRelativeTo(null);
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
@@ -132,6 +133,16 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        if(jTable1.getRowCount()==0){     
+            JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
+        } 
+        
+        //RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
+        registrarAlumnos2.setVisible(true);
+        RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public void subirFamiliares(){
         String nombre_alumno = RegistrarAlumnos1.nombre;
         String apellido_alumno = RegistrarAlumnos1.apellido; //--
         int dni_alumno = RegistrarAlumnos1.dni_numerico;
@@ -175,12 +186,8 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
-        
-        //RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
-        registrarAlumnos2.setVisible(true);
-        RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
+    
     private void jButton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_agregarActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{"","","",""});
