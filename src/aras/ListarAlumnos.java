@@ -1,6 +1,7 @@
 package aras;
 
 
+import static aras.GestionarAlumnos.user_update;
 import java.sql.*;
 import clases.Conexion;
 import com.itextpdf.text.BaseColor;
@@ -42,10 +43,9 @@ import jxl.write.WriteException;
 public class ListarAlumnos extends javax.swing.JFrame {
 
     public static String user_update = "";
+    public static int name;
     DefaultTableModel model = new DefaultTableModel();
-    /**
-     * Creates new form GestionarAlumnos
-     */
+    
     public ListarAlumnos() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
@@ -53,6 +53,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
+        setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
@@ -97,6 +98,24 @@ public class ListarAlumnos extends javax.swing.JFrame {
         }
 
         ObtenerDatosTabla();
+        
+        jTable_gestionarAlumnos.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
+               //seleccionamos por defecto la columna 1 (nombre)
+               int columna_point = 1;
+               
+               
+               if(fila_point > -1){
+                   name = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
+                   user_update = (String) model.getValueAt(fila_point, 1);
+                   System.out.println(name);
+               }
+               
+            }
+        });
     }
     
     //Reemplazar el icono de java por default
@@ -121,7 +140,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_gestionarAlumnos = new javax.swing.JTable();
         Imprimir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton_eliminar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton_eliminar1 = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,22 +152,22 @@ public class ListarAlumnos extends javax.swing.JFrame {
         Mostrar.setBackground(new java.awt.Color(153, 153, 255));
         Mostrar.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         Mostrar.setForeground(new java.awt.Color(255, 255, 255));
-        Mostrar.setText("Mostrar");
+        Mostrar.setText("Actualizar Tabla");
         Mostrar.setBorder(null);
         Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 210, 35));
+        getContentPane().add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 210, 35));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Listar Alumnos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1º grado", "2º grado", "3º grado", "4º grado", "5º grado", "6º grado", "7º grado", "1º año", "2º año", "3º año", "4º año", "5º año" }));
-        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, -1));
+        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
 
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,7 +182,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 700, 290));
 
         Imprimir.setBackground(new java.awt.Color(153, 153, 255));
         Imprimir.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
@@ -173,18 +194,40 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 ImprimirActionPerformed(evt);
             }
         });
-        getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 210, 35));
+        getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 210, 35));
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 255));
-        jButton1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Guardar Excel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_eliminar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_eliminar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton_eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_eliminar.setText("Eliminar");
+        jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 120, 30));
+        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 120, 30));
+
+        jButton2.setBackground(new java.awt.Color(153, 153, 255));
+        jButton2.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Guardar Excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 120, 30));
+
+        jButton_eliminar1.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_eliminar1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton_eliminar1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_eliminar1.setText("Estadísticas");
+        jButton_eliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_eliminar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 120, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -323,19 +366,60 @@ ObtenerDatosTabla();
         
     }//GEN-LAST:event_ImprimirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
+        
+        int dni;
+        String apellido;
+        dni = name;
+        apellido = user_update;
+        int input = JOptionPane.showConfirmDialog(null, "¿Seguro que querés eliminar a este alumno?");
+        // 0=yes, 1=no, 2=cancel
+        System.out.println(input);
+        
+        if(input == 0) {
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst;
+                pst = cn.prepareStatement(
+                        "delete from alumnos where dni = '" + dni + "' and apellido = '" + apellido + "'");
+                //selecciona esos valores de la tabla
+                pst.executeUpdate(); //ejecuto lo anterior
+                JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente.");
+            } catch (SQLException ex) {
+                System.err.println("Error al eliminar alumno. " + ex);
+            }
+            try {
+                Connection cn = Conexion.conectar();
+                PreparedStatement pst;
+                pst = cn.prepareStatement(
+                        "delete from familiares where dni_familiar = '" + dni + "' and apellido = '" + apellido + "'");
+                //selecciona esos valores de la tabla
+                pst.executeUpdate(); //ejecuto lo anterior
+            } catch (SQLException ex) {
+                System.err.println("Error al eliminar familiar. " + ex);
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton_eliminarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        String seleccion = cmb_filtro.getSelectedItem().toString();
+        
         Connection cn = Conexion.conectar();
         String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-        File file = new File(ruta + "/Desktop/CuatroVientos.xls");
+        File file = new File(ruta + "/Desktop/Alumnos " + seleccion + ".xls");
         int row = 0;
         WritableSheet excelSheet = null;
         WritableWorkbook workbook = null;
-        
+
         try {
             workbook = Workbook.createWorkbook(file);
-            
+
             workbook.createSheet("dato", 0);
-            
+
             excelSheet = workbook.getSheet(0);
             System.out.println("creando la hoja de excel...");
         } catch (IOException e){
@@ -345,10 +429,21 @@ ObtenerDatosTabla();
                     + "domicilio,localidad,nombre_madre,dni_madre,nombre_padre,dni_padre,telefono,"
                     + "telefono2,numero_escuela,nombre_escuela,grado,repitio,grado_repetido,"
                     + "sangre,alergias,cobertura,condicion,retira_con,observaciones,inscripcion,cuota,fecha"
-                    + " from alumnos order by grado";
-        
+                    + " from alumnos where grado = '" + seleccion + "' order by apellido";
+        String sql2 = "select id,nombre,apellido,dni,nacimiento,lugar_nacimiento,"
+                    + "domicilio,localidad,nombre_madre,dni_madre,nombre_padre,dni_padre,telefono,"
+                    + "telefono2,numero_escuela,nombre_escuela,grado,repitio,grado_repetido,"
+                    + "sangre,alergias,cobertura,condicion,retira_con,observaciones,inscripcion,cuota,fecha"
+                    + " from alumnos order by grado,apellido";
+
         try {
-            PreparedStatement pst = cn.prepareStatement(sql);
+            PreparedStatement pst;
+            if(seleccion.equals("Todos")){
+                pst = cn.prepareStatement(sql2);
+            } else {
+                pst = cn.prepareStatement(sql);
+            }
+            
 
             ResultSet rs = pst.executeQuery();
             System.out.println("obteniendo registros...");
@@ -382,7 +477,7 @@ ObtenerDatosTabla();
                 Label cuota = new Label(26, row, rs.getString("Cuota"));
                 Label fecha = new Label(27, row, rs.getString("Fecha"));
                 row++;
-                
+
                 try {
                     excelSheet.addCell(id);
                     excelSheet.addCell(nombre);
@@ -415,23 +510,25 @@ ObtenerDatosTabla();
                 } catch (WriteException e) {
                     System.err.println(e.getMessage());
                 }
-                                              
+
+
+
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             workbook.write();
             workbook.close();
             System.out.println("escribiendo en el disco...");
-            JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
         } catch (IOException ex) {
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (WriteException ex) {
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
         //Lo mismo pero con la lista de familiares
         //Se reutilizaran algunas de las variables usadas en el proceso anterior
@@ -441,12 +538,12 @@ ObtenerDatosTabla();
         row = 0;
         excelSheet = null;
         workbook = null;
-        
+
         try {
             workbook = Workbook.createWorkbook(file);
-            
+
             workbook.createSheet("dato", 0);
-            
+
             excelSheet = workbook.getSheet(0);
             System.out.println("creando la hoja de excel...");
         } catch (IOException e){
@@ -454,7 +551,7 @@ ObtenerDatosTabla();
         }
         sql = "select id,apellido,dni_familiar,nombre_familiar,parentesco,edad,ocupacion"
                     + " from familiares order by id";
-        
+
         try {
             PreparedStatement pst = cn.prepareStatement(sql);
 
@@ -469,7 +566,8 @@ ObtenerDatosTabla();
                 Number edad = new Number(5, row, rs.getLong("Edad"));
                 Label ocupacion = new Label(6, row, rs.getString("Ocupacion"));
                 row++;
-                
+
+
                 try {
                     excelSheet.addCell(id);   
                     excelSheet.addCell(apellido);
@@ -478,18 +576,13 @@ ObtenerDatosTabla();
                     excelSheet.addCell(parentesco);
                     excelSheet.addCell(edad);
                     excelSheet.addCell(ocupacion);
-                    
+
                 } catch (WriteException e) {
                     System.err.println(e.getMessage());
                 }    
-                
+
             }
             rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
             workbook.write();
             workbook.close();
             System.out.println("escribiendo en el disco...");
@@ -498,8 +591,16 @@ ObtenerDatosTabla();
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (WriteException ex) {
             Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton_eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminar1ActionPerformed
+        
+        new Grafica().setVisible(true);
+        
+    }//GEN-LAST:event_jButton_eliminar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,7 +642,9 @@ ObtenerDatosTabla();
     private javax.swing.JButton Imprimir;
     private javax.swing.JButton Mostrar;
     private javax.swing.JComboBox<String> cmb_filtro;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_eliminar;
+    private javax.swing.JButton jButton_eliminar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
