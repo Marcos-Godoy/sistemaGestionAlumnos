@@ -8,6 +8,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 import clases.Conexion;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,8 +38,10 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         
         setResizable(false);
         setTitle("Sistema de Registro");
+        setLocationRelativeTo(null);
+        setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
@@ -78,7 +82,29 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
             System.err.println("Error en cargar usuario. " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
         }
+        
+        //CerrarVentana();
+        
     }
+    
+    //Metodo para cerrar este Jframe desde otros.
+    public void CerrarVentana(){
+        dispose();
+    }
+    
+    /*
+    public void CerrarVentana(){
+        addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+        //InformaciónAlumnos1.informacionAlumnos4.setVisible(true);
+        informacionAlumnos4.dispose();
+        //InformaciónAlumnos4.informacionAlumnos2.setVisible(true);
+        InformaciónAlumnos4.informacionAlumnos2.dispose();
+        InformaciónAlumnos2.informacionAlumnos3.dispose();
+        //System.exit(0);
+        }
+    });
+    }*/
     
     //Reemplazar el icono de java por default
     @Override

@@ -130,6 +130,7 @@ public class Login extends javax.swing.JFrame {
                     
                     if(contr.equalsIgnoreCase(pass)){
                         dispose();
+                        
                         new Administrador().setVisible(true);
                         
                     }

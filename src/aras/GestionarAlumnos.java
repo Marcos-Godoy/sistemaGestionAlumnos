@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestionarAlumnos extends javax.swing.JFrame {
 
     public static int user_update;
-    //public static InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1();
+    //public static InformaciónAlumnos1 informacion_alumnos1;
     DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form GestionarAlumnos
@@ -90,6 +90,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
                    System.out.println(user_update);
                    InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1(); //abro la proxima interfaz
                    informacion_alumnos1.setVisible(true);
+                   dispose();
                }
                
             }

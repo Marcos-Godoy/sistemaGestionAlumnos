@@ -16,7 +16,8 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
     
     public RegistrarAlumnos2() {
         initComponents();
-
+        
+        setLocationRelativeTo(null);
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -177,6 +178,9 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         nombre_escuela = txt_nombre_escuela.getText().trim();
         numero_escuela = txt_numero_escuela.getText().trim();
         
+        if("".equals(numero_escuela)) {
+            numero_escuela = "0";
+        }
         
         if(jRadioButton_repitio.isSelected()){
             repitio = "SI";

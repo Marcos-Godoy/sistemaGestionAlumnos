@@ -368,7 +368,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                         
             pst2.executeUpdate();
             cn2.close();
-            this.dispose();
+            //this.dispose();
                         
             } catch (SQLException e) {
                 System.err.println("Error en Registrar alumno. " + e);
@@ -485,12 +485,14 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 System.out.println("Error al generar PDF. " + e);
             }
         }
-        //InformaciónAlumnos1.informacionAlumnos4.setVisible(true);
-        InformaciónAlumnos1.informacionAlumnos4.dispose();
-        //InformaciónAlumnos4.informacionAlumnos2.setVisible(true);
+        this.dispose();
         InformaciónAlumnos4.informacionAlumnos2.dispose();
-        //InformaciónAlumnos2.informacionAlumnos3.dispose();
-        Administrador administrador = new Administrador();
+        InformaciónAlumnos1.informacionAlumnos4.dispose();
+        //InformaciónAlumnos1.CerrarVentana();
+        
+        String[] args = null;
+        Administrador.main(args);
+        //Administrador administrador = new Administrador();
         //administrador.setVisible(true);
         
     }

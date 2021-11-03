@@ -33,6 +33,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
         int dni_alumno = InformaciónAlumnos1.dni_numerico;
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),

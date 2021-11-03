@@ -28,6 +28,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         user_update = GestionarAlumnos.user_update;
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");

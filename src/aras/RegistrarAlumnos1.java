@@ -13,6 +13,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 import clases.Conexion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,6 +33,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Sistema de Registro");
         setLocationRelativeTo(null);
+        setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //establece la imagen como fondo de la aplicacion
@@ -296,8 +298,21 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         dni_padre = txt_dni_padre.getText().trim();
         dni_madre = txt_dni_madre.getText().trim();
         
+        if("".equals(dni)) {
+            JOptionPane.showMessageDialog(null, "Debes llenar el campo DNI!!!.");
+        }
+        
+        if("".equals(dni_padre)) {
+            dni_padre = "0";
+        }
+        if("".equals(dni_madre)) {
+            dni_madre = "0";
+        }
+        
         dni_numerico = Integer.parseInt(dni);
         System.out.println(dni_numerico);
+        
+        
         
         //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
         registrarAlumnos4.setVisible(true);

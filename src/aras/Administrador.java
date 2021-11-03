@@ -2,10 +2,12 @@ package aras; //paquete al que pertenece la clase
 
 import java.sql.*;
 import clases.Conexion;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
@@ -13,7 +15,7 @@ import javax.swing.WindowConstants;
  * @author mjgod
  */
 public class Administrador extends javax.swing.JFrame {
-
+    
     //public static RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
     /**
      * Creates new form Administrador
@@ -36,6 +38,16 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
         
+        
+    jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseEntered(java.awt.event.MouseEvent evt) {
+        jButton1.setBackground(Color.GREEN);
+    }
+
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        jButton1.setBackground(UIManager.getColor("control"));
+    }
+    });
         
     }
     
