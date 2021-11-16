@@ -172,6 +172,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        /*
         //int contador = RegistrarAlumnos3.cont;
         String nombre_alumno = InformaciónAlumnos1.nombre;
         String apellido_alumno = InformaciónAlumnos1.apellido;
@@ -233,12 +234,76 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
-        
+        */
         //InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
         informacionAlumnos2.setVisible(true);
         InformaciónAlumnos1.informacionAlumnos4.setVisible(false); //oculto pantalla al cerrarse
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void actualizarFamiliares(){
+        
+        String nombre_alumno = InformaciónAlumnos1.nombre;
+        String apellido_alumno = InformaciónAlumnos1.apellido;
+        int dni_alumno = InformaciónAlumnos1.dni_numerico;
+        user_update = GestionarAlumnos.user_update;
+
+        System.out.println(cantfilas);
+        if(jTable1.getRowCount()>0){
+            for(int i = 0; i < jTable1.getRowCount(); i++){
+                if(i < cantfilas){
+                    try {
+                        String dato = String.valueOf(model.getValueAt(i,0));
+//no anda porque no estoy siendo especifico a quien quiero modificar, habria q agregar una id, toda la familia va a tener el mismo id familiar
+                        //el nombre debe permanecer igual para que funcione.
+                        Connection cn = Conexion.conectar();
+                        PreparedStatement pst = cn.prepareStatement("update familiares set id=?, apellido=?, dni_familiar=?, nombre_familiar=?,"
+                                + "parentesco=?,edad=?,ocupacion=? where dni_familiar = '" + user_update + "' and nombre_familiar = '" + dato + "'");
+                        System.out.println(nombre_alumno + dni_alumno);
+                        pst.setString(1, nombre_alumno);
+                        pst.setString(2, apellido_alumno); //--
+                        pst.setInt(3, dni_alumno);
+                        pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                        pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                        pst.setInt(6, (int) jTable1.getValueAt(i, 2));
+                        pst.setString(7, (String) jTable1.getValueAt(i, 3));
+                        pst.executeUpdate();
+                        cn.close();
+                        this.dispose();
+                    }
+                    catch (SQLException e) {
+                        System.err.println("Error en Registrar familiares. " + e);
+                        JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
+                    }
+                } else {
+                    try {
+
+                        Connection cn = Conexion.conectar();
+                        PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
+                        pst.setString(1, nombre_alumno);
+                        pst.setString(2, apellido_alumno); //--
+                        pst.setInt(3, dni_alumno);
+                        pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                        pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                        pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                        pst.setString(7, (String) jTable1.getValueAt(i, 3));
+                        pst.executeUpdate();
+                        cn.close();
+                        this.dispose();
+                    }
+                    catch (SQLException e) {
+                        System.err.println("Error en Registrar familiares. " + e);
+                        JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
+                    }
+                } 
+                    
+            }
+            
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
+        }
+    }
+    
     private void jButton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_agregarActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{"","","",""});

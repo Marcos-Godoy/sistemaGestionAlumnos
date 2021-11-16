@@ -301,6 +301,9 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         dni_madre = Integer.parseInt(InformaciónAlumnos1.dni_madre);
         dni_padre = Integer.parseInt(InformaciónAlumnos1.dni_padre);
         
+        // Actualizo la tabla de familiares
+        InformaciónAlumnos1.informacionAlumnos4.actualizarFamiliares();
+        
         nombre_escuela = InformaciónAlumnos2.nombre_escuela;
         numero_escuela = Integer.parseInt(InformaciónAlumnos2.numero_escuela);
         grado = InformaciónAlumnos2.grado;
