@@ -290,6 +290,10 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             cuota = "NO";
         }
         
+        if(observaciones.equals("")){
+            observaciones = "s/o";
+        }
+        
         
         try {
             Connection cn2 = Conexion.conectar();
