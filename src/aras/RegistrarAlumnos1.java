@@ -5,6 +5,7 @@
  */
 package aras;
 
+import static aras.Login.user;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 import clases.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -311,11 +316,39 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         
         dni_numerico = Integer.parseInt(dni);
         System.out.println(dni_numerico);
+        int n = 0;
         
+        if(!(dni.equals(""))){
+            try {
+                Connection cn = Conexion.conectar();
+                //seleccione segun la condicion
+                PreparedStatement pst = cn.prepareStatement(
+                "select count(dni) from alumnos where dni = '" + dni_numerico
+                 + "'");
+                
+                //recupera los resultados
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    
+                    //Si hay resultados obtengo el valor. 
+                    n = rs.getInt(1);
+                    if(n == 0) {
+                        registrarAlumnos4.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Ese DNI ya fue ingresado.");
+                    }
+                    
+                }
+            } catch (SQLException e) {
+                System.err.println("Error. " + e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes llenar el campo DNI!!!.");
+        }
         
         
         //RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
-        registrarAlumnos4.setVisible(true);
+        //registrarAlumnos4.setVisible(true);
         //Administrador.registrarAlumnos.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

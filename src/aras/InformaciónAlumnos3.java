@@ -46,7 +46,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
@@ -493,8 +493,8 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         InformaciónAlumnos1.informacionAlumnos4.dispose();
         //InformaciónAlumnos1.CerrarVentana();
         
-        String[] args = null;
-        Login.main(args);
+        //String[] args = null;
+        //Login.main(args);
         //Administrador administrador = new Administrador();
         //administrador.setVisible(true);
         

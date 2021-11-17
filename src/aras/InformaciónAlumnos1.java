@@ -29,9 +29,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     int user_update;
     public static int dni_numerico = 0;
     
-    /**
-     * Creates new form RegistrarAlumnos1
-     */
+    
     public InformaciónAlumnos1() {
         initComponents();
         user_update = GestionarAlumnos.user_update;

@@ -133,6 +133,14 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        for(int i = 0; i < jTable1.getRowCount(); i++){
+            for(int j = 0; j < jTable1.getColumnCount(); j++){
+                if(((String) jTable1.getValueAt(i, j)) == ""){
+                    jTable1.setValueAt("-", i, j);
+                }
+            }
+        }
+        
         if(jTable1.getRowCount()==0){     
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         } 
@@ -146,14 +154,9 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         String nombre_alumno = RegistrarAlumnos1.nombre;
         String apellido_alumno = RegistrarAlumnos1.apellido; //--
         int dni_alumno = RegistrarAlumnos1.dni_numerico;
-        /*for(int i = 0; i < jTable1.getRowCount(); i++){
-            for(int j = 0; j < jTable1.getColumnCount(); j++){
-                if(((String) jTable1.getValueAt(i, j)) == ""){
-                    jTable1.setValueAt("vacio", i, j);
-                }
-            }
-        }
-        */
+        
+        
+        
         //int contador = RegistrarAlumnos3.cont;
         if(jTable1.getRowCount()>0){
             for(int i = 0; i < jTable1.getRowCount(); i++){
