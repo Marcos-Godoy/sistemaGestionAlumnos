@@ -494,7 +494,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         //InformaciónAlumnos1.CerrarVentana();
         
         String[] args = null;
-        Administrador.main(args);
+        Login.main(args);
         //Administrador administrador = new Administrador();
         //administrador.setVisible(true);
         

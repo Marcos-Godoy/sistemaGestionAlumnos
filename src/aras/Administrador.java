@@ -43,9 +43,40 @@ public class Administrador extends javax.swing.JFrame {
     public void mouseEntered(java.awt.event.MouseEvent evt) {
         jButton1.setBackground(Color.GREEN);
     }
+    
 
     public void mouseExited(java.awt.event.MouseEvent evt) {
         jButton1.setBackground(UIManager.getColor("control"));
+    }
+    });
+    
+    jButton_RegistrarAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseEntered(java.awt.event.MouseEvent evt) {
+        jButton_RegistrarAlumnos.setBackground(Color.GRAY);
+    }
+            
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        jButton_RegistrarAlumnos.setBackground(UIManager.getColor("control"));
+    }
+    });
+    
+    jButton_GestionarAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseEntered(java.awt.event.MouseEvent evt) {
+        jButton_GestionarAlumnos.setBackground(Color.GRAY);
+    }
+            
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        jButton_GestionarAlumnos.setBackground(UIManager.getColor("control"));
+    }
+    });
+    
+    jButton_ListarAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseEntered(java.awt.event.MouseEvent evt) {
+        jButton_ListarAlumnos.setBackground(Color.GRAY);
+    }
+            
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        jButton_ListarAlumnos.setBackground(UIManager.getColor("control"));
     }
     });
         
