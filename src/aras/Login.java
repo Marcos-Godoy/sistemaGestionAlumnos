@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         this.repaint();
         
         //para colocar logo
-        ImageIcon wallpaper_logo = new ImageIcon("src/images/cuatroVientos.jpg");
+        ImageIcon wallpaper_logo = new ImageIcon("src/images/cuatroVientos.png");
         Icon icono_logo = new ImageIcon(wallpaper_logo.getImage().getScaledInstance(jLabel_Logo.getWidth(),
                 jLabel_Logo.getHeight(), Image.SCALE_DEFAULT));
         jLabel_Logo.setIcon(icono_logo);
@@ -52,7 +52,7 @@ public class Login extends javax.swing.JFrame {
     //Reemplazar el icono de java por default
     @Override
     public Image getIconImage(){
-        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/cuatroVientos.jpg"));
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("images/cuatroVientos.png"));
         return retValue;
     }
     
@@ -75,7 +75,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jLabel_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 220, 270));
+        getContentPane().add(jLabel_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 250, 270));
 
         txt_user.setBackground(new java.awt.Color(153, 153, 255));
         txt_user.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N

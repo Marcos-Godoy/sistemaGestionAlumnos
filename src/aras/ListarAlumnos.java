@@ -68,7 +68,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido");
+                    "select apellido,nombre, dni, nombre_escuela, grado from alumnos order by apellido");
             //selecciona esos valores de la tabla
             
             ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
@@ -76,8 +76,8 @@ public class ListarAlumnos extends javax.swing.JFrame {
             jScrollPane1.setViewportView(jTable_gestionarAlumnos); //la tabla esta contenida dentro de un jscrollpane
 
             //agrego los titulos de las columnas
-            model.addColumn("Nombre");
             model.addColumn("Apellido");
+            model.addColumn("Nombre");
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
@@ -425,12 +425,72 @@ ObtenerDatosTabla();
         } catch (IOException e){
             System.err.println(e.getMessage());
         }
-        String sql = "select id,nombre,apellido,dni,nacimiento,lugar_nacimiento,"
+        Label nombret = new Label(0, row, "NOMBRE");
+        Label apellidot = new Label(1, row, "APELLIDO");
+        Label dnit = new Label(2, row, "DNI");
+        Label fecha_nacimientot = new Label(3, row, "NACIMIENTO");
+        Label lugar_nacimientot = new Label(4, row, "LUGAR NACIMIENTO");
+        Label domiciliot = new Label(5, row,"DOMICILIO");
+        Label localidadt = new Label(6, row, "LOCALIDAD");
+        Label nombre_madret = new Label(7, row, "NOMBRE MADRE");
+        Label dni_madret = new Label(8, row, "DNI MADRE");
+        Label nombre_padret = new Label(9, row, "NOMBRE PADRE");
+        Label dni_padret = new Label(10, row, "DNI PADRE");
+        Label telefonot = new Label(11, row, "TELEFONO");
+        Label telefono2t = new Label(12, row,"OTRO TELEFONO");
+        Label numero_escuelat = new Label(13, row, "NUMERO DE ESCUELA");
+        Label nombre_escuelat = new Label(14, row, "NOMBRE DE ESCUELA");
+        Label gradot = new Label(15, row, "GRADO");
+        Label repitiot = new Label(16, row, "¿REPITIÓ?");
+        Label grado_repetidot = new Label(17, row, "GRADO REPETIDO");
+        Label sangret = new Label(18, row, "GRUPO SANGUÍNEO");
+        Label alergiast = new Label(19, row, "ALERGIAS");
+        Label coberturat = new Label(20, row, "COBERTURA MÉDICA");
+        Label condiciont = new Label(21, row, "CONDICIÓN MÉDICA");
+        Label retira_cont = new Label(22, row, "SE RETIRA CON");
+        Label observacionest = new Label(23, row, "OBSERVACIONES");
+        Label inscripciont = new Label(24, row, "INSCRIPCIÓN PAGA");
+        Label cuotat = new Label(25, row, "CUOTA PAGA");
+        Label fechat = new Label(26, row, "FECHA INSCRIPCIÓN");
+        row++;
+        try {
+            excelSheet.addCell(nombret);
+            excelSheet.addCell(apellidot);
+                    excelSheet.addCell(dnit);
+                    excelSheet.addCell(fecha_nacimientot);
+                    excelSheet.addCell(lugar_nacimientot);
+                    excelSheet.addCell(domiciliot);
+                    excelSheet.addCell(localidadt);
+                    excelSheet.addCell(nombre_madret);
+                    excelSheet.addCell(dni_madret);
+                    excelSheet.addCell(nombre_padret);
+                    excelSheet.addCell(dni_padret);
+                    excelSheet.addCell(telefonot);
+                    excelSheet.addCell(telefono2t);
+                    excelSheet.addCell(numero_escuelat);
+                    excelSheet.addCell(nombre_escuelat);
+                    excelSheet.addCell(gradot);
+                    excelSheet.addCell(repitiot);
+                    excelSheet.addCell(grado_repetidot);
+                    excelSheet.addCell(sangret);
+                    excelSheet.addCell(alergiast);
+                    excelSheet.addCell(coberturat);
+                    excelSheet.addCell(condiciont);
+                    excelSheet.addCell(retira_cont);
+                    excelSheet.addCell(observacionest);
+                    excelSheet.addCell(inscripciont);
+                    excelSheet.addCell(cuotat);
+                    excelSheet.addCell(fechat);
+        } catch (WriteException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String sql = "select nombre,apellido,dni,nacimiento,lugar_nacimiento,"
                     + "domicilio,localidad,nombre_madre,dni_madre,nombre_padre,dni_padre,telefono,"
                     + "telefono2,numero_escuela,nombre_escuela,grado,repitio,grado_repetido,"
                     + "sangre,alergias,cobertura,condicion,retira_con,observaciones,inscripcion,cuota,fecha"
                     + " from alumnos where grado = '" + seleccion + "' order by apellido";
-        String sql2 = "select id,nombre,apellido,dni,nacimiento,lugar_nacimiento,"
+        String sql2 = "select nombre,apellido,dni,nacimiento,lugar_nacimiento,"
                     + "domicilio,localidad,nombre_madre,dni_madre,nombre_padre,dni_padre,telefono,"
                     + "telefono2,numero_escuela,nombre_escuela,grado,repitio,grado_repetido,"
                     + "sangre,alergias,cobertura,condicion,retira_con,observaciones,inscripcion,cuota,fecha"
@@ -448,38 +508,38 @@ ObtenerDatosTabla();
             ResultSet rs = pst.executeQuery();
             System.out.println("obteniendo registros...");
             while(rs.next()){
-                Number id = new Number(0, row, rs.getLong("Id"));
-                Label nombre = new Label(1, row, rs.getString("Nombre"));
-                Label apellido = new Label(2, row, rs.getString("Apellido"));
-                Number dni = new Number(3, row, rs.getLong("DNI"));
-                Number fecha_nacimiento = new Number(4, row, rs.getLong("nacimiento"));
-                Label lugar_nacimiento = new Label(5, row, rs.getString("Lugar_nacimiento"));
-                Label domicilio = new Label(6, row, rs.getString("Domicilio"));
-                Label localidad = new Label(7, row, rs.getString("Localidad"));
-                Label nombre_madre = new Label(8, row, rs.getString("Nombre_Madre"));
-                Number dni_madre = new Number(9, row, rs.getLong("DNI_Madre"));
-                Label nombre_padre = new Label(10, row, rs.getString("Nombre_Padre"));
-                Number dni_padre = new Number(11, row, rs.getLong("DNI_Padre"));
-                Label telefono = new Label(12, row, rs.getString("Telefono"));
-                Label telefono2 = new Label(13, row, rs.getString("Telefono2"));
-                Number numero_escuela = new Number(14, row, rs.getLong("Numero_Escuela"));
-                Label nombre_escuela = new Label(15, row, rs.getString("Nombre_Escuela"));
-                Label grado = new Label(16, row, rs.getString("Grado"));
-                Label repitio = new Label(17, row, rs.getString("Repitio"));
-                Label grado_repetido = new Label(18, row, rs.getString("Grado_Repetido"));
-                Label sangre = new Label(19, row, rs.getString("Sangre"));
-                Label alergias = new Label(20, row, rs.getString("Alergias"));
-                Label cobertura = new Label(21, row, rs.getString("Cobertura"));
-                Label condicion = new Label(22, row, rs.getString("Condicion"));
-                Label retira_con = new Label(23, row, rs.getString("retira_con"));
-                Label observaciones = new Label(24, row, rs.getString("Observaciones"));
-                Label inscripcion = new Label(25, row, rs.getString("Inscripcion"));
-                Label cuota = new Label(26, row, rs.getString("Cuota"));
-                Label fecha = new Label(27, row, rs.getString("Fecha"));
+                //Number id = new Number(0, row, rs.getLong("Id"));
+                Label nombre = new Label(0, row, rs.getString("Nombre"));
+                Label apellido = new Label(1, row, rs.getString("Apellido"));
+                Number dni = new Number(2, row, rs.getLong("DNI"));
+                Number fecha_nacimiento = new Number(3, row, rs.getLong("nacimiento"));
+                Label lugar_nacimiento = new Label(4, row, rs.getString("Lugar_nacimiento"));
+                Label domicilio = new Label(5, row, rs.getString("Domicilio"));
+                Label localidad = new Label(6, row, rs.getString("Localidad"));
+                Label nombre_madre = new Label(7, row, rs.getString("Nombre_Madre"));
+                Number dni_madre = new Number(8, row, rs.getLong("DNI_Madre"));
+                Label nombre_padre = new Label(9, row, rs.getString("Nombre_Padre"));
+                Number dni_padre = new Number(10, row, rs.getLong("DNI_Padre"));
+                Label telefono = new Label(11, row, rs.getString("Telefono"));
+                Label telefono2 = new Label(12, row, rs.getString("Telefono2"));
+                Number numero_escuela = new Number(13, row, rs.getLong("Numero_Escuela"));
+                Label nombre_escuela = new Label(14, row, rs.getString("Nombre_Escuela"));
+                Label grado = new Label(15, row, rs.getString("Grado"));
+                Label repitio = new Label(16, row, rs.getString("Repitio"));
+                Label grado_repetido = new Label(17, row, rs.getString("Grado_Repetido"));
+                Label sangre = new Label(18, row, rs.getString("Sangre"));
+                Label alergias = new Label(19, row, rs.getString("Alergias"));
+                Label cobertura = new Label(20, row, rs.getString("Cobertura"));
+                Label condicion = new Label(21, row, rs.getString("Condicion"));
+                Label retira_con = new Label(22, row, rs.getString("retira_con"));
+                Label observaciones = new Label(23, row, rs.getString("Observaciones"));
+                Label inscripcion = new Label(24, row, rs.getString("Inscripcion"));
+                Label cuota = new Label(25, row, rs.getString("Cuota"));
+                Label fecha = new Label(26, row, rs.getString("Fecha"));
                 row++;
 
                 try {
-                    excelSheet.addCell(id);
+                    //excelSheet.addCell(id);
                     excelSheet.addCell(nombre);
                     excelSheet.addCell(apellido);
                     excelSheet.addCell(dni);
@@ -549,17 +609,39 @@ ObtenerDatosTabla();
         } catch (IOException e){
             System.err.println(e.getMessage());
         }
+          
+        Label apellidoT = new Label(0, row, "APELLIDO");
+        Label idT = new Label(1, row, "NOMBRE");
+        Label dni_familiarT = new Label(2, row, "DNI DEL FAMILIAR");
+        Label nombre_familiarT = new Label(3, row,"NOMBRE DEL FAMILIAR");
+        Label parentescoT = new Label(4, row,"PARENTESCO");
+        Label edadT = new Label(5, row, "EDAD");
+        Label ocupacionT = new Label(6, row, "OCUPACION");
+        row++;
+        try {
+            excelSheet.addCell(apellidoT);   
+            excelSheet.addCell(idT);
+            excelSheet.addCell(dni_familiarT);
+            excelSheet.addCell(nombre_familiarT);
+            excelSheet.addCell(parentescoT);
+            excelSheet.addCell(edadT);
+            excelSheet.addCell(ocupacionT);
+        } catch (WriteException ex) {
+            Logger.getLogger(ListarAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         sql = "select id,apellido,dni_familiar,nombre_familiar,parentesco,edad,ocupacion"
-                    + " from familiares order by id";
+                    + " from familiares order by apellido,id,nombre_familiar";
 
         try {
+            
             PreparedStatement pst = cn.prepareStatement(sql);
 
             ResultSet rs = pst.executeQuery();
             System.out.println("obteniendo registros...");
             while(rs.next()){
-                Label id = new Label(0, row, rs.getString("Id"));
-                Label apellido = new Label(1, row, rs.getString("apellido"));
+                Label id = new Label(1, row, rs.getString("Id"));
+                Label apellido = new Label(0, row, rs.getString("apellido"));
                 Number dni_familiar = new Number(2, row, rs.getLong("Dni_familiar"));
                 Label nombre_familiar = new Label(3, row, rs.getString("nombre_familiar"));
                 Label parentesco = new Label(4, row, rs.getString("Parentesco"));
@@ -569,8 +651,8 @@ ObtenerDatosTabla();
 
 
                 try {
-                    excelSheet.addCell(id);   
-                    excelSheet.addCell(apellido);
+                    excelSheet.addCell(apellido);   
+                    excelSheet.addCell(id);
                     excelSheet.addCell(dni_familiar);
                     excelSheet.addCell(nombre_familiar);
                     excelSheet.addCell(parentesco);
