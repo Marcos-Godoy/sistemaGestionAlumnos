@@ -285,7 +285,7 @@ ObtenerDatosTabla();
         Document documento = new Document(); //creo objeto de la clase document
         try {
             String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/ListadoAsistencia.pdf")); //complementamos la ruta
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
             
             com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
             header.scaleToFit(300, 900); //tamaño del header
@@ -293,7 +293,7 @@ ObtenerDatosTabla();
             
             Paragraph parrafo = new Paragraph(); //creo el parrafo del pdf
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Listado de asistencia\n\n");
+            parrafo.add("\nListado de asistencia: " + seleccion + "\n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
             
             documento.open();
@@ -301,14 +301,14 @@ ObtenerDatosTabla();
             documento.add(parrafo);
             
             PdfPTable tabla = new PdfPTable(26); //agrego las columnas
-            
+            int contador = 1;
             // Set Table Total Width
             //tabla.setTotalWidth(50);
             
             // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
 // EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
-            float var = 0.15f;
-            float[] medidaCeldas = {1.0f, 1.0f, var, var, var, var, var, var, var, var, var, var,
+            float var = 0.25f;
+            float[] medidaCeldas = {0.20f, 2.0f, var, var, var, var, var, var, var, var, var, var,
                 var, var, var, var, var, var, var, var, var, var, var, var, var, var};
             /*
             medidaCeldas[0] = 1.0f;
@@ -317,10 +317,13 @@ ObtenerDatosTabla();
             }*/
 
 // ASIGNAS LAS MEDIDAS A LA TABLA (ANCHO)
+            tabla.setWidthPercentage(100);
+            tabla.setTotalWidth(1000);
             tabla.setWidths(medidaCeldas);
             
-            tabla.addCell("Apellido");
-            tabla.addCell("Nombre");
+            tabla.addCell(" ");
+            tabla.addCell("Apellido y Nombre");
+            //tabla.addCell("Nombre");
             
             
             for(int i = 0; i < 24; i++){
@@ -340,10 +343,13 @@ ObtenerDatosTabla();
                 ResultSet rs = pst.executeQuery();
                 
                 if (rs.next()) {
-                    do {                        
-                        
-                        tabla.addCell(rs.getString(1));
-                        tabla.addCell(rs.getString(2));
+                    do {
+                        String cont;
+                        cont = String.valueOf(contador);
+                        contador ++;
+                        tabla.addCell(cont);
+                        tabla.addCell(rs.getString(1) + ", " + rs.getString(2));
+                        //tabla.addCell(rs.getString(2));
                         
                         for(int i = 0; i < 24; i++){
                             tabla.addCell("");

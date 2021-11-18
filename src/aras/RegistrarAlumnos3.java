@@ -1,5 +1,6 @@
 package aras;
 
+import static aras.InformaciónAlumnos3.fechaActual;
 import clases.Conexion;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -356,31 +357,38 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
 
                 Paragraph parrafo = new Paragraph(); //creo el parrafo del pdf
                 parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-                parrafo.add("Ficha de Inscripción\n\n");
+                //parrafo.add("Ficha de Inscripción\n\n");
                 parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
+                Font font = new Font(FontFactory.getFont(FontFactory.HELVETICA,12.0f,Font.NORMAL,BaseColor.BLACK));
 
                 documento.open();
                 documento.add(header); //le agrego los elementos al documento
                 documento.add(parrafo);
 
-                documento.add(new Paragraph("Fecha de inscripción: " + fechaActual() + "\n"));
-                documento.add(new Paragraph("Nombre: " + nombre + "                Apellido: " + apellido + "\n"));
+                documento.add(new Paragraph("Fecha de inscripción: " + fechaActual() + "\n",font));
+                documento.add(new Paragraph("Nombre: " + nombre + "                Apellido: " + apellido + "\n",font));
                 //documento.add(new Paragraph("Apellido: " + apellido));
-                documento.add(new Paragraph("DNI: " + dni + "                Lugar de nacimiento: " + lugar + "                Fecha de nacimiento: " + fecha + "\n"));
-                //documento.add(new Paragraph("Lugar de nacimiento: " + lugar));
+                documento.add(new Paragraph("DNI: " + dni + "\n",font));
+                documento.add(new Paragraph("Lugar de nacimiento: " + lugar + "                Fecha de nacimiento: " + fecha + "\n",font));
                 //documento.add(new Paragraph("Fecha de nacimiento: " + fecha));
-                documento.add(new Paragraph("Domicilio: " + domicilio + "                Localidad: " + localidad + "\n"));
+                documento.add(new Paragraph("Domicilio: " + domicilio + "                Localidad: " + localidad + "\n",font));
                 //documento.add(new Paragraph("Localidad: " + localidad));
-                documento.add(new Paragraph("Nombre de la Madre: " + nombre_madre + "                DNI: " + dni_madre + "\n"));
+                documento.add(new Paragraph("Nombre de la Madre: " + nombre_madre + "                DNI: " + dni_madre + "\n",font));
                 //documento.add(new Paragraph("DNI: " + dni_madre));
-                documento.add(new Paragraph("Nombre del Padre: " + nombre_padre + "                DNI: " + dni_padre + "\n"));
+                documento.add(new Paragraph("Nombre del Padre: " + nombre_padre + "                DNI: " + dni_padre + "\n",font));
                 //documento.add(new Paragraph("DNI: " + dni_padre));
-                documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n"));
-                documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n"));
+                documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n",font));
+                documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n",font));
 
                 documento.add(new Paragraph("Grupo familiar del alumno:\n\n"));
                 PdfPTable tabla = new PdfPTable(4); //agrego las columnas
+                
+                // Set Table Total Width
+                tabla.setWidthPercentage(100);
+                tabla.setTotalWidth(1000);
 
+                // Set Each Column Width - Make Sure Array is the same number specified in constructor
+                tabla.setWidths(new int[]{350, 275, 100, 275});
 
                 tabla.addCell("NOMBRE Y APELLIDO");
                 tabla.addCell("PARENTESCO");
@@ -389,7 +397,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
 
                 try {
                     Connection cn = Conexion.conectar();
-                    PreparedStatement pst = cn.prepareStatement("select nombre_familiar, parentesco, edad, ocupacion from familiares where id = '" + nombre +"'");
+                    PreparedStatement pst = cn.prepareStatement("select nombre_familiar, parentesco, edad, ocupacion from familiares where dni_familiar = '" + dni +"'");
 
                     ResultSet rs = pst.executeQuery();
 
@@ -409,45 +417,51 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                     System.out.println("Error al generar lista de alumnos. " + e);
                 }
 
-                documento.add(new Paragraph("Nombre de Escuela a la que asiste: " + nombre_escuela + "                Número: " + numero_escuela + "\n"));
+                documento.add(new Paragraph("\nNombre de Escuela a la que asiste: " + nombre_escuela + "                Número: " + numero_escuela + "\n",font));
                 //documento.add(new Paragraph("Número: " + numero_escuela));
-                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n"));
+                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n",font));
                 //documento.add(new Paragraph("Repitió grado alguna vez: " + repitio));
                 //documento.add(new Paragraph("¿Qué Grado repitió? " + grado_repetido));
 
-                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "                Cobertura médica: " + cobertura + "\n"));
+                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "                Cobertura médica: " + cobertura + "\n",font));
                 //documento.add(new Paragraph("Alergias: " + alergias));
                 //documento.add(new Paragraph("Cobertura médica: " + cobertura));
-                documento.add(new Paragraph("Padece de alguna condición médica: " + condicion + "\n"));
-                documento.add(new Paragraph("Se retira acompañado de: " + retira_con + "\n"));
-                documento.add(new Paragraph("Observaciones: " + observaciones + "\n"));
-                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n\n"));
+                documento.add(new Paragraph("Padece de alguna condición médica: " + condicion + "\n",font));
+                documento.add(new Paragraph("Se retira acompañado de: " + retira_con + "\n",font));
+                documento.add(new Paragraph("Observaciones: " + observaciones + "\n",font));
+                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n\n",font));
                 //documento.add(new Paragraph("Paga Cuota: " + cuota));
 
 
                 Paragraph parrafo2 = new Paragraph(); //creo el parrafo del pdf
                 parrafo2.setAlignment(Paragraph.ALIGN_CENTER);
-                parrafo2.add("________________________________________________________");
+                parrafo2.add("__________________________________________________________\n");
                 documento.add(parrafo2);
-
-                Paragraph terminos = new Paragraph("\nPor la presente, autorizo a mi hijo que concurra y participe en todas las actividades"
+                
+                Font f=new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,12.0f,Font.BOLDITALIC,BaseColor.BLACK));
+                
+                Paragraph terminos = new Paragraph("Por la presente, autorizo a mi hijo que concurra y participe en todas las actividades"
                         + " en el Centro Educativo Cuatro Vientos. Dejo constancia que estoy de acuerdo con los términos "
-                        + "y condiciones de la inscripción del alumno.\n");
-                terminos.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.DARK_GRAY));
+                        + "y condiciones de la inscripción del alumno.\n", f);
+                //terminos.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.GREEN));
                 documento.add(terminos);
 
-                documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n"));
-                documento.add(new Paragraph("Aclaración y Parentesco:\n"));
-                documento.add(new Paragraph("DNI:\n"));
-
+                documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n",f));
+                documento.add(new Paragraph("Aclaración y Parentesco:\n",f));
+                documento.add(new Paragraph("DNI:\n",f));
+                
+                
 
                 documento.close();
                 JOptionPane.showMessageDialog(null, "Ficha de alumno creada correctamente.");
+
+
 
             } catch (Exception e) {
                 System.out.println("Error al generar PDF. " + e);
             }
         }
+        
     }
     
     /**
