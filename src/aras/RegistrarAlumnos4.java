@@ -29,6 +29,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         //dni_alumno = RegistrarAlumnos1.dni_numerico;
         //establece la imagen como fondo de la aplicacion
         setLocationRelativeTo(null);
+        setTitle("Sistema de Registro");
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));

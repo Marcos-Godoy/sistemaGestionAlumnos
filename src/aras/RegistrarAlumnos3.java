@@ -462,6 +462,8 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             }
         }
         
+        System.exit(0); //Para cerrar toda la aplicación
+        
     }
     
     /**

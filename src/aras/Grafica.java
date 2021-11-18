@@ -42,7 +42,7 @@ public class Grafica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo5.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
 

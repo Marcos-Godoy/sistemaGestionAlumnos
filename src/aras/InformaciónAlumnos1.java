@@ -35,7 +35,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         user_update = GestionarAlumnos.user_update;
         
         setResizable(false);
-        setTitle("Sistema de Registro");
+        setTitle("Gestión de alumnos");
         setLocationRelativeTo(null);
         setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
@@ -87,7 +87,9 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     
     //Metodo para cerrar este Jframe desde otros.
     public void CerrarVentana(){
-        dispose();
+        //if(InformaciónAlumnos3.informacionAlumnos3.ban == 1){
+            this.dispose();
+        //}
     }
     
     /*

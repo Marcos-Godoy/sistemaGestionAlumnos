@@ -34,6 +34,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
         
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setTitle("Gestión de alumnos");
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),

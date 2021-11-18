@@ -18,6 +18,7 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         initComponents();
         
         setLocationRelativeTo(null);
+        setTitle("Sistema de Registro");
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),

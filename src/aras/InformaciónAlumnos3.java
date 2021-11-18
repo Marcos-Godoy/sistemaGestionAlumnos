@@ -35,8 +35,8 @@ import static javax.swing.text.StyleConstants.*;
  * @author mjgod
  */
 public class InformaciónAlumnos3 extends javax.swing.JFrame {
+    //public static int ban = 0;
     int cont = 32, ID;
-    // String user_update = "";
     int user_update;
    
     public InformaciónAlumnos3() {
@@ -45,7 +45,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         user_update = GestionarAlumnos.user_update;
         
         setResizable(false);
-        setTitle("Sistema de Registro");
+        setTitle("Gestión de alumnos");
         setLocationRelativeTo(null);
         setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
@@ -374,7 +374,6 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                         
             pst2.executeUpdate();
             cn2.close();
-            //this.dispose();
                         
             } catch (SQLException e) {
                 System.err.println("Error en Registrar alumno. " + e);
@@ -501,9 +500,13 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 System.out.println("Error al generar PDF. " + e);
             }
         }
+        //ban = 1;
         this.dispose();
         InformaciónAlumnos4.informacionAlumnos2.dispose();
         InformaciónAlumnos1.informacionAlumnos4.dispose();
+        
+        System.exit(0); //Para cerrar toda la aplicación
+        
         //InformaciónAlumnos1.CerrarVentana();
         
         //String[] args = null;

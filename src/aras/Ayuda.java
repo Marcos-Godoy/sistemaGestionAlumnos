@@ -25,7 +25,7 @@ public class Ayuda extends javax.swing.JFrame {
 
         // metodos para poder modificar la interfaz visual por codigo 
         setResizable(false);
-        setTitle("Sistema de Registro");
+        setTitle("Ayuda");
         setLocationRelativeTo(null);
         setSize(650,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
@@ -68,6 +68,7 @@ public class Ayuda extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("Sistema de Gestion de Alumnos\n\n Este programa cuenta con tres opciones principales:\n \n Registrar alumnos: \n\t Esta opción sirve para realizar el registro\n\tde alumnos nuevos a la institución. Se deberán \n\tllenar una serie de campos, aunque se pueden\n\tdejar vacíos, a excepción del dni del alumno.\n\tAl finalizar el registro de un nuevo alumno el\n\tprograma se cerrará por cuestiones de funcionalidad.\n\t También crea una ficha de inscripción en formato\n\tpdf que se podrá utilizar para imprimir y firmar.\n\n Gestionar alumnos:\n\t Esta opción sirve para modificar datos de\n\talumnos incriptos anteriormente. Se debe elegir\t\n\tal alumno de una tabla dada, y no se podrá modificar\n\tel dni del alumno.\n\n Listar alumnos:\n\t Esta opción permite realizar un filtro en el\n\tlistado de alumnos por curso. Además permite \n\tguardar en un archivo excel el listado de todos\n\tlos alumnos y familiares.\n\n Programa elaborado por Marcos Godoy Quattoni, alumno de\n6to Informática del Instituto Politécnico Superior como parte\nde la materia Prácticas Profesionalizantes.\n Año: 2021");
+        jTextArea1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 470, 350));

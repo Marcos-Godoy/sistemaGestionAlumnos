@@ -51,14 +51,14 @@ public class ListarAlumnos extends javax.swing.JFrame {
         // metodos para poder modificar la interfaz visual por codigo
 
         setResizable(false);
-        setTitle("Sistema de Registro");
+        setTitle("Listado de alumnos");
         setLocationRelativeTo(null);
         setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo5.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -149,7 +149,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Mostrar.setBackground(new java.awt.Color(153, 153, 255));
+        Mostrar.setBackground(new java.awt.Color(51, 102, 255));
         Mostrar.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         Mostrar.setForeground(new java.awt.Color(255, 255, 255));
         Mostrar.setText("Actualizar Tabla");
@@ -184,7 +184,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 700, 290));
 
-        Imprimir.setBackground(new java.awt.Color(153, 153, 255));
+        Imprimir.setBackground(new java.awt.Color(51, 102, 255));
         Imprimir.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         Imprimir.setForeground(new java.awt.Color(255, 255, 255));
         Imprimir.setText("Imprimir");
@@ -196,7 +196,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         });
         getContentPane().add(Imprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 210, 35));
 
-        jButton_eliminar.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_eliminar.setBackground(new java.awt.Color(51, 102, 255));
         jButton_eliminar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         jButton_eliminar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_eliminar.setText("Eliminar");
@@ -205,9 +205,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 jButton_eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 120, 30));
+        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 120, 30));
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 255));
+        jButton2.setBackground(new java.awt.Color(51, 102, 255));
         jButton2.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Guardar Excel");
@@ -216,9 +216,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 430, 120, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 120, 30));
 
-        jButton_eliminar1.setBackground(new java.awt.Color(153, 153, 255));
+        jButton_eliminar1.setBackground(new java.awt.Color(51, 102, 255));
         jButton_eliminar1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         jButton_eliminar1.setForeground(new java.awt.Color(255, 255, 255));
         jButton_eliminar1.setText("Estadísticas");
@@ -227,7 +227,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 jButton_eliminar1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 120, 30));
+        getContentPane().add(jButton_eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 120, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -291,10 +291,10 @@ ObtenerDatosTabla();
             header.scaleToFit(300, 900); //tamaño del header
             header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
             
-            Paragraph parrafo = new Paragraph(); //creo el parrafo del pdf
+            Font f=new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,14.0f,Font.BOLDITALIC,BaseColor.BLACK));
+            Paragraph parrafo = new Paragraph("\nLista de Alumnos: " + seleccion,f); //creo el parrafo del pdf
+            parrafo.add("\n\n");
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("\nListado de asistencia: " + seleccion + "\n\n");
-            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
             
             documento.open();
             documento.add(header); //le agrego los elementos al documento
@@ -308,7 +308,7 @@ ObtenerDatosTabla();
             // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
 // EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
             float var = 0.25f;
-            float[] medidaCeldas = {0.20f, 2.0f, var, var, var, var, var, var, var, var, var, var,
+            float[] medidaCeldas = {0.35f, 2.0f, var, var, var, var, var, var, var, var, var, var,
                 var, var, var, var, var, var, var, var, var, var, var, var, var, var};
             /*
             medidaCeldas[0] = 1.0f;

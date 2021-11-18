@@ -32,7 +32,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
         // metodos para poder modificar la interfaz visual por codigo
         setSize(650,430); 
         setResizable(false);
-        setTitle("Sistema de Registro");
+        setTitle("Gestión de alumnos");
         setLocationRelativeTo(null);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
