@@ -287,7 +287,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
+        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, genero, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
         int dni, dni_madre, dni_padre, numero_escuela;
         
         nombre = InformaciónAlumnos1.nombre;
@@ -309,6 +309,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         
         nombre_escuela = InformaciónAlumnos2.nombre_escuela;
         numero_escuela = Integer.parseInt(InformaciónAlumnos2.numero_escuela);
+        genero = InformaciónAlumnos2.genero;
         grado = InformaciónAlumnos2.grado;
         repitio = InformaciónAlumnos2.repitio;
         grado_repetido = InformaciónAlumnos2.grado_repetido;
@@ -338,7 +339,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             PreparedStatement pst2 = cn2.prepareStatement("update alumnos set id=?,nombre=?,apellido=?,dni=?,nacimiento=?,lugar_nacimiento=?,"
                     + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
                     + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
-                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?"
+                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,genero=?"
                     + " where dni ='" + user_update + "'");
             
             pst2.setInt(1, ID);
@@ -368,7 +369,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(25, observaciones);
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
-            //pst2.setString(28, fechaActual()); //despues cambiar por fecha de inscripcion
+            pst2.setString(28, genero); //despues cambiar por fecha de inscripcion
             
             cont++;
                         

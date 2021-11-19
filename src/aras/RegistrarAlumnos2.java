@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
  */
 public class RegistrarAlumnos2 extends javax.swing.JFrame {
     
-    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
+    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero;
     public static RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
     
     public RegistrarAlumnos2() {
@@ -227,11 +227,17 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         
         if(jRadioButton_hombre.isSelected()){
             grado = jComboBox_grado1.getSelectedItem().toString();
+            genero = "Masculino";
         } else {
-            if(jRadioButton_mujer.isSelected())
+            if(jRadioButton_mujer.isSelected()) {
                 grado = jComboBox_grado.getSelectedItem().toString();
-            else
+                genero = "Femenino";
+            }
+                
+            else {
                 grado = "1º grado (Varones)";
+                genero = "No especificado";
+            }
         }
         
         //grado_repetido = jComboBox_grado_repetido.getSelectedIndex() + 1;

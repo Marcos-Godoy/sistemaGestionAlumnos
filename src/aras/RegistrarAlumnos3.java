@@ -248,7 +248,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
+        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, grado, genero, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
         int dni, dni_madre, dni_padre, numero_escuela;
         
         nombre = RegistrarAlumnos1.nombre;
@@ -267,6 +267,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         
         nombre_escuela = RegistrarAlumnos2.nombre_escuela;
         numero_escuela = Integer.parseInt(RegistrarAlumnos2.numero_escuela);
+        genero = RegistrarAlumnos2.genero;
         grado = RegistrarAlumnos2.grado;
         repitio = RegistrarAlumnos2.repitio;
         grado_repetido = RegistrarAlumnos2.grado_repetido;
@@ -298,7 +299,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         
         try {
             Connection cn2 = Conexion.conectar();
-            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst2 = cn2.prepareStatement("insert into alumnos values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
             pst2.setInt(1, cont);
             pst2.setString(2, nombre);
@@ -328,6 +329,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
             pst2.setString(28, fechaActual());
+            pst2.setString(29, genero);
                         
             pst2.executeUpdate();
             cn2.close();

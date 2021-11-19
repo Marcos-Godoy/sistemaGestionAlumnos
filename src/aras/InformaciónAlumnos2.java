@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
  */
 public class InformaciónAlumnos2 extends javax.swing.JFrame {
     
-    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado;
+    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero;
     //String user_update = "";
     int user_update;
     public static InformaciónAlumnos3 informacionAlumnos3 = new InformaciónAlumnos3();
@@ -54,13 +54,25 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
                 
                 jComboBox_grado_repetido.setSelectedItem(rs.getString("grado_repetido"));
                 //Ahora hay 2 jcomboBox (tengo que pasarle a cual corresponde)
-                jComboBox_grado.setSelectedItem(rs.getString("grado"));
+                //jComboBox_grado.setSelectedItem(rs.getString("grado"));
                 
                 
                 if("SI".equals(rs.getString("repitio"))){
                         jRadioButton_repitio.setSelected(true);
                 } else {
                     jRadioButton4.setSelected(true);
+                }
+                
+                if("Masculino".equals(rs.getString("genero"))){
+                        jRadioButton_hombre.setSelected(true);
+                        jComboBox_grado1.setSelectedItem(rs.getString("grado"));
+                        jComboBox_grado.disable();
+                } else {
+                    if("Femenino".equals(rs.getString("genero"))) {
+                        jRadioButton_mujer.setSelected(true);
+                        jComboBox_grado.setSelectedItem(rs.getString("grado"));
+                        jComboBox_grado1.disable();
+                    }
                 }
                 
             }
@@ -264,11 +276,17 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         
         if(jRadioButton_hombre.isSelected()){
             grado = jComboBox_grado1.getSelectedItem().toString();
+            genero = "Masculino";
+            
         } else {
-            if(jRadioButton_mujer.isSelected())
+            if(jRadioButton_mujer.isSelected()) {
                 grado = jComboBox_grado.getSelectedItem().toString();
-            else
+                genero = "Femenino";
+            }
+            else {
                 grado = "1º grado (Varones)";
+                genero = "No especificado";
+            }
         }
         
         grado_repetido = jComboBox_grado_repetido.getSelectedItem().toString();
