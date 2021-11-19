@@ -361,7 +361,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 parrafo.setAlignment(Paragraph.ALIGN_CENTER);
                 //parrafo.add("Ficha de Inscripción\n\n");
                 parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
-                Font font = new Font(FontFactory.getFont(FontFactory.HELVETICA,12.0f,Font.NORMAL,BaseColor.BLACK));
+                Font font = new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,13.0f,Font.BOLD,BaseColor.BLACK));
 
                 documento.open();
                 documento.add(header); //le agrego los elementos al documento
@@ -382,7 +382,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n",font));
                 documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n",font));
 
-                documento.add(new Paragraph("Grupo familiar del alumno:\n\n"));
+                documento.add(new Paragraph("Grupo familiar del alumno:\n\n",font));
                 PdfPTable tabla = new PdfPTable(4); //agrego las columnas
                 
                 // Set Table Total Width
@@ -392,10 +392,10 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 // Set Each Column Width - Make Sure Array is the same number specified in constructor
                 tabla.setWidths(new int[]{350, 275, 100, 275});
 
-                tabla.addCell("NOMBRE Y APELLIDO");
-                tabla.addCell("PARENTESCO");
-                tabla.addCell("EDAD");
-                tabla.addCell("OCUPACION");
+                tabla.addCell(new Paragraph("NOMBRE Y APELLIDO",font));
+                tabla.addCell(new Paragraph("PARENTESCO",font));
+                tabla.addCell(new Paragraph("EDAD",font));
+                tabla.addCell(new Paragraph("OCUPACIÓN",font));
 
                 try {
                     Connection cn = Conexion.conectar();
@@ -406,10 +406,10 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                     if (rs.next()) {
                         do {                        
 
-                            tabla.addCell(rs.getString(1));
-                            tabla.addCell(rs.getString(2));
-                            tabla.addCell(rs.getString(3));
-                            tabla.addCell(rs.getString(4));
+                            tabla.addCell(new Paragraph(rs.getString(1),font));
+                            tabla.addCell(new Paragraph(rs.getString(2),font));
+                            tabla.addCell(new Paragraph(rs.getString(3),font));
+                            tabla.addCell(new Paragraph(rs.getString(4),font));
 
                         } while (rs.next());
                         documento.add(tabla);
@@ -419,7 +419,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                     System.out.println("Error al generar lista de alumnos. " + e);
                 }
 
-                documento.add(new Paragraph("\nNombre de Escuela a la que asiste: " + nombre_escuela + "                Número: " + numero_escuela + "\n",font));
+                documento.add(new Paragraph("\nNombre de Escuela: " + nombre_escuela + "                Número: " + numero_escuela + "\n",font));
                 //documento.add(new Paragraph("Número: " + numero_escuela));
                 documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n",font));
                 //documento.add(new Paragraph("Repitió grado alguna vez: " + repitio));
