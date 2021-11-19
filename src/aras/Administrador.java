@@ -157,7 +157,7 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel_GestionarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_GestionarAlumnos.setText("Gestionar Alumnos");
-        getContentPane().add(jLabel_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+        getContentPane().add(jLabel_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
 
         jButton1.setText("?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

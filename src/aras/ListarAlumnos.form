@@ -72,29 +72,44 @@
     <Component class="javax.swing.JComboBox" name="cmb_filtro">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="13">
+          <StringArray count="25">
             <StringItem index="0" value="Todos"/>
-            <StringItem index="1" value="1&#xba; grado"/>
-            <StringItem index="2" value="2&#xba; grado"/>
-            <StringItem index="3" value="3&#xba; grado"/>
-            <StringItem index="4" value="4&#xba; grado"/>
-            <StringItem index="5" value="5&#xba; grado"/>
-            <StringItem index="6" value="6&#xba; grado"/>
-            <StringItem index="7" value="7&#xba; grado"/>
-            <StringItem index="8" value="1&#xba; a&#xf1;o"/>
-            <StringItem index="9" value="2&#xba; a&#xf1;o"/>
-            <StringItem index="10" value="3&#xba; a&#xf1;o"/>
-            <StringItem index="11" value="4&#xba; a&#xf1;o"/>
-            <StringItem index="12" value="5&#xba; a&#xf1;o"/>
+            <StringItem index="1" value="1&#xba; grado (Varones)"/>
+            <StringItem index="2" value="2&#xba; grado (Varones)"/>
+            <StringItem index="3" value="3&#xba; grado (Varones)"/>
+            <StringItem index="4" value="4&#xba; grado (Varones)"/>
+            <StringItem index="5" value="5&#xba; grado (Varones)"/>
+            <StringItem index="6" value="6&#xba; grado (Varones)"/>
+            <StringItem index="7" value="7&#xba; grado (Varones)"/>
+            <StringItem index="8" value="1&#xba; a&#xf1;o (Varones)"/>
+            <StringItem index="9" value="2&#xba; a&#xf1;o (Varones)"/>
+            <StringItem index="10" value="3&#xba; a&#xf1;o (Varones)"/>
+            <StringItem index="11" value="4&#xba; a&#xf1;o (Varones)"/>
+            <StringItem index="12" value="5&#xba; a&#xf1;o (Varones)"/>
+            <StringItem index="13" value="1&#xba; grado (Mujeres)"/>
+            <StringItem index="14" value="2&#xba; grado (Mujeres)"/>
+            <StringItem index="15" value="3&#xba; grado (Mujeres)"/>
+            <StringItem index="16" value="4&#xba; grado (Mujeres)"/>
+            <StringItem index="17" value="5&#xba; grado (Mujeres)"/>
+            <StringItem index="18" value="6&#xba; grado (Mujeres)"/>
+            <StringItem index="19" value="7&#xba; grado (Mujeres)"/>
+            <StringItem index="20" value="1&#xba; a&#xf1;o (Mujeres)"/>
+            <StringItem index="21" value="2&#xba; a&#xf1;o (Mujeres)"/>
+            <StringItem index="22" value="3&#xba; a&#xf1;o (Mujeres)"/>
+            <StringItem index="23" value="4&#xba; a&#xf1;o (Mujeres)"/>
+            <StringItem index="24" value="5&#xba; a&#xf1;o (Mujeres)"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_filtroActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="580" y="40" width="-1" height="-1"/>
+          <AbsoluteConstraints x="540" y="40" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

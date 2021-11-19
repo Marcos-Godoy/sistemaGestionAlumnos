@@ -398,7 +398,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 parrafo.setAlignment(Paragraph.ALIGN_CENTER);
                 //parrafo.add("Ficha de Inscripción\n\n");
                 parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
-                Font font = new Font(FontFactory.getFont(FontFactory.HELVETICA,12.0f,Font.NORMAL,BaseColor.BLACK));
+                Font font = new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,12.0f,Font.NORMAL,BaseColor.BLACK));
 
                 documento.open();
                 documento.add(header); //le agrego los elementos al documento

@@ -166,8 +166,13 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jLabel1.setText("Listar Alumnos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
-        cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1º grado", "2º grado", "3º grado", "4º grado", "5º grado", "6º grado", "7º grado", "1º año", "2º año", "3º año", "4º año", "5º año" }));
-        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
+        cmb_filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "1º grado (Varones)", "2º grado (Varones)", "3º grado (Varones)", "4º grado (Varones)", "5º grado (Varones)", "6º grado (Varones)", "7º grado (Varones)", "1º año (Varones)", "2º año (Varones)", "3º año (Varones)", "4º año (Varones)", "5º año (Varones)", "1º grado (Mujeres)", "2º grado (Mujeres)", "3º grado (Mujeres)", "4º grado (Mujeres)", "5º grado (Mujeres)", "6º grado (Mujeres)", "7º grado (Mujeres)", "1º año (Mujeres)", "2º año (Mujeres)", "3º año (Mujeres)", "4º año (Mujeres)", "5º año (Mujeres)" }));
+        cmb_filtro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_filtroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
 
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,9 +250,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
             Connection cn = Conexion.conectar();
 
             if (seleccion.equals("Todos")) {
-                query = "select nombre, apellido, dni, nombre_escuela, grado from alumnos order by apellido";
+                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos order by apellido";
             } else {
-                query = "select nombre, apellido, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
+                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -256,8 +261,8 @@ public class ListarAlumnos extends javax.swing.JFrame {
             jTable_gestionarAlumnos = new JTable(model);
             jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-            model.addColumn("Nombre");
             model.addColumn("Apellido");
+            model.addColumn("Nombre");
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
@@ -689,6 +694,11 @@ ObtenerDatosTabla();
         new Grafica().setVisible(true);
         
     }//GEN-LAST:event_jButton_eliminar1ActionPerformed
+
+    
+    private void cmb_filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_filtroActionPerformed
 
     /**
      * @param args the command line arguments

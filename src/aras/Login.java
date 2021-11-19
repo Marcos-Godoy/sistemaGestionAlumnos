@@ -133,13 +133,17 @@ public class Login extends javax.swing.JFrame {
                         
                         new Administrador().setVisible(true);
                         
-                    }
-                    
-                } else {
-                    JOptionPane.showMessageDialog(null,"Datos de acceso incorrectos.");
+                    } else {
+                    JOptionPane.showMessageDialog(null,"Datos de usuario incorrectos.");
                     txt_user.setText("");
                     txt_password.setText("");
-                }
+                } 
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null,"Datos de usuario incorrectos.");
+                    txt_user.setText("");
+                    txt_password.setText("");
+                } 
             } catch (SQLException e) {
                 System.err.println("Error en el boton Acceder. " + e);
                 JOptionPane.showMessageDialog(null,"¡Error al iniciar sesion!, contacte al administrador.");
