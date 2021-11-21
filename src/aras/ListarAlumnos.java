@@ -767,6 +767,49 @@ ObtenerDatosTabla();
 
         });
     }
+    
+    public void actualizarTabla(){
+        
+        String seleccion = cmb_filtro.getSelectedItem().toString();
+        String query = "";
+
+        model.setRowCount(0);
+        model.setColumnCount(0);
+
+        try {
+            Connection cn = Conexion.conectar();
+
+            if (seleccion.equals("Todos")) {
+                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos order by apellido";
+            } else {
+                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
+            }
+
+            PreparedStatement pst = cn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            jTable_gestionarAlumnos = new JTable(model);
+            jScrollPane1.setViewportView(jTable_gestionarAlumnos);
+
+            model.addColumn("Apellido");
+            model.addColumn("Nombre");
+            model.addColumn("DNI");
+            model.addColumn("Escuela");
+            model.addColumn("Curso");
+
+            while(rs.next()){
+                Object [] fila = new Object[5];
+                for (int i = 0; i < 5; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al recuperar los registros de alumnos. " + e);
+        }
+    }
 }
 
 

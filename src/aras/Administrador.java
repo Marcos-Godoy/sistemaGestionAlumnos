@@ -79,6 +79,16 @@ public class Administrador extends javax.swing.JFrame {
         jButton_ListarAlumnos.setBackground(UIManager.getColor("control"));
     }
     });
+    
+    jButton_GestionarNiveles.addMouseListener(new java.awt.event.MouseAdapter() {
+    public void mouseEntered(java.awt.event.MouseEvent evt) {
+        jButton_GestionarNiveles.setBackground(Color.GRAY);
+    }
+            
+    public void mouseExited(java.awt.event.MouseEvent evt) {
+        jButton_GestionarNiveles.setBackground(UIManager.getColor("control"));
+    }
+    });
         
     }
     
@@ -108,6 +118,7 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_ListarAlumnos = new javax.swing.JLabel();
         jLabel_GestionarAlumnos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton_GestionarNiveles = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -127,7 +138,7 @@ public class Administrador extends javax.swing.JFrame {
                 jButton_RegistrarAlumnosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, 100));
+        getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 120, 100));
 
         jButton_GestionarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
         jButton_GestionarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -166,6 +177,16 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 40, 30));
+
+        jButton_GestionarNiveles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/niveles.png"))); // NOI18N
+        jButton_GestionarNiveles.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton_GestionarNiveles.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton_GestionarNiveles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_GestionarNivelesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_GestionarNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, 100));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 430));
 
         pack();
@@ -194,6 +215,11 @@ public class Administrador extends javax.swing.JFrame {
         Ayuda ayuda = new Ayuda();
         ayuda.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton_GestionarNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GestionarNivelesActionPerformed
+        Cursos gestionarCursos = new Cursos();
+        gestionarCursos.setVisible(true);
+    }//GEN-LAST:event_jButton_GestionarNivelesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,6 +259,7 @@ public class Administrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_GestionarAlumnos;
+    private javax.swing.JButton jButton_GestionarNiveles;
     private javax.swing.JButton jButton_ListarAlumnos;
     private javax.swing.JButton jButton_RegistrarAlumnos;
     private javax.swing.JLabel jLabel1;
