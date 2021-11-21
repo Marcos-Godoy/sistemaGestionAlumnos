@@ -124,6 +124,9 @@ public class Cursos extends javax.swing.JFrame {
         
         
         
+        
+        
+        
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
@@ -150,7 +153,58 @@ public class Cursos extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.err.println("Error al llenar tabla. " + e);
             JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
-        }    
+        } 
+        
+        
+        
+        jTable_niveles.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               int fila_point = jTable_niveles.rowAtPoint(e.getPoint());
+               
+               String nombreNivel = "";
+               
+               int input = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar este nivel?");
+                    // 0=yes, 1=no, 2=cancel
+               
+               
+               if(fila_point > -1 && input == 0){
+                   nombreNivel = (String) model2.getValueAt(fila_point, 0); //nos devuelve el nombre
+                   
+                   System.out.println(nombreNivel);
+                   
+                   try {
+                        Connection cn = Conexion.conectar();
+                        PreparedStatement pst;
+                        pst = cn.prepareStatement(
+                                "delete from niveles where nivel = '" + nombreNivel + "'");
+                        //selecciona esos valores de la tabla
+                        pst.executeUpdate();
+                        cn.close();
+                    } catch (SQLException ex) {
+                        System.err.println("Error al eliminar. " + ex);
+                    }
+                   
+                   try {
+                        Connection cn2 = Conexion.conectar();
+                        PreparedStatement pst2 = cn2.prepareStatement("update alumnos set nivel=?"
+                                + " where nivel ='" + nombreNivel + "'");
+
+                        pst2.setString(1, "Sin Asignar");
+                        pst2.executeUpdate();
+                        cn2.close();
+                        
+                        JOptionPane.showMessageDialog(null, "¡Nivel eliminado correctamente!");
+                        model2.removeRow(fila_point);
+                        actualizarTabla();
+                    } catch (SQLException ex) {
+                        System.err.println("Error al eliminar. " + ex);
+                    }
+               }
+               
+            }
+        });
             
             
         /*
@@ -250,6 +304,8 @@ public class Cursos extends javax.swing.JFrame {
         jTable_niveles = new javax.swing.JTable();
         jComboBox_nivel = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable_nivelescopia = new javax.swing.JTable();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -323,6 +379,21 @@ public class Cursos extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre del nuevo nivel:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+
+        jTable_nivelescopia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable_nivelescopia);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 600, 160));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -355,6 +426,8 @@ public class Cursos extends javax.swing.JFrame {
                 pst2.setString(1, nuevoNivel);
                 DefaultTableModel model3 = (DefaultTableModel) jTable_niveles.getModel();
                 model3.addRow(new Object[]{nuevoNivel,0});
+                
+                jComboBox_nivel.addItem(nuevoNivel);
                 JOptionPane.showMessageDialog(null, "Nuevo Nivel creado correctamente");
                 txt_nuevoCurso.setText("");
 
@@ -374,24 +447,6 @@ public class Cursos extends javax.swing.JFrame {
     private void jComboBox_nivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_nivelActionPerformed
         actualizarTabla();
 
-        jTable_gestionarAlumnos.addMouseListener(new MouseAdapter() {
-            @Override // para sobreescribir metodos
-            public void mouseClicked(MouseEvent e){
-                //le indicamos la fila que selecciono el usuario
-                int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
-                //seleccionamos por defecto la columna 1 (nombre)
-                int columna_point = 1;
-
-                if(fila_point > -1){
-                    user_update = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
-                    System.out.println(user_update);
-                    AsignarCurso asignarCurso = new AsignarCurso(); //abro la proxima interfaz
-                    asignarCurso.setVisible(true);
-                    dispose();
-                }
-
-            }
-        });
     }//GEN-LAST:event_jComboBox_nivelActionPerformed
 
     public void actualizarTabla(){
@@ -435,6 +490,25 @@ public class Cursos extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.err.println("Error al recuperar los registros de alumnos. " + e);
         }
+        
+        jTable_gestionarAlumnos.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+                //le indicamos la fila que selecciono el usuario
+                int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
+                //seleccionamos por defecto la columna 1 (nombre)
+                int columna_point = 1;
+
+                if(fila_point > -1){
+                    user_update = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
+                    System.out.println(user_update);
+                    AsignarCurso asignarCurso = new AsignarCurso(); //abro la proxima interfaz
+                    asignarCurso.setVisible(true);
+                    dispose();
+                }
+
+            }
+        });
     }
     
     /**
@@ -481,8 +555,10 @@ public class Cursos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable_gestionarAlumnos;
     private javax.swing.JTable jTable_niveles;
+    private javax.swing.JTable jTable_nivelescopia;
     private javax.swing.JTextField txt_nuevoCurso;
     // End of variables declaration//GEN-END:variables
 }
