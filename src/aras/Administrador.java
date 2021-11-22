@@ -119,6 +119,7 @@ public class Administrador extends javax.swing.JFrame {
         jLabel_GestionarAlumnos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton_GestionarNiveles = new javax.swing.JButton();
+        jLabel_GestionarCursos = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,7 +139,7 @@ public class Administrador extends javax.swing.JFrame {
                 jButton_RegistrarAlumnosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 120, 100));
+        getContentPane().add(jButton_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 120, 100));
 
         jButton_GestionarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modificar.png"))); // NOI18N
         jButton_GestionarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -147,7 +148,7 @@ public class Administrador extends javax.swing.JFrame {
                 jButton_GestionarAlumnosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 120, 100));
+        getContentPane().add(jButton_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 120, 100));
 
         jButton_ListarAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/listar.png"))); // NOI18N
         jButton_ListarAlumnos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -160,7 +161,7 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel_RegistrarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_RegistrarAlumnos.setText("Registrar Alumnos");
-        getContentPane().add(jLabel_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+        getContentPane().add(jLabel_RegistrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         jLabel_ListarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_ListarAlumnos.setText("Listar Alumnos");
@@ -168,7 +169,7 @@ public class Administrador extends javax.swing.JFrame {
 
         jLabel_GestionarAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_GestionarAlumnos.setText("Gestionar Alumnos");
-        getContentPane().add(jLabel_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+        getContentPane().add(jLabel_GestionarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
 
         jButton1.setText("?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +187,11 @@ public class Administrador extends javax.swing.JFrame {
                 jButton_GestionarNivelesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_GestionarNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 120, 100));
+        getContentPane().add(jButton_GestionarNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 120, 100));
+
+        jLabel_GestionarCursos.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_GestionarCursos.setText("Gestionar Cursos");
+        getContentPane().add(jLabel_GestionarCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 430));
 
         pack();
@@ -264,6 +269,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton_RegistrarAlumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_GestionarAlumnos;
+    private javax.swing.JLabel jLabel_GestionarCursos;
     private javax.swing.JLabel jLabel_ListarAlumnos;
     private javax.swing.JLabel jLabel_RegistrarAlumnos;
     private javax.swing.JLabel jLabel_Wallpaper;

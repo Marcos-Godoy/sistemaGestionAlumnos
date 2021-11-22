@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
@@ -68,7 +69,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select apellido,nombre, dni, nombre_escuela, grado from alumnos order by apellido");
+                    "select apellido,nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido");
             //selecciona esos valores de la tabla
             
             ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
@@ -81,11 +82,12 @@ public class ListarAlumnos extends javax.swing.JFrame {
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
+            model.addColumn("Nivel");
 
             while (rs.next()) { //para ver si encontro resultados o coincidencias
-                Object[] fila = new Object[5]; //son 5 columnas
+                Object[] fila = new Object[6]; //son 5 columnas
 
-                for (int i = 0; i < 5; i++) { //voy ingresando lo que vaya encontrando en la bd
+                for (int i = 0; i < 6; i++) { //voy ingresando lo que vaya encontrando en la bd
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); //añado al modelo toda la fila
@@ -110,12 +112,28 @@ public class ListarAlumnos extends javax.swing.JFrame {
                
                if(fila_point > -1){
                    name = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
-                   user_update = (String) model.getValueAt(fila_point, 1);
+                   user_update = (String) model.getValueAt(fila_point, 0);
                    System.out.println(name);
+                   System.out.println(user_update);
                }
                
             }
         });
+        
+        try {
+            Connection cn2 = Conexion.conectar();
+            PreparedStatement pst2 = cn2.prepareStatement(
+            "select nivel from niveles order by nivel");
+            ResultSet rs2 = pst2.executeQuery();
+            
+            while(rs2.next()){
+                cmb_filtroNivel.addItem(rs2.getString("nivel"));
+            }
+            cn2.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar niveles. " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
+        }
     }
     
     //Reemplazar el icono de java por default
@@ -143,6 +161,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jButton_eliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_eliminar1 = new javax.swing.JButton();
+        cmb_filtroNivel = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,7 +193,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
                 cmb_filtroActionPerformed(evt);
             }
         });
-        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, -1, -1));
+        getContentPane().add(cmb_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,7 +208,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 700, 290));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 290));
 
         Imprimir.setBackground(new java.awt.Color(51, 102, 255));
         Imprimir.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
@@ -233,7 +254,23 @@ public class ListarAlumnos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton_eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 120, 30));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
+
+        cmb_filtroNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sin Asignar" }));
+        cmb_filtroNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_filtroNivelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmb_filtroNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, -1, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Nivel");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Curso");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,9 +287,9 @@ public class ListarAlumnos extends javax.swing.JFrame {
             Connection cn = Conexion.conectar();
 
             if (seleccion.equals("Todos")) {
-                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos order by apellido";
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
             } else {
-                query = "select apellido, nombre, dni, nombre_escuela, grado from alumnos where grado = '" + seleccion + "' order by apellido";
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -266,10 +303,11 @@ public class ListarAlumnos extends javax.swing.JFrame {
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
+            model.addColumn("Nivel");
 
             while(rs.next()){
-                Object [] fila = new Object[5];
-                for (int i = 0; i < 5; i++) {
+                Object [] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila);
@@ -284,105 +322,228 @@ ObtenerDatosTabla();
 
     private void ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImprimirActionPerformed
         
-        String seleccion = cmb_filtro.getSelectedItem().toString();
-        String query = "";
         
-        Document documento = new Document(); //creo objeto de la clase document
-        try {
-            String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
-            
-            com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
-            header.scaleToFit(300, 900); //tamaño del header
-            header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
-            
-            Font f=new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,14.0f,Font.BOLDITALIC,BaseColor.BLACK));
-            Paragraph parrafo = new Paragraph("\nLista de Alumnos: " + seleccion,f); //creo el parrafo del pdf
-            parrafo.add("\n\n");
-            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            
-            documento.open();
-            documento.add(header); //le agrego los elementos al documento
-            documento.add(parrafo);
-            
-            PdfPTable tabla = new PdfPTable(26); //agrego las columnas
-            int contador = 1;
-            // Set Table Total Width
-            //tabla.setTotalWidth(50);
-            
-            // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
-// EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
-            float var = 0.25f;
-            float[] medidaCeldas = {0.35f, 2.0f, var, var, var, var, var, var, var, var, var, var,
-                var, var, var, var, var, var, var, var, var, var, var, var, var, var};
-            /*
-            medidaCeldas[0] = 1.0f;
-            for (int i=1; i < 25; i++){
-                medidaCeldas[i] = var;      
-            }*/
+      
+        int seleccion1 = JOptionPane.showOptionDialog( null,"Seleccione una opcion",
+          "Selector de opciones",JOptionPane.YES_NO_CANCEL_OPTION,
+           JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
+          new Object[] { "Por curso", "Por nivel", "Cancelar"},"Por curso");
 
-// ASIGNAS LAS MEDIDAS A LA TABLA (ANCHO)
-            tabla.setWidthPercentage(100);
-            tabla.setTotalWidth(1000);
-            tabla.setWidths(medidaCeldas);
-            
-            tabla.addCell(" ");
-            tabla.addCell("Apellido y Nombre");
-            //tabla.addCell("Nombre");
-            
-            
-            for(int i = 0; i < 24; i++){
-                tabla.addCell("");
-            }
-            
-            if (seleccion.equals("Todos")) {
-                    query = "select apellido, nombre from alumnos order by apellido";
-            } else {
-                query = "select apellido, nombre from alumnos where grado = '" + seleccion + "' order by apellido";
-            }
-            
+         if (seleccion1 != -1){
+                   System.out.println("seleccionada opcion " + (seleccion1 + 1));
+         }
+         
+        if(seleccion1 == 0) {
+            String seleccion = cmb_filtro.getSelectedItem().toString();
+            String query = "";
+
+            Document documento = new Document(); //creo objeto de la clase document
             try {
-                Connection cn = Conexion.conectar();
-                PreparedStatement pst = cn.prepareStatement(query);
+                String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
 
-                ResultSet rs = pst.executeQuery();
+                com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+                header.scaleToFit(300, 900); //tamaño del header
+                header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
+
+                Font f=new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,14.0f,Font.BOLDITALIC,BaseColor.BLACK));
+                Paragraph parrafo = new Paragraph("\nLista de Alumnos: " + seleccion,f); //creo el parrafo del pdf
+                parrafo.add("\n\n");
+                parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+
+                documento.open();
+                documento.add(header); //le agrego los elementos al documento
+                documento.add(parrafo);
+
+                PdfPTable tabla = new PdfPTable(26); //agrego las columnas
+                int contador = 1;
+                // Set Table Total Width
+                //tabla.setTotalWidth(50);
+
+                // CREO UN ARREGLO QUE CONTIENE LAS MEDIDAS DE CADA UNA DE LAS COLUMNAS
+    // EN MI CASO SON 4, (TB PUEDES PASAR EL ARREGLO DIRECTAMENTE)
+                float var = 0.25f;
+                float[] medidaCeldas = {0.35f, 2.0f, var, var, var, var, var, var, var, var, var, var,
+                    var, var, var, var, var, var, var, var, var, var, var, var, var, var};
+                /*
+                medidaCeldas[0] = 1.0f;
+                for (int i=1; i < 25; i++){
+                    medidaCeldas[i] = var;      
+                }*/
+
+    // ASIGNAS LAS MEDIDAS A LA TABLA (ANCHO)
+                tabla.setWidthPercentage(100);
+                tabla.setTotalWidth(1000);
+                tabla.setWidths(medidaCeldas);
+
+                tabla.addCell(" ");
+                tabla.addCell("Apellido y Nombre");
+                //tabla.addCell("Nombre");
+
+
+                for(int i = 0; i < 24; i++){
+                    tabla.addCell("");
+                }
+
+                if (seleccion.equals("Todos")) {
+                        query = "select apellido, nombre from alumnos order by apellido";
+                } else {
+                    query = "select apellido, nombre from alumnos where grado = '" + seleccion + "' order by apellido";
+                }
+
+                try {
+                    Connection cn = Conexion.conectar();
+                    PreparedStatement pst = cn.prepareStatement(query);
+
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()) {
+                        do {
+                            String cont;
+                            cont = String.valueOf(contador);
+                            contador ++;
+                            tabla.addCell(cont);
+                            tabla.addCell(rs.getString(1) + ", " + rs.getString(2));
+                            //tabla.addCell(rs.getString(2));
+
+                            for(int i = 0; i < 24; i++){
+                                tabla.addCell("");
+                            }
+
+                        } while (rs.next());
+                        documento.add(tabla);
+                    }
+
+                } catch (SQLException e) {
+                    System.out.println("Error al generar lista de alumnos. " + e);
+                }
+
+                documento.close();
+                JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
+
+            } catch (Exception e) {
+                System.out.println("Error al generar PDF. " + e);
+            }
+        } else {
+            
+            if(seleccion1 == 1){
                 
-                if (rs.next()) {
-                    do {
-                        String cont;
-                        cont = String.valueOf(contador);
-                        contador ++;
-                        tabla.addCell(cont);
-                        tabla.addCell(rs.getString(1) + ", " + rs.getString(2));
-                        //tabla.addCell(rs.getString(2));
-                        
-                        for(int i = 0; i < 24; i++){
-                            tabla.addCell("");
+                String seleccion = cmb_filtroNivel.getSelectedItem().toString();
+                String query = "";
+
+                Document documento = new Document(); //creo objeto de la clase document
+                try {
+                    String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
+
+                    com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
+                    header.scaleToFit(300, 900); //tamaño del header
+                    header.setAlignment(Chunk.ALIGN_CENTER); //posicion centrada del header
+
+                    Font f=new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,14.0f,Font.BOLDITALIC,BaseColor.BLACK));
+                    Paragraph parrafo = new Paragraph("\nLista de Alumnos: " + seleccion,f); //creo el parrafo del pdf
+                    parrafo.add("\n\n");
+                    parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+
+                    documento.open();
+                    documento.add(header); //le agrego los elementos al documento
+                    documento.add(parrafo);
+
+                    PdfPTable tabla = new PdfPTable(26); //agrego las columnas
+                    int contador = 1;
+                    
+                    float var = 0.25f;
+                    float[] medidaCeldas = {0.35f, 2.0f, var, var, var, var, var, var, var, var, var, var,
+                        var, var, var, var, var, var, var, var, var, var, var, var, var, var};
+                    
+                    tabla.setWidthPercentage(100);
+                    tabla.setTotalWidth(1000);
+                    tabla.setWidths(medidaCeldas);
+
+                    tabla.addCell(" ");
+                    tabla.addCell("Apellido y Nombre");
+                    
+
+
+                    for(int i = 0; i < 24; i++){
+                        tabla.addCell("");
+                    }
+
+                    if (seleccion.equals("Todos")) {
+                            query = "select apellido, nombre from alumnos order by apellido";
+                    } else {
+                        query = "select apellido, nombre from alumnos where nivel = '" + seleccion + "' order by apellido";
+                    }
+
+                    try {
+                        Connection cn = Conexion.conectar();
+                        PreparedStatement pst = cn.prepareStatement(query);
+
+                        ResultSet rs = pst.executeQuery();
+
+                        if (rs.next()) {
+                            do {
+                                String cont;
+                                cont = String.valueOf(contador);
+                                contador ++;
+                                tabla.addCell(cont);
+                                tabla.addCell(rs.getString(1) + ", " + rs.getString(2));
+
+                                for(int i = 0; i < 24; i++){
+                                    tabla.addCell("");
+                                }
+
+                            } while (rs.next());
+                            documento.add(tabla);
                         }
-                        
-                    } while (rs.next());
-                    documento.add(tabla);
+
+                    } catch (SQLException e) {
+                        System.out.println("Error al generar lista de alumnos. " + e);
+                    }
+
+                    documento.close();
+                    JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
+
+                } catch (Exception e) {
+                    System.out.println("Error al generar PDF. " + e);
                 }
                 
-            } catch (SQLException e) {
-                System.out.println("Error al generar lista de alumnos. " + e);
+            } else {
+                System.out.println("Cancelado");
             }
             
-            documento.close();
-            JOptionPane.showMessageDialog(null, "Lista de alumnos creada correctamente.");
-            
-        } catch (Exception e) {
-            System.out.println("Error al generar PDF. " + e);
         }
         
     }//GEN-LAST:event_ImprimirActionPerformed
 
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-        
-        int dni;
+        /*
+        jTable_gestionarAlumnos.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
+               //seleccionamos por defecto la columna 1 (nombre)
+               int columna_point = 1;
+               
+               
+               if(fila_point > -1){
+                   name = (int) model.getValueAt(fila_point, 2); //nos devuelve el dni
+                   user_update = (String) model.getValueAt(fila_point, 1);
+                   System.out.println(name);
+                   System.out.println(user_update);
+                   
+               }
+               
+            }
+        });
+        */
+        int dni, fila;
         String apellido;
         dni = name;
+        //fila = fila_point;
         apellido = user_update;
+        //int fila = fila_point;
         int input = JOptionPane.showConfirmDialog(null, "¿Seguro que querés eliminar a este alumno?");
         // 0=yes, 1=no, 2=cancel
         System.out.println(input);
@@ -395,7 +556,9 @@ ObtenerDatosTabla();
                         "delete from alumnos where dni = '" + dni + "' and apellido = '" + apellido + "'");
                 //selecciona esos valores de la tabla
                 pst.executeUpdate(); //ejecuto lo anterior
+                //model.removeRow(fila);
                 JOptionPane.showMessageDialog(null, "Alumno eliminado correctamente.");
+                //model.removeRow(fila+1);
             } catch (SQLException ex) {
                 System.err.println("Error al eliminar alumno. " + ex);
             }
@@ -409,6 +572,8 @@ ObtenerDatosTabla();
             } catch (SQLException ex) {
                 System.err.println("Error al eliminar familiar. " + ex);
             }
+            
+            ObtenerDatosTabla();
         }
         
         
@@ -697,8 +862,94 @@ ObtenerDatosTabla();
 
     
     private void cmb_filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroActionPerformed
-        // TODO add your handling code here:
+        String seleccion = cmb_filtro.getSelectedItem().toString();
+        String query = "";
+
+        model.setRowCount(0);
+        model.setColumnCount(0);
+
+        try {
+            Connection cn = Conexion.conectar();
+
+            if (seleccion.equals("Todos")) {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
+            } else {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+            }
+
+            PreparedStatement pst = cn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            jTable_gestionarAlumnos = new JTable(model);
+            jScrollPane1.setViewportView(jTable_gestionarAlumnos);
+
+            model.addColumn("Apellido");
+            model.addColumn("Nombre");
+            model.addColumn("DNI");
+            model.addColumn("Escuela");
+            model.addColumn("Curso");
+            model.addColumn("Nivel");
+
+            while(rs.next()){
+                Object [] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al recuperar los registros de alumnos. " + e);
+        }
+        //cmb_filtroNivel.setSelectedItem("Todos");
+        ObtenerDatosTabla();
     }//GEN-LAST:event_cmb_filtroActionPerformed
+
+    private void cmb_filtroNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroNivelActionPerformed
+        String seleccion = cmb_filtroNivel.getSelectedItem().toString();
+        String query = "";
+
+        model.setRowCount(0);
+        model.setColumnCount(0);
+
+        try {
+            Connection cn = Conexion.conectar();
+
+            if (seleccion.equals("Todos")) {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
+            } else {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where nivel = '" + seleccion + "' order by apellido";
+            }
+
+            PreparedStatement pst = cn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            jTable_gestionarAlumnos = new JTable(model);
+            jScrollPane1.setViewportView(jTable_gestionarAlumnos);
+
+            model.addColumn("Apellido");
+            model.addColumn("Nombre");
+            model.addColumn("DNI");
+            model.addColumn("Escuela");
+            model.addColumn("Curso");
+            model.addColumn("Nivel");
+
+            while(rs.next()){
+                Object [] fila = new Object[6];
+                for (int i = 0; i < 6; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.err.println("Error al recuperar los registros de alumnos. " + e);
+        }
+        //cmb_filtro.setSelectedItem("Todos");
+        ObtenerDatosTabla();
+    }//GEN-LAST:event_cmb_filtroNivelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -740,10 +991,13 @@ ObtenerDatosTabla();
     private javax.swing.JButton Imprimir;
     private javax.swing.JButton Mostrar;
     private javax.swing.JComboBox<String> cmb_filtro;
+    private javax.swing.JComboBox<String> cmb_filtroNivel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_eliminar;
     private javax.swing.JButton jButton_eliminar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_gestionarAlumnos;
@@ -752,19 +1006,22 @@ ObtenerDatosTabla();
 
     public void ObtenerDatosTabla() {
         jTable_gestionarAlumnos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
-                int columna_point = 0;
-/*
-                if (fila_point > -1) {
-                    IDequipo_update = (int) model.getValueAt(fila_point, columna_point);
-                    InformacionEquipoTecnico info = new InformacionEquipoTecnico();
-                    info.setVisible(true);
-
-                }*/
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               int fila_point = jTable_gestionarAlumnos.rowAtPoint(e.getPoint());
+               //seleccionamos por defecto la columna 1 (nombre)
+               int columna_point = 1;
+               
+               
+               if(fila_point > -1){
+                   name = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
+                   user_update = (String) model.getValueAt(fila_point, 0);
+                   System.out.println(name);
+                   System.out.println(user_update);
+               }
+               
             }
-
         });
     }
     

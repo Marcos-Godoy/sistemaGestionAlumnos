@@ -41,13 +41,13 @@ public class Cursos extends javax.swing.JFrame {
         // metodos para poder modificar la interfaz visual por codigo
         setSize(600,500); 
         setResizable(false);
-        setTitle("Gestión de alumnos");
+        setTitle("Gestión de cursos");
         setLocationRelativeTo(null);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -257,6 +257,7 @@ public class Cursos extends javax.swing.JFrame {
                         model2.removeRow(fila_point);
                         //actualizarTablaNiveles();
                         actualizarTabla();
+                        //actualizarOpciones();
                     } catch (SQLException ex) {
                         System.err.println("Error al eliminar. " + ex);
                     }
@@ -368,6 +369,7 @@ public class Cursos extends javax.swing.JFrame {
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -453,7 +455,7 @@ public class Cursos extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable_nivelescopia);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 600, 160));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -601,8 +603,12 @@ public class Cursos extends javax.swing.JFrame {
         
         //jComboBox_nivel.removeAll();
         
-        DefaultComboBoxModel model3 = (DefaultComboBoxModel) jComboBox_nivel.getModel();
-        model3.removeAllElements();
+        //DefaultComboBoxModel model3 = (DefaultComboBoxModel) jComboBox_nivel.getModel();
+        //jComboBox_nivel.removeAllItems();
+        
+        for(int i=jComboBox_nivel.getItemCount()-1;i>=0;i--){
+            jComboBox_nivel.removeItemAt(i);
+        }
         
         jComboBox_nivel.addItem("Sin Asignar");
         

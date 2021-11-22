@@ -30,14 +30,14 @@ public class AsignarCurso extends javax.swing.JFrame {
         user_update = Cursos.user_update;
         
         setResizable(false);
-        setTitle("Gestión de alumnos");
+        setTitle("Gestión de cursos");
         setLocationRelativeTo(null);
         setSize(550,320);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
-        ImageIcon wallpaper = new ImageIcon("src/images/fondo2.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/images/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
         
@@ -70,7 +70,7 @@ public class AsignarCurso extends javax.swing.JFrame {
         try {
             Connection cn2 = Conexion.conectar();
             PreparedStatement pst2 = cn2.prepareStatement(
-            "select nivel from niveles");
+            "select nivel from niveles order by nivel");
             ResultSet rs2 = pst2.executeQuery();
             
             while(rs2.next()){
@@ -202,7 +202,7 @@ public class AsignarCurso extends javax.swing.JFrame {
         jComboBox_nivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBox_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Asignar" }));
         getContentPane().add(jComboBox_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 100, 30));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
