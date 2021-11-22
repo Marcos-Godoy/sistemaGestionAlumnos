@@ -278,6 +278,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
     private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
 
         String seleccion = cmb_filtro.getSelectedItem().toString();
+        String seleccion2 = cmb_filtroNivel.getSelectedItem().toString();
         String query = "";
 
         model.setRowCount(0);
@@ -286,10 +287,18 @@ public class ListarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
 
-            if (seleccion.equals("Todos")) {
+            if (seleccion.equals("Todos") && seleccion2.equals("Todos")) {
                 query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
             } else {
-                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+                if(seleccion.equals("Todos")) {
+                    query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where nivel = '" + seleccion2 + "' order by apellido";
+                } else {
+                    if(seleccion2.equals("Todos")){
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+                    } else {
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' and nivel = '" + seleccion2 + "' order by apellido";
+                    }
+                }
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -862,7 +871,9 @@ ObtenerDatosTabla();
 
     
     private void cmb_filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroActionPerformed
+        
         String seleccion = cmb_filtro.getSelectedItem().toString();
+        String seleccion2 = cmb_filtroNivel.getSelectedItem().toString();
         String query = "";
 
         model.setRowCount(0);
@@ -870,11 +881,25 @@ ObtenerDatosTabla();
 
         try {
             Connection cn = Conexion.conectar();
-
+            
+            /*
             if (seleccion.equals("Todos")) {
                 query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
             } else {
                 query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+            }*/
+            if (seleccion.equals("Todos") && seleccion2.equals("Todos")) {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
+            } else {
+                if(seleccion.equals("Todos")) {
+                    query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where nivel = '" + seleccion2 + "' order by apellido";
+                } else {
+                    if(seleccion2.equals("Todos")){
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+                    } else {
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' and nivel = '" + seleccion2 + "' order by apellido";
+                    }
+                }
             }
 
             PreparedStatement pst = cn.prepareStatement(query);
@@ -907,7 +932,8 @@ ObtenerDatosTabla();
     }//GEN-LAST:event_cmb_filtroActionPerformed
 
     private void cmb_filtroNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroNivelActionPerformed
-        String seleccion = cmb_filtroNivel.getSelectedItem().toString();
+        String seleccion = cmb_filtro.getSelectedItem().toString();
+        String seleccion2 = cmb_filtroNivel.getSelectedItem().toString();
         String query = "";
 
         model.setRowCount(0);
@@ -915,11 +941,24 @@ ObtenerDatosTabla();
 
         try {
             Connection cn = Conexion.conectar();
-
+            /*
             if (seleccion.equals("Todos")) {
                 query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
             } else {
                 query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where nivel = '" + seleccion + "' order by apellido";
+            }*/
+            if (seleccion.equals("Todos") && seleccion2.equals("Todos")) {
+                query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
+            } else {
+                if(seleccion.equals("Todos")) {
+                    query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where nivel = '" + seleccion2 + "' order by apellido";
+                } else {
+                    if(seleccion2.equals("Todos")){
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' order by apellido";
+                    } else {
+                        query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos where grado = '" + seleccion + "' and nivel = '" + seleccion2 + "' order by apellido";
+                    }
+                }
             }
 
             PreparedStatement pst = cn.prepareStatement(query);

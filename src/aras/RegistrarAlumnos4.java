@@ -1,15 +1,22 @@
 package aras;
 
+import static aras.ListarAlumnos.name;
+import static aras.ListarAlumnos.user_update;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+//import javax.swing.JTable;
 
 /**
  *
@@ -19,10 +26,8 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
     public static RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
     //public String nombre_alumno = RegistrarAlumnos1.nombre;
-    //public int dni_alumno = RegistrarAlumnos1.dni_numerico;
-    /**
-     * Creates new form RegistrarAlumnos1
-     */
+    public static int fila_point;
+    DefaultTableModel model = new DefaultTableModel();
     public RegistrarAlumnos4() {
         initComponents();
         //nombre_alumno = RegistrarAlumnos1.nombre;
@@ -36,6 +41,42 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+                //le indicamos la fila que selecciono el usuario
+                int fila_point = jTable1.rowAtPoint(e.getPoint());
+                System.out.println(fila_point);
+                
+                /*
+                if(e.getClickCount()==3){
+                    int input = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminar este familiar?");
+                    // 0=yes, 1=no, 2=cancel
+                    if(input == 0) {
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        model.removeRow(fila_point);
+                        System.out.println("Eliminado correctamente");
+                    }
+                }
+                */
+               
+            }
+        });
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setNumRows(0);
+        
+        /*
+        jTable1 = new JTable(model); //declaramos la tabla y ponemos el model
+        jScrollPane2.setViewportView(jTable1);
+        model.addColumn("Nombre y Apellido");
+        model.addColumn("Parentesco");
+        model.addColumn("Edad");
+        model.addColumn("Ocupación");
+        */
+        //jTable1 = new JTable(model); //declaramos la tabla y ponemos el model
+        //jScrollPane1.setViewportView(jTable1); //la tabla esta contenida dentro de un jscrollpane
     }
     
     //Reemplazar el icono de java por default
@@ -60,6 +101,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_agregar = new javax.swing.JButton();
+        jButton_eliminar = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,7 +117,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "Apellido y Nombre", "Parentesco", "Edad", "Ocupación"
@@ -119,7 +161,15 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                 jButton_agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
+
+        jButton_eliminar.setText("Eliminar");
+        jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_eliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -133,13 +183,30 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        /*
         for(int i = 0; i < jTable1.getRowCount(); i++){
             for(int j = 0; j < jTable1.getColumnCount(); j++){
                 if(((String) jTable1.getValueAt(i, j)) == ""){
                     jTable1.setValueAt("-", i, j);
                 }
             }
+        }*/
+        //NO ME ANDA
+        
+        for(int i = 0; i < jTable1.getRowCount(); i++){
+            if("".equals((String) jTable1.getValueAt(i, 2))) {
+                jTable1.setValueAt("0",i, 2);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 0))) {
+                jTable1.setValueAt("-",i, 0);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 1))) {
+                jTable1.setValueAt("-",i, 1);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 3))) {
+                jTable1.setValueAt("-",i, 3);
+            }
+            System.out.println(jTable1.getValueAt(i, 2));
         }
         
         if(jTable1.getRowCount()==0){     
@@ -161,6 +228,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         //int contador = RegistrarAlumnos3.cont;
         if(jTable1.getRowCount()>0){
             for(int i = 0; i < jTable1.getRowCount(); i++){
+                if(!("-".equals((String) jTable1.getValueAt(i, 0)))) {
                 try {
                     
                     Connection cn = Conexion.conectar();
@@ -169,6 +237,8 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                             +jTable1.getValueAt(i, 1)+", "
                             +jTable1.getValueAt(i, 2)+", "
                             +jTable1.getValueAt(i, 3)+")");*/
+                    
+                    
                     PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
                     //pst.setInt(1, 0);
                     pst.setString(1, nombre_alumno);
@@ -177,6 +247,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                     pst.setString(4, (String) jTable1.getValueAt(i, 0));
                     pst.setString(5, (String) jTable1.getValueAt(i, 1));
                     pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                    //pst.setInt(6, (int) jTable1.getValueAt(i, 2));
                     pst.setString(7, (String) jTable1.getValueAt(i, 3));
                     pst.executeUpdate();
                     cn.close();
@@ -186,7 +257,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                     System.err.println("Error en Registrar familiares. " + e);
                     JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
                 }
-            }       
+            } }       
         } else {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
@@ -197,6 +268,34 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         model.addRow(new Object[]{"","","",""});
     }//GEN-LAST:event_jButton_agregarActionPerformed
 
+    private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
+        /*
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               fila_point = jTable1.rowAtPoint(e.getPoint());
+               
+            }
+        });
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(fila_point);
+        */
+    }//GEN-LAST:event_jButton_eliminarActionPerformed
+
+    
+    public void ObtenerDatosTabla() {
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override // para sobreescribir metodos
+            public void mouseClicked(MouseEvent e){
+               //le indicamos la fila que selecciono el usuario
+               int fila_point = jTable1.rowAtPoint(e.getPoint());
+               
+            }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -237,6 +336,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_agregar;
+    private javax.swing.JButton jButton_eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
