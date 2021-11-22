@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -130,7 +131,7 @@ public class Cursos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select nivel, count(nivel) as Niveles from alumnos group by nivel");
+                    "select nivel, count(nivel) as Niveles from alumnos group by nivel order by count(nivel) desc");
             ResultSet rs = pst.executeQuery();                        
             
             jTable_niveles = new JTable(model2); //declaramos la tabla y ponemos el model
@@ -155,6 +156,63 @@ public class Cursos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
         } 
         
+        int k = 0, i = 0;
+            String[] cursoVacio = new String[50];
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select nivel from niveles");
+            ResultSet rs = pst.executeQuery();                        
+            
+            //jTable_niveles = new JTable(model2); //declaramos la tabla y ponemos el model
+            //jScrollPane2.setViewportView(jTable_niveles); //la tabla esta contenida dentro de un jscrollpane
+
+            //model2.addColumn("Niveles");
+            //model2.addColumn("Alumnos asignados");
+            
+            
+            
+            while (rs.next()) { //para ver si encontro resultados o coincidencias
+                int c = 0;
+                for(k = 0; k<jTable_niveles.getRowCount(); k++){
+                    String dato=String.valueOf(model2.getValueAt(k,0));
+                    //System.out.println(rs.getString(1));
+                    if(dato.equals(rs.getString(1))){
+                        c = 1;
+                    }
+                }
+                
+                if(c==0){
+                    cursoVacio[i] = rs.getString(1);
+                    i++;
+                }
+                
+                /*
+                Object[] fila2 = new Object[2]; //son 4 columnas                
+                fila2[0] = rs.getObject(1);                   
+                    //cadena[j] = rs2.getObject(i + 1);
+                fila2[1] = rs.getObject(2);
+                
+                model2.addRow(fila2); //añado al modelo toda la fila
+                */
+            }
+            
+            cn.close(); //cierra la conexion
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
+        } 
+        System.out.println("Cursos vacios:");
+        for(int l=0; l < i; l++){
+            
+            System.out.println(cursoVacio[l]);
+            Object[] fila2 = new Object[2];
+            fila2[0] = cursoVacio[l];
+            fila2[1] = 0;
+            model2.addRow(fila2);
+        }
         
         
         jTable_niveles.addMouseListener(new MouseAdapter() {
@@ -197,6 +255,7 @@ public class Cursos extends javax.swing.JFrame {
                         
                         JOptionPane.showMessageDialog(null, "¡Nivel eliminado correctamente!");
                         model2.removeRow(fila_point);
+                        //actualizarTablaNiveles();
                         actualizarTabla();
                     } catch (SQLException ex) {
                         System.err.println("Error al eliminar. " + ex);
@@ -448,7 +507,121 @@ public class Cursos extends javax.swing.JFrame {
         actualizarTabla();
 
     }//GEN-LAST:event_jComboBox_nivelActionPerformed
+    
+    private void actualizarTablaNiveles(){
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select nivel, count(nivel) as Niveles from alumnos group by nivel order by count(nivel) desc");
+            ResultSet rs = pst.executeQuery();                        
+            
+            DefaultTableModel model2 = new DefaultTableModel();
+            jTable_niveles = new JTable(model2); //declaramos la tabla y ponemos el model
+            jScrollPane2.setViewportView(jTable_niveles); //la tabla esta contenida dentro de un jscrollpane
 
+            model2.addColumn("Niveles");
+            model2.addColumn("Alumnos asignados");
+            
+            
+            while (rs.next()) { //para ver si encontro resultados o coincidencias
+                Object[] fila2 = new Object[2]; //son 4 columnas                
+                fila2[0] = rs.getObject(1);                   
+                    //cadena[j] = rs2.getObject(i + 1);
+                fila2[1] = rs.getObject(2);
+                
+                model2.addRow(fila2); //añado al modelo toda la fila
+            }
+            cn.close(); //cierra la conexion
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
+        } 
+        
+        int k = 0, i = 0;
+            String[] cursoVacio = new String[50];
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select nivel from niveles");
+            ResultSet rs = pst.executeQuery();                        
+            
+            //jTable_niveles = new JTable(model2); //declaramos la tabla y ponemos el model
+            //jScrollPane2.setViewportView(jTable_niveles); //la tabla esta contenida dentro de un jscrollpane
+
+            //model2.addColumn("Niveles");
+            //model2.addColumn("Alumnos asignados");
+            
+            
+            
+            while (rs.next()) { //para ver si encontro resultados o coincidencias
+                int c = 0;
+                for(k = 0; k<jTable_niveles.getRowCount(); k++){
+                    String dato=String.valueOf(model2.getValueAt(k,0));
+                    //System.out.println(rs.getString(1));
+                    if(dato.equals(rs.getString(1))){
+                        c = 1;
+                    }
+                }
+                
+                if(c==0){
+                    cursoVacio[i] = rs.getString(1);
+                    i++;
+                }
+                
+                /*
+                Object[] fila2 = new Object[2]; //son 4 columnas                
+                fila2[0] = rs.getObject(1);                   
+                    //cadena[j] = rs2.getObject(i + 1);
+                fila2[1] = rs.getObject(2);
+                
+                model2.addRow(fila2); //añado al modelo toda la fila
+                */
+            }
+            
+            cn.close(); //cierra la conexion
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
+        } 
+        System.out.println("Cursos vacios:");
+        for(int l=0; l < i; l++){
+            
+            System.out.println(cursoVacio[l]);
+            Object[] fila2 = new Object[2];
+            fila2[0] = cursoVacio[l];
+            fila2[1] = 0;
+            model2.addRow(fila2);
+        }
+    }
+    
+    private void actualizarOpciones(){
+        
+        //jComboBox_nivel.removeAll();
+        
+        DefaultComboBoxModel model3 = (DefaultComboBoxModel) jComboBox_nivel.getModel();
+        model3.removeAllElements();
+        
+        jComboBox_nivel.addItem("Sin Asignar");
+        
+        try {
+            Connection cn2 = Conexion.conectar();
+            PreparedStatement pst2 = cn2.prepareStatement(
+            "select nivel from niveles");
+            ResultSet rs2 = pst2.executeQuery();
+            
+            while(rs2.next()){
+                jComboBox_nivel.addItem(rs2.getString("nivel"));
+            }
+            cn2.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar niveles. " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
+        }
+    }
+    
     public void actualizarTabla(){
         
         String seleccion = jComboBox_nivel.getSelectedItem().toString();
