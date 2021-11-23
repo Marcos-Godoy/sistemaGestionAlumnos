@@ -17,9 +17,8 @@ import javax.swing.WindowConstants;
 public class Administrador extends javax.swing.JFrame {
     
     //public static RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
-    /**
-     * Creates new form Administrador
-     */
+    public static RegistrarAlumnos1 registrarAlumnos;
+    
     public Administrador() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
@@ -198,8 +197,8 @@ public class Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_RegistrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarAlumnosActionPerformed
-        // TODO add your handling code here:
-        RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
+        registrarAlumnos = new RegistrarAlumnos1();
         registrarAlumnos.setVisible(true);
     }//GEN-LAST:event_jButton_RegistrarAlumnosActionPerformed
 

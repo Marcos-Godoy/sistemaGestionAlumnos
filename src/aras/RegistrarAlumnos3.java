@@ -46,7 +46,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         setSize(700,500);
         setLocationRelativeTo(null);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
@@ -55,6 +55,8 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        System.out.println("Registrar 3");
     }
     
     //Reemplazar el icono de java por default
@@ -466,7 +468,12 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             }
         }
         
-        System.exit(0); //Para cerrar toda la aplicación
+        RegistrarAlumnos1.registrarAlumnos4.dispose();
+        RegistrarAlumnos4.registrarAlumnos2.dispose();
+        Administrador.registrarAlumnos.dispose();
+        this.dispose();
+        
+        //System.exit(0); //Para cerrar toda la aplicación
         
     }
     

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -18,7 +19,8 @@ import javax.swing.JOptionPane;
 public class RegistrarAlumnos2 extends javax.swing.JFrame {
     
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero, nivel;
-    public static RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
+    //public static RegistrarAlumnos3 registrarAlumnos3 = new RegistrarAlumnos3();
+    public static RegistrarAlumnos3 registrarAlumnos3;
     
     public RegistrarAlumnos2() {
         initComponents();
@@ -29,9 +31,13 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        System.out.println("Registrar 2");
+        registrarAlumnos3 = new RegistrarAlumnos3();
         
         jComboBox_grado.disable();
         jComboBox_grado1.disable();

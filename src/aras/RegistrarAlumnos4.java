@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 //import javax.swing.JTable;
@@ -24,8 +25,8 @@ import javax.swing.table.TableModel;
  */
 public class RegistrarAlumnos4 extends javax.swing.JFrame {
 
-    public static RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
-    //public String nombre_alumno = RegistrarAlumnos1.nombre;
+    //public static RegistrarAlumnos2 registrarAlumnos2 = new RegistrarAlumnos2();
+    public static RegistrarAlumnos2 registrarAlumnos2;
     public static int fila_point;
     DefaultTableModel model = new DefaultTableModel();
     public RegistrarAlumnos4() {
@@ -38,9 +39,13 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
                 jLabel_Wallpaper.getHeight(), Image.SCALE_DEFAULT));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        System.out.println("Registrar 4");
+        registrarAlumnos2 = new RegistrarAlumnos2();
         
         jTable1.addMouseListener(new MouseAdapter() {
             @Override // para sobreescribir metodos
@@ -195,6 +200,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
             System.out.println(jTable1.getValueAt(i, 2));
         }
         RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
+        Administrador.registrarAlumnos.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

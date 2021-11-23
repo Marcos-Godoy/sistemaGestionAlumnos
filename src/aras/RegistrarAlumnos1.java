@@ -28,11 +28,11 @@ import javax.swing.JOptionPane;
 public class RegistrarAlumnos1 extends javax.swing.JFrame {
     
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
-    public static RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
+    //public static RegistrarAlumnos4 registrarAlumnos4 = new RegistrarAlumnos4();
+    public static RegistrarAlumnos4 registrarAlumnos4;
     public static int dni_numerico = 0;
-    /**
-     * Creates new form RegistrarAlumnos1
-     */
+    
+   
     public RegistrarAlumnos1() {
         initComponents();
         
@@ -41,7 +41,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setSize(700,500);
         //cuando se cierra la ventana, termina de ejecutarse el programa
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         //establece la imagen como fondo de la aplicacion
         ImageIcon wallpaper = new ImageIcon("src/images/fondo.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(jLabel_Wallpaper.getWidth(),
@@ -50,7 +50,8 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
         
-        
+        System.out.println("Se creo Registrar 1");
+        registrarAlumnos4 = new RegistrarAlumnos4();
     }
     
     //Reemplazar el icono de java por default
@@ -335,6 +336,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
                     n = rs.getInt(1);
                     if(n == 0) {
                         registrarAlumnos4.setVisible(true);
+                        this.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null,"Ese DNI ya fue ingresado.");
                     }
