@@ -289,7 +289,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        String nivel, nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, genero, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
+        String fechaIns, nivel, nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, genero, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
         int dni, dni_madre, dni_padre, numero_escuela;
         
         nombre = InformaciónAlumnos1.nombre;
@@ -298,6 +298,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         nombre_padre = InformaciónAlumnos1.nombre_padre;
         lugar = InformaciónAlumnos1.lugar;
         fecha = InformaciónAlumnos1.fecha;
+        fechaIns = InformaciónAlumnos1.fechaIns;
         localidad = InformaciónAlumnos1.localidad;
         domicilio = InformaciónAlumnos1.domicilio;
         telefono = InformaciónAlumnos1.telefono;
@@ -342,7 +343,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             PreparedStatement pst2 = cn2.prepareStatement("update alumnos set id=?,nombre=?,apellido=?,dni=?,nacimiento=?,lugar_nacimiento=?,"
                     + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
                     + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
-                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,genero=?,nivel=?"
+                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,fecha=?,genero=?,nivel=?"
                     + " where dni ='" + user_update + "'");
             
             pst2.setInt(1, ID);
@@ -372,8 +373,9 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(25, observaciones);
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
-            pst2.setString(28, genero);
-            pst2.setString(29, nivel);
+            pst2.setString(28, fechaIns);
+            pst2.setString(29, genero);
+            pst2.setString(30, nivel);
             
             cont++;
                         
@@ -404,7 +406,6 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 //parrafo.add("Ficha de Inscripción\n\n");
                 parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); //le doy la fuente
                 Font font = new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,13.0f,Font.BOLD,BaseColor.BLACK));
-                //Font fuente = new Font(FontFactory.getFont(FontFactory.TIMES_ROMAN,13.0f,Font.BOLD,BaseColor.RED));
 
                 documento.open();
                 documento.add(header); //le agrego los elementos al documento
@@ -425,7 +426,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n",font));
                 documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n",font));
 
-                documento.add(new Paragraph("Grupo familiar del alumno:\n",font));
+                documento.add(new Paragraph("Grupo familiar del alumno:\n\n",font));
                 PdfPTable tabla = new PdfPTable(4); //agrego las columnas
                 
                 // Set Table Total Width
@@ -464,17 +465,15 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
 
                 documento.add(new Paragraph("\nNombre de Escuela: " + nombre_escuela + "                Número: " + numero_escuela + "\n",font));
                 //documento.add(new Paragraph("Número: " + numero_escuela));
-                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n",font));
-                //documento.add(new Paragraph("Repitió grado alguna vez: " + repitio));
-                //documento.add(new Paragraph("¿Qué Grado repitió? " + grado_repetido));
+                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió alguna vez: " + grado_repetido + "\n",font));
 
-                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "                Cobertura médica: " + cobertura + "\n",font));
+                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "\n",font));
                 //documento.add(new Paragraph("Alergias: " + alergias));
-                //documento.add(new Paragraph("Cobertura médica: " + cobertura));
+                documento.add(new Paragraph("Cobertura médica: " + cobertura + "\n",font));
                 documento.add(new Paragraph("Padece de alguna condición médica: " + condicion + "\n",font));
                 documento.add(new Paragraph("Se retira acompañado de: " + retira_con + "\n",font));
                 documento.add(new Paragraph("Observaciones: " + observaciones + "\n",font));
-                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n\n",font));
+                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n",font));
                 //documento.add(new Paragraph("Paga Cuota: " + cuota));
 
 
@@ -492,8 +491,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 documento.add(terminos);
 
                 documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n",f));
-                documento.add(new Paragraph("Aclaración y Parentesco:\n",f));
-                documento.add(new Paragraph("DNI:\n",f));
+                documento.add(new Paragraph("Aclaración y Parentesco:                                                    DNI:",f));
                 
                 
 

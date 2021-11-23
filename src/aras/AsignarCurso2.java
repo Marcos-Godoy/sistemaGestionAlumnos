@@ -171,7 +171,19 @@ public class AsignarCurso2 extends javax.swing.JFrame {
                 {"2º año (Varones)"},
                 {"3º año (Varones)"},
                 {"4º año (Varones)"},
-                {"5º año (Varones)"}
+                {"5º año (Varones)"},
+                {"1º grado (Mujeres)"},
+                {"2º grado (Mujeres)"},
+                {"3º grado (Mujeres)"},
+                {"4º grado (Mujeres)"},
+                {"5º grado (Mujeres)"},
+                {"6º grado (Mujeres)"},
+                {"7º grado (Mujeres)"},
+                {"1º año (Mujeres)"},
+                {"2º año (Mujeres)"},
+                {"3º año (Mujeres)"},
+                {"4º año (Mujeres)"},
+                {"5º año (Mujeres)"}
             },
             new String [] {
                 "Curso/Año"

@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class InformaciónAlumnos1 extends javax.swing.JFrame {
     
-    public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
+    public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre, fechaIns;
     public static InformaciónAlumnos4 informacionAlumnos4;
     int ID;
     //String user_update = "";
@@ -50,7 +50,8 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         this.repaint();
         
         txt_dni.setEnabled(false); //bloqueo el dni para que no se pueda modificar
-        
+        txt_nombre.setEditable(false);
+        txt_apellido.setEditable(false);
         
         System.out.println("Se creo jframe 1");
         //Lo creo apenas se lanza
@@ -63,7 +64,6 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                //ID = rs.getInt("id");
                 //Realizo el vaciado de datos en los jtextfield.
                 txt_nombre.setText(rs.getString("nombre"));
                 txt_apellido.setText(rs.getString("apellido"));
@@ -78,7 +78,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
                 txt_dni.setText(rs.getString("dni"));
                 txt_dni_padre.setText(rs.getString("dni_padre"));
                 txt_dni_madre.setText(rs.getString("dni_madre"));
-
+                txt_fechains.setText(rs.getString("fecha"));
             }
             cn.close();
         } catch (SQLException e) {
@@ -150,6 +150,8 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         txt_lugar_nacimiento = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txt_telefono2 = new javax.swing.JTextField();
+        txt_fechains = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -159,67 +161,72 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información del Alumno");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
         txt_nombre.setBackground(new java.awt.Color(51, 102, 255));
         txt_nombre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_nombre.setForeground(new java.awt.Color(255, 255, 255));
         txt_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 210, 25));
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 210, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DNI:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         txt_dni.setBackground(new java.awt.Color(51, 102, 255));
         txt_dni.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_dni.setForeground(new java.awt.Color(255, 255, 255));
         txt_dni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_dni.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, -1));
+        getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 210, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Fecha de nacimiento:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         txt_lugar.setBackground(new java.awt.Color(51, 102, 255));
         txt_lugar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_lugar.setForeground(new java.awt.Color(255, 255, 255));
         txt_lugar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_lugar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_lugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 210, -1));
+        getContentPane().add(txt_lugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 210, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Domicilio:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
         txt_domicilio.setBackground(new java.awt.Color(51, 102, 255));
         txt_domicilio.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_domicilio.setForeground(new java.awt.Color(255, 255, 255));
         txt_domicilio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_domicilio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_domicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 210, -1));
+        getContentPane().add(txt_domicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 210, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Localidad:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
         txt_localidad.setBackground(new java.awt.Color(51, 102, 255));
         txt_localidad.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_localidad.setForeground(new java.awt.Color(255, 255, 255));
         txt_localidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_localidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_localidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 210, -1));
+        getContentPane().add(txt_localidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 210, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -296,26 +303,26 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Apellido:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         txt_apellido.setBackground(new java.awt.Color(51, 102, 255));
         txt_apellido.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_apellido.setForeground(new java.awt.Color(255, 255, 255));
         txt_apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_apellido.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 210, 25));
+        getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 210, 25));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Lugar de nacimiento:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
         txt_lugar_nacimiento.setBackground(new java.awt.Color(51, 102, 255));
         txt_lugar_nacimiento.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_lugar_nacimiento.setForeground(new java.awt.Color(255, 255, 255));
         txt_lugar_nacimiento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_lugar_nacimiento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_lugar_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 210, 25));
+        getContentPane().add(txt_lugar_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 210, 25));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -328,6 +335,18 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         txt_telefono2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_telefono2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txt_telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 210, 25));
+
+        txt_fechains.setBackground(new java.awt.Color(51, 102, 255));
+        txt_fechains.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        txt_fechains.setForeground(new java.awt.Color(255, 255, 255));
+        txt_fechains.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_fechains.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_fechains, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 210, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Fecha de inscripción:");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -341,7 +360,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        fechaIns = txt_fechains.getText().trim();
         nombre = txt_nombre.getText().trim();
         apellido = txt_apellido.getText().trim();
         nombre_madre = txt_nombre_madre.getText().trim();
@@ -358,10 +377,13 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         
         dni_numerico = Integer.parseInt(dni);
         
-        //InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
         informacionAlumnos4.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,6 +429,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -421,6 +444,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
     private javax.swing.JTextField txt_dni_madre;
     private javax.swing.JTextField txt_dni_padre;
     private javax.swing.JTextField txt_domicilio;
+    private javax.swing.JTextField txt_fechains;
     private javax.swing.JTextField txt_localidad;
     private javax.swing.JTextField txt_lugar;
     private javax.swing.JTextField txt_lugar_nacimiento;

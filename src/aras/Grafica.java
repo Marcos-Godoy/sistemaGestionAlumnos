@@ -70,6 +70,8 @@ public class Grafica extends javax.swing.JFrame {
                     }
                     posicion++;
                 } while (rs.next());
+                
+                cn.close();
             }
 
         } catch (SQLException e) {

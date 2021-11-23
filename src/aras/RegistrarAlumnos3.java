@@ -425,17 +425,15 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
 
                 documento.add(new Paragraph("\nNombre de Escuela: " + nombre_escuela + "                Número: " + numero_escuela + "\n",font));
                 //documento.add(new Paragraph("Número: " + numero_escuela));
-                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió grado alguna vez: " + repitio + "                ¿Qué Grado? " + grado_repetido + "\n",font));
-                //documento.add(new Paragraph("Repitió grado alguna vez: " + repitio));
-                //documento.add(new Paragraph("¿Qué Grado repitió? " + grado_repetido));
+                documento.add(new Paragraph("Grado/Curso: " + grado + "                Repitió alguna vez: " + grado_repetido + "\n",font));
 
-                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "                Cobertura médica: " + cobertura + "\n",font));
+                documento.add(new Paragraph("Grupo sanguíneo: " + sangre + "               Alergias: " + alergias + "\n",font));
                 //documento.add(new Paragraph("Alergias: " + alergias));
-                //documento.add(new Paragraph("Cobertura médica: " + cobertura));
+                documento.add(new Paragraph("Cobertura médica: " + cobertura + "\n",font));
                 documento.add(new Paragraph("Padece de alguna condición médica: " + condicion + "\n",font));
                 documento.add(new Paragraph("Se retira acompañado de: " + retira_con + "\n",font));
                 documento.add(new Paragraph("Observaciones: " + observaciones + "\n",font));
-                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n\n",font));
+                documento.add(new Paragraph("Paga Inscripción: " + inscripcion + "                Paga Cuota: " + cuota + "\n",font));
                 //documento.add(new Paragraph("Paga Cuota: " + cuota));
 
 
@@ -453,8 +451,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 documento.add(terminos);
 
                 documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n",f));
-                documento.add(new Paragraph("Aclaración y Parentesco:\n",f));
-                documento.add(new Paragraph("DNI:\n",f));
+                documento.add(new Paragraph("Aclaración y Parentesco:                                                    DNI:",f));
                 
                 
 

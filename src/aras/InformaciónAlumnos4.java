@@ -254,7 +254,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                             pst.setInt(3, dni_alumno);
                             pst.setString(4, (String) jTable1.getValueAt(i, 0));
                             pst.setString(5, (String) jTable1.getValueAt(i, 1));
-                            pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                            pst.setObject(6, jTable1.getValueAt(i, 2));
                             //pst.setInt(6, (int) jTable1.getValueAt(i, 2));
                             pst.setString(7, (String) jTable1.getValueAt(i, 3));
                             pst.executeUpdate();
