@@ -106,7 +106,6 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton_agregar = new javax.swing.JButton();
-        jButton_eliminar = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,15 +165,7 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
                 jButton_agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
-
-        jButton_eliminar.setText("Eliminar");
-        jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_eliminarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, -1, -1));
+        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -289,22 +280,6 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         model.addRow(new Object[]{"","","",""});
     }//GEN-LAST:event_jButton_agregarActionPerformed
 
-    private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-        /*
-        jTable1.addMouseListener(new MouseAdapter() {
-            @Override // para sobreescribir metodos
-            public void mouseClicked(MouseEvent e){
-               //le indicamos la fila que selecciono el usuario
-               fila_point = jTable1.rowAtPoint(e.getPoint());
-               
-            }
-        });
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.removeRow(fila_point);
-        */
-    }//GEN-LAST:event_jButton_eliminarActionPerformed
-
     
     public void ObtenerDatosTabla() {
         jTable1.addMouseListener(new MouseAdapter() {
@@ -357,7 +332,6 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_agregar;
-    private javax.swing.JButton jButton_eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;

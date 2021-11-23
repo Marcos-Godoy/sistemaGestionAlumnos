@@ -289,7 +289,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        String nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, genero, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
+        String nivel, nombre, apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, nombre_escuela, genero, grado, repitio, grado_repetido, alergias, cobertura, condicion, sangre, retira_con, observaciones, inscripcion, cuota;
         int dni, dni_madre, dni_padre, numero_escuela;
         
         nombre = InformaciónAlumnos1.nombre;
@@ -315,6 +315,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         grado = InformaciónAlumnos2.grado;
         repitio = InformaciónAlumnos2.repitio;
         grado_repetido = InformaciónAlumnos2.grado_repetido;
+        nivel = InformaciónAlumnos2.nivel;
         
         alergias = txt_alergias.getText().trim();
         cobertura = txt_cobertura.getText().trim();
@@ -341,7 +342,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             PreparedStatement pst2 = cn2.prepareStatement("update alumnos set id=?,nombre=?,apellido=?,dni=?,nacimiento=?,lugar_nacimiento=?,"
                     + "domicilio=?,localidad=?,nombre_madre=?,dni_madre=?,nombre_padre=?,dni_padre=?,telefono=?,"
                     + "telefono2=?,numero_escuela=?,nombre_escuela=?,grado=?,repitio=?,grado_repetido=?,"
-                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,genero=?"
+                    + "sangre=?,alergias=?,cobertura=?,condicion=?,retira_con=?,observaciones=?,inscripcion=?,cuota=?,genero=?,nivel=?"
                     + " where dni ='" + user_update + "'");
             
             pst2.setInt(1, ID);
@@ -372,6 +373,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             pst2.setString(26, inscripcion);
             pst2.setString(27, cuota);
             pst2.setString(28, genero);
+            pst2.setString(29, nivel);
             
             cont++;
                         
@@ -423,7 +425,7 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
                 documento.add(new Paragraph("Teléfono de contacto: " + telefono + "\n",font));
                 documento.add(new Paragraph("Otro teléfono de contacto: " + telefono2 + "\n\n",font));
 
-                documento.add(new Paragraph("Grupo familiar del alumno:\n\n",font));
+                documento.add(new Paragraph("Grupo familiar del alumno:\n",font));
                 PdfPTable tabla = new PdfPTable(4); //agrego las columnas
                 
                 // Set Table Total Width

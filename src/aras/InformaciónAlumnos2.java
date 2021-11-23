@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
  */
 public class InformaciónAlumnos2 extends javax.swing.JFrame {
     
-    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero;
+    public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero, nivel;
     //String user_update = "";
     int user_update;
     //public static InformaciónAlumnos3 informacionAlumnos3 = new InformaciónAlumnos3();
@@ -85,6 +85,21 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
             System.err.println("Error en cargar usuario. " + e);
             JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
         }
+        
+        try {
+            Connection cn2 = Conexion.conectar();
+            PreparedStatement pst2 = cn2.prepareStatement(
+            "select nivel from niveles");
+            ResultSet rs2 = pst2.executeQuery();
+            
+            while(rs2.next()){
+                jComboBox_nivel.addItem(rs2.getString("nivel"));
+            }
+            cn2.close();
+        } catch (SQLException e) {
+            System.err.println("Error en cargar niveles. " + e);
+            JOptionPane.showMessageDialog(null, "Error al cargar, contacte al administrador.");
+        }
     }
     
     //Reemplazar el icono de java por default
@@ -123,6 +138,8 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         jLabel_genero = new javax.swing.JLabel();
         jComboBox_grado1 = new javax.swing.JComboBox<>();
         jComboBox_grado = new javax.swing.JComboBox<>();
+        jLabel_nivel = new javax.swing.JLabel();
+        jComboBox_nivel = new javax.swing.JComboBox<>();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -223,7 +240,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Género:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
 
         buttonGroup1.add(jRadioButton_hombre);
         jRadioButton_hombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,7 +250,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
                 jRadioButton_hombreActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton_hombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
+        getContentPane().add(jRadioButton_hombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
         buttonGroup1.add(jRadioButton_mujer);
         jRadioButton_mujer.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,7 +260,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
                 jRadioButton_mujerActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton_mujer, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
+        getContentPane().add(jRadioButton_mujer, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
 
         jLabel_genero.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel_genero.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,6 +272,14 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
 
         jComboBox_grado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1º grado (Mujeres)", "2º grado (Mujeres)", "3º grado (Mujeres)", "4º grado (Mujeres)", "5º grado (Mujeres)", "6º grado (Mujeres)", "7º grado (Mujeres)", "1º año (Mujeres)", "2º año (Mujeres)", "3º año (Mujeres)", "4º año (Mujeres)", "5º año (Mujeres)" }));
         getContentPane().add(jComboBox_grado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
+
+        jLabel_nivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel_nivel.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_nivel.setText("Nivel:");
+        getContentPane().add(jLabel_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+
+        jComboBox_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Asignar" }));
+        getContentPane().add(jComboBox_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -294,7 +319,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         }
         
         grado_repetido = jComboBox_grado_repetido.getSelectedItem().toString();
-        
+        nivel = jComboBox_nivel.getSelectedItem().toString();
         //grado = jComboBox_grado.getSelectedItem().toString();
         
         informacionAlumnos3.setVisible(true);
@@ -379,6 +404,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox_grado;
     private javax.swing.JComboBox<String> jComboBox_grado1;
     private javax.swing.JComboBox<String> jComboBox_grado_repetido;
+    private javax.swing.JComboBox<String> jComboBox_nivel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -387,6 +413,7 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JLabel jLabel_genero;
+    private javax.swing.JLabel jLabel_nivel;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton_hombre;
     private javax.swing.JRadioButton jRadioButton_mujer;

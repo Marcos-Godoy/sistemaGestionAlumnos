@@ -48,7 +48,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
-                    "select apellido,nombre, dni, nombre_escuela, grado from alumnos order by apellido");
+                    "select apellido,nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido");
             //selecciona esos valores de la tabla
             
             ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
@@ -60,11 +60,12 @@ public class GestionarAlumnos extends javax.swing.JFrame {
             model.addColumn("DNI");
             model.addColumn("Escuela");
             model.addColumn("Curso");
+            model.addColumn("Nivel");
 
             while (rs.next()) { //para ver si encontro resultados o coincidencias
-                Object[] fila = new Object[5]; //son 4 columnas
+                Object[] fila = new Object[6];
 
-                for (int i = 0; i < 5; i++) { //voy ingresando lo que vaya encontrando en la bd
+                for (int i = 0; i < 6; i++) { //voy ingresando lo que vaya encontrando en la bd
                     fila[i] = rs.getObject(i + 1);
                 }
                 model.addRow(fila); //añado al modelo toda la fila
@@ -116,8 +117,10 @@ public class GestionarAlumnos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        txt_busqueda = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_gestionarAlumnos = new javax.swing.JTable();
+        jButton_buscar = new javax.swing.JButton();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,6 +131,13 @@ public class GestionarAlumnos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Gestionar Alumnos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+
+        txt_busqueda.setBackground(new java.awt.Color(51, 102, 255));
+        txt_busqueda.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txt_busqueda.setForeground(new java.awt.Color(255, 255, 255));
+        txt_busqueda.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_busqueda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txt_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 95, 120, 20));
 
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,11 +152,60 @@ public class GestionarAlumnos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 290));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 400));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 700, 290));
+
+        jButton_buscar.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_buscar.setFont(new java.awt.Font("Arial Narrow", 0, 11)); // NOI18N
+        jButton_buscar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_buscar.setText("Buscar");
+        jButton_buscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton_buscar.setBorderPainted(false);
+        jButton_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 30));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_buscarActionPerformed
+        String busqueda, query = "";
+        busqueda = txt_busqueda.getText().trim();
+        txt_busqueda.setText("");
+        
+        if("".equals(busqueda)) {
+            query = "select apellido, nombre, dni, nombre_escuela, grado, nivel from alumnos order by apellido";
+        } else {
+            query = "select apellido,nombre, dni, nombre_escuela, grado, nivel from alumnos where apellido = '"+ busqueda + "' order by nombre";
+        }
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable_gestionarAlumnos.getModel();
+        dtm.setNumRows(0);
+        
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(query);
+            
+            ResultSet rs = pst.executeQuery(); //ejecuto lo anterior
+
+            while (rs.next()) { //para ver si encontro resultados o coincidencias
+                Object[] fila = new Object[6];
+
+                for (int i = 0; i < 6; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila); //añado al modelo toda la fila
+            }
+            cn.close(); //cierra la conexion
+
+        } catch (SQLException e) {
+            System.err.println("Error al llenar tabla. " + e);
+            JOptionPane.showMessageDialog(null, "Error al mostrar informacion, ¡Contacte al administrador!");
+        }
+    }//GEN-LAST:event_jButton_buscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,9 +243,11 @@ public class GestionarAlumnos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_gestionarAlumnos;
+    private javax.swing.JTextField txt_busqueda;
     // End of variables declaration//GEN-END:variables
 }

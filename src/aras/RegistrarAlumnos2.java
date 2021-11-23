@@ -232,7 +232,7 @@ public class RegistrarAlumnos2 extends javax.swing.JFrame {
 
         jLabel_nivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel_nivel.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_nivel.setText("Grado / Curso:");
+        jLabel_nivel.setText("Nivel:");
         getContentPane().add(jLabel_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         jComboBox_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Asignar" }));
