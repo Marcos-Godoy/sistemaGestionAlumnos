@@ -366,6 +366,9 @@ public class Cursos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_nivelescopia = new javax.swing.JTable();
+        jButton_presionar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel_Wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -375,7 +378,7 @@ public class Cursos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Gestionar Cursos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         jTable_gestionarAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -390,27 +393,30 @@ public class Cursos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_gestionarAlumnos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 600, 160));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 600, 160));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Seleccione un alumnos para asignarle nivel:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jLabel2.setText("Asignar nivel por curso:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
 
         txt_nuevoCurso.setBackground(new java.awt.Color(51, 102, 255));
         txt_nuevoCurso.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_nuevoCurso.setForeground(new java.awt.Color(255, 255, 255));
         txt_nuevoCurso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nuevoCurso.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nuevoCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 25));
+        getContentPane().add(txt_nuevoCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 210, 25));
 
+        jButton_agregar.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_agregar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton_agregar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_agregar.setText("Crear nivel");
         jButton_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
+        getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         jTable_niveles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -425,7 +431,7 @@ public class Cursos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable_niveles);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 170, 100));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 170, 90));
 
         jComboBox_nivel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBox_nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sin Asignar" }));
@@ -434,12 +440,12 @@ public class Cursos extends javax.swing.JFrame {
                 jComboBox_nivelActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 100, 30));
+        getContentPane().add(jComboBox_nivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 100, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre del nuevo nivel:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jTable_nivelescopia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -454,7 +460,29 @@ public class Cursos extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable_nivelescopia);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 600, 160));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 600, 160));
+
+        jButton_presionar.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_presionar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton_presionar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_presionar.setText("Cursos");
+        jButton_presionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton_presionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_presionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton_presionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 90, 30));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Niveles creados");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Asignar nivel por alumno:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
 
         pack();
@@ -509,6 +537,14 @@ public class Cursos extends javax.swing.JFrame {
         actualizarTabla();
 
     }//GEN-LAST:event_jComboBox_nivelActionPerformed
+
+    private void jButton_presionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_presionarActionPerformed
+
+        AsignarCurso2 asignar = new AsignarCurso2();
+        asignar.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton_presionarActionPerformed
     
     private void actualizarTablaNiveles(){
         try {
@@ -727,10 +763,13 @@ public class Cursos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_agregar;
+    private javax.swing.JButton jButton_presionar;
     private javax.swing.JComboBox<String> jComboBox_nivel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel_Wallpaper;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

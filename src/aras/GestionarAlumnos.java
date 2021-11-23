@@ -155,7 +155,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 700, 290));
 
         jButton_buscar.setBackground(new java.awt.Color(51, 102, 255));
-        jButton_buscar.setFont(new java.awt.Font("Arial Narrow", 0, 11)); // NOI18N
+        jButton_buscar.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
         jButton_buscar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_buscar.setText("Buscar");
         jButton_buscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -165,7 +165,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
                 jButton_buscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 30));
+        getContentPane().add(jButton_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 60, 30));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
