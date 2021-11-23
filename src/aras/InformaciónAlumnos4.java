@@ -27,8 +27,8 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
     int user_update;
     public static int fila_point;
     int cantfilas = 0, filasAgregadas = 0, ban = 0;
-    public static InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
-    
+    //public static InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
+    public static InformaciónAlumnos2 informacionAlumnos2;
     public InformaciónAlumnos4() {
         initComponents();
         user_update = GestionarAlumnos.user_update;
@@ -45,7 +45,11 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        
+        System.out.println("Se creo el jframe 4");
         System.out.println(user_update);
+        informacionAlumnos2 = new InformaciónAlumnos2();
+        
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
@@ -189,7 +193,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         for(int i = 0; i < jTable1.getRowCount(); i++){
-            if("".equals((String) jTable1.getValueAt(i, 2))) {
+            if("".equals(jTable1.getValueAt(i, 2))) {
                 jTable1.setValueAt("0",i, 2);
             }
             if("".equals((String) jTable1.getValueAt(i, 0))) {
@@ -201,10 +205,9 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
             if("".equals((String) jTable1.getValueAt(i, 3))) {
                 jTable1.setValueAt("-",i, 3);
             }
-            System.out.println(jTable1.getValueAt(i, 2));
         }
         
-        //GestionarAlumnos.informacion_alumnos1.setVisible(true);
+        GestionarAlumnos.informacion_alumnos1.setVisible(true);
         InformaciónAlumnos1.informacionAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -273,7 +276,20 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tabla esta vacía!!!");
         }
         */
-        //InformaciónAlumnos2 informacionAlumnos2 = new InformaciónAlumnos2();
+        for(int i = 0; i < jTable1.getRowCount(); i++){
+            if("".equals(jTable1.getValueAt(i, 2))) {
+                jTable1.setValueAt("0",i, 2);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 0))) {
+                jTable1.setValueAt("-",i, 0);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 1))) {
+                jTable1.setValueAt("-",i, 1);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 3))) {
+                jTable1.setValueAt("-",i, 3);
+            }
+        }
         informacionAlumnos2.setVisible(true);
         InformaciónAlumnos1.informacionAlumnos4.setVisible(false); //oculto pantalla al cerrarse
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -304,7 +320,8 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                             pst.setInt(3, dni_alumno);
                             pst.setString(4, (String) jTable1.getValueAt(i, 0));
                             pst.setString(5, (String) jTable1.getValueAt(i, 1));
-                            pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                            //pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                            pst.setInt(6, (int) jTable1.getValueAt(i, 2));
                             pst.setString(7, (String) jTable1.getValueAt(i, 3));
                             pst.executeUpdate();
                             cn.close();
@@ -315,24 +332,26 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
                         }
                     } else {
-                        try {
+                        if(!("-".equals((String) jTable1.getValueAt(i, 0)))) { //Si de los familiares nuevos, hay uno que es basura, no lo subo a bd
+                            try {
 
-                            Connection cn = Conexion.conectar();
-                            PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
-                            pst.setString(1, nombre_alumno);
-                            pst.setString(2, apellido_alumno); //--
-                            pst.setInt(3, dni_alumno);
-                            pst.setString(4, (String) jTable1.getValueAt(i, 0));
-                            pst.setString(5, (String) jTable1.getValueAt(i, 1));
-                            pst.setString(6, (String) jTable1.getValueAt(i, 2));
-                            pst.setString(7, (String) jTable1.getValueAt(i, 3));
-                            pst.executeUpdate();
-                            cn.close();
-                            this.dispose();
-                        }
-                        catch (SQLException e) {
-                            System.err.println("Error en Registrar familiares. " + e);
-                            JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
+                                Connection cn = Conexion.conectar();
+                                PreparedStatement pst = cn.prepareStatement("insert into familiares values (?,?,?,?,?,?,?)");
+                                pst.setString(1, nombre_alumno);
+                                pst.setString(2, apellido_alumno); //--
+                                pst.setInt(3, dni_alumno);
+                                pst.setString(4, (String) jTable1.getValueAt(i, 0));
+                                pst.setString(5, (String) jTable1.getValueAt(i, 1));
+                                pst.setString(6, (String) jTable1.getValueAt(i, 2));
+                                pst.setString(7, (String) jTable1.getValueAt(i, 3));
+                                pst.executeUpdate();
+                                cn.close();
+                                this.dispose();
+                            }
+                            catch (SQLException e) {
+                                System.err.println("Error en Registrar familiares. " + e);
+                                JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
+                            }
                         }
                     } 
 
@@ -346,7 +365,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
             
             //Si se limpio la tabla se ejecuta lo siguiente
             for(int i = 0; i < jTable1.getRowCount(); i++) {
-                
+                if(!("-".equals((String) jTable1.getValueAt(i, 0)))) {
                 try {
 
                             Connection cn = Conexion.conectar();
@@ -366,7 +385,7 @@ public class InformaciónAlumnos4 extends javax.swing.JFrame {
                             System.err.println("Error en Registrar familiares. " + e);
                             JOptionPane.showMessageDialog(null, "¡ERROR al registrar familiares!, contacte al administrador.");
                         }
-                
+                }
             }
             
         }

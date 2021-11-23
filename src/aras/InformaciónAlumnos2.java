@@ -21,7 +21,8 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
     public static String nombre_escuela, numero_escuela, repitio, grado_repetido, grado, genero;
     //String user_update = "";
     int user_update;
-    public static InformaciónAlumnos3 informacionAlumnos3 = new InformaciónAlumnos3();
+    //public static InformaciónAlumnos3 informacionAlumnos3 = new InformaciónAlumnos3();
+    public static InformaciónAlumnos3 informacionAlumnos3;
     
     public InformaciónAlumnos2() {
         initComponents();
@@ -38,6 +39,9 @@ public class InformaciónAlumnos2 extends javax.swing.JFrame {
         
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
+        System.out.println("Se creo jframe 2");
+        informacionAlumnos3 = new InformaciónAlumnos3();
+        
         
         try {
             Connection cn = Conexion.conectar();

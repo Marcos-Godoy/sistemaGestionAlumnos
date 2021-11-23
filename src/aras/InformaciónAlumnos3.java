@@ -59,6 +59,8 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
         jLabel_Wallpaper.setIcon(icono);
         this.repaint();
         
+        System.out.println("Se creo jframe 3");
+        
         try {
             Connection cn = Conexion.conectar();
             PreparedStatement pst = cn.prepareStatement(
@@ -503,11 +505,13 @@ public class InformaciónAlumnos3 extends javax.swing.JFrame {
             }
         }
         //ban = 1;
-        this.dispose();
+        
         InformaciónAlumnos4.informacionAlumnos2.dispose();
         InformaciónAlumnos1.informacionAlumnos4.dispose();
+        GestionarAlumnos.informacion_alumnos1.dispose();
+        this.dispose();
         
-        System.exit(0); //Para cerrar toda la aplicación
+        //System.exit(0); //Para cerrar toda la aplicación
         
         //InformaciónAlumnos1.CerrarVentana();
         

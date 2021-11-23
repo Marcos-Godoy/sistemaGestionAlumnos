@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 public class InformaciónAlumnos1 extends javax.swing.JFrame {
     
     public static String nombre = "", apellido, lugar, fecha, localidad, domicilio, nombre_madre, nombre_padre, telefono, telefono2, dni, dni_madre, dni_padre;
-    public static InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
+    public static InformaciónAlumnos4 informacionAlumnos4;
     int ID;
     //String user_update = "";
     int user_update;
@@ -50,6 +50,11 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         this.repaint();
         
         txt_dni.setEnabled(false); //bloqueo el dni para que no se pueda modificar
+        
+        
+        System.out.println("Se creo jframe 1");
+        //Lo creo apenas se lanza
+        informacionAlumnos4 = new InformaciónAlumnos4();
         
         try {
             Connection cn = Conexion.conectar();
@@ -355,7 +360,7 @@ public class InformaciónAlumnos1 extends javax.swing.JFrame {
         
         //InformaciónAlumnos4 informacionAlumnos4 = new InformaciónAlumnos4();
         informacionAlumnos4.setVisible(true);
-        //GestionarAlumnos.informacion_alumnos1.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

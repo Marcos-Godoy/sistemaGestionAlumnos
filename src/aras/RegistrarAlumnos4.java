@@ -179,6 +179,21 @@ public class RegistrarAlumnos4 extends javax.swing.JFrame {
         // TODO add your handling code here:
         //RegistrarAlumnos1 registrarAlumnos = new RegistrarAlumnos1();
         //Administrador.registrarAlumnos.setVisible(true);
+        for(int i = 0; i < jTable1.getRowCount(); i++){
+            if("".equals((String) jTable1.getValueAt(i, 2))) {
+                jTable1.setValueAt("0",i, 2);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 0))) {
+                jTable1.setValueAt("-",i, 0);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 1))) {
+                jTable1.setValueAt("-",i, 1);
+            }
+            if("".equals((String) jTable1.getValueAt(i, 3))) {
+                jTable1.setValueAt("-",i, 3);
+            }
+            System.out.println(jTable1.getValueAt(i, 2));
+        }
         RegistrarAlumnos1.registrarAlumnos4.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

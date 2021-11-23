@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestionarAlumnos extends javax.swing.JFrame {
 
     public static int user_update;
-    //public static InformaciónAlumnos1 informacion_alumnos1;
+    public static InformaciónAlumnos1 informacion_alumnos1;
     DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form GestionarAlumnos
@@ -30,7 +30,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
     public GestionarAlumnos() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
-        setSize(650,430); 
+        setSize(700,500); 
         setResizable(false);
         setTitle("Gestión de alumnos");
         setLocationRelativeTo(null);
@@ -88,7 +88,8 @@ public class GestionarAlumnos extends javax.swing.JFrame {
                if(fila_point > -1){
                    user_update = (int) model.getValueAt(fila_point, 2); //nos devuelve el nombre
                    System.out.println(user_update);
-                   InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1(); //abro la proxima interfaz
+                   //InformaciónAlumnos1 informacion_alumnos1 = new InformaciónAlumnos1(); //abro la proxima interfaz
+                   informacion_alumnos1 = new InformaciónAlumnos1();
                    informacion_alumnos1.setVisible(true);
                    dispose();
                }
