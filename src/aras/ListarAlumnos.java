@@ -160,7 +160,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         Imprimir = new javax.swing.JButton();
         jButton_eliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton_eliminar1 = new javax.swing.JButton();
+        jButton_estadistica = new javax.swing.JButton();
         cmb_filtroNivel = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -244,16 +244,16 @@ public class ListarAlumnos extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 120, 30));
 
-        jButton_eliminar1.setBackground(new java.awt.Color(51, 102, 255));
-        jButton_eliminar1.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
-        jButton_eliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_eliminar1.setText("Estadísticas");
-        jButton_eliminar1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_estadistica.setBackground(new java.awt.Color(51, 102, 255));
+        jButton_estadistica.setFont(new java.awt.Font("Arial Narrow", 0, 14)); // NOI18N
+        jButton_estadistica.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_estadistica.setText("Estadísticas");
+        jButton_estadistica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_eliminar1ActionPerformed(evt);
+                jButton_estadisticaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_eliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 120, 30));
+        getContentPane().add(jButton_estadistica, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 120, 30));
 
         cmb_filtroNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sin Asignar" }));
         cmb_filtroNivel.addActionListener(new java.awt.event.ActionListener() {
@@ -863,11 +863,17 @@ ObtenerDatosTabla();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton_eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminar1ActionPerformed
+    private void jButton_estadisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estadisticaActionPerformed
         
-        new Grafica().setVisible(true);
+        Grafica f1 = new Grafica();
+        f1.setLocationRelativeTo(null);
+        f1.setVisible(true);
+
+        GraficaNiveles f2 = new GraficaNiveles();
+        f2.setLocation(f1.getX() + f1.getWidth(), f1.getY());
+        f2.setVisible(true);
         
-    }//GEN-LAST:event_jButton_eliminar1ActionPerformed
+    }//GEN-LAST:event_jButton_estadisticaActionPerformed
 
     
     private void cmb_filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_filtroActionPerformed
@@ -1033,7 +1039,7 @@ ObtenerDatosTabla();
     private javax.swing.JComboBox<String> cmb_filtroNivel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_eliminar;
-    private javax.swing.JButton jButton_eliminar1;
+    private javax.swing.JButton jButton_estadistica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

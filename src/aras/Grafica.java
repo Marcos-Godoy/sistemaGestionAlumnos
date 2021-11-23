@@ -22,23 +22,16 @@ import javax.swing.WindowConstants;
  */
 public class Grafica extends javax.swing.JFrame {
 
-    String user;
     int[] vector_cantidad = new int[11];
     String[] vector_inscripcion = new String[11];
     int afirmacion, negacion;
 
-    /**
-     * Creates new form Grafica
-     */
     public Grafica() {
         initComponents();
-
-        user = Login.user;
 
         setTitle("Estadistica");
         setSize(550, 450);
         setResizable(false);
-        setLocationRelativeTo(null);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
