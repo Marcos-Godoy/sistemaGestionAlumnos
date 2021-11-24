@@ -82,26 +82,26 @@ public class Login extends javax.swing.JFrame {
         txt_user.setForeground(new java.awt.Color(255, 255, 255));
         txt_user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_user.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 330, 210, -1));
+        getContentPane().add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 210, -1));
 
         txt_password.setBackground(new java.awt.Color(51, 102, 255));
         txt_password.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txt_password.setForeground(new java.awt.Color(255, 255, 255));
         txt_password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_password.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 370, 210, -1));
+        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 210, -1));
 
         jButton_Acceder.setBackground(new java.awt.Color(51, 102, 255));
         jButton_Acceder.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         jButton_Acceder.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Acceder.setText("Acceder");
-        jButton_Acceder.setBorder(null);
+        jButton_Acceder.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton_Acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AccederActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 420, 210, 35));
+        getContentPane().add(jButton_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 210, 35));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 550));
 
         pack();

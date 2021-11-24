@@ -30,7 +30,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
     public GestionarAlumnos() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
-        setSize(700,500); 
+        setSize(710,500); 
         setResizable(false);
         setTitle("Gestión de alumnos");
         setLocationRelativeTo(null);
@@ -166,7 +166,7 @@ public class GestionarAlumnos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 60, 30));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -107,7 +107,7 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Información del Alumno");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -173,74 +173,74 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nombre de la madre:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
         txt_nombre_madre.setBackground(new java.awt.Color(51, 102, 255));
         txt_nombre_madre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_nombre_madre.setForeground(new java.awt.Color(255, 255, 255));
         txt_nombre_madre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre_madre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre_madre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 210, -1));
+        getContentPane().add(txt_nombre_madre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 210, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("DNI:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
 
         txt_dni_madre.setBackground(new java.awt.Color(51, 102, 255));
         txt_dni_madre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_dni_madre.setForeground(new java.awt.Color(255, 255, 255));
         txt_dni_madre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_dni_madre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_dni_madre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 210, -1));
+        getContentPane().add(txt_dni_madre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 210, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nombre del padre:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
 
         txt_nombre_padre.setBackground(new java.awt.Color(51, 102, 255));
         txt_nombre_padre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_nombre_padre.setForeground(new java.awt.Color(255, 255, 255));
         txt_nombre_padre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_nombre_padre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_nombre_padre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 210, -1));
+        getContentPane().add(txt_nombre_padre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 210, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("DNI:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
 
         txt_dni_padre.setBackground(new java.awt.Color(51, 102, 255));
         txt_dni_padre.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_dni_padre.setForeground(new java.awt.Color(255, 255, 255));
         txt_dni_padre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_dni_padre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_dni_padre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, 210, -1));
+        getContentPane().add(txt_dni_padre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, 210, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Teléfono de contacto:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
 
         txt_telefono.setBackground(new java.awt.Color(51, 102, 255));
         txt_telefono.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_telefono.setForeground(new java.awt.Color(255, 255, 255));
         txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 210, -1));
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 210, -1));
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Siguiente >");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 140, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 140, 50));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,14 +269,14 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Otro teléfono:");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, -1, -1));
 
         txt_telefono2.setBackground(new java.awt.Color(51, 102, 255));
         txt_telefono2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_telefono2.setForeground(new java.awt.Color(255, 255, 255));
         txt_telefono2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_telefono2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 210, 25));
+        getContentPane().add(txt_telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 210, 25));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -335,8 +335,12 @@ public class RegistrarAlumnos1 extends javax.swing.JFrame {
                     //Si hay resultados obtengo el valor. 
                     n = rs.getInt(1);
                     if(n == 0) {
-                        registrarAlumnos4.setVisible(true);
-                        this.setVisible(false);
+                        if(!(nombre.equals("")) && !(apellido.equals(""))) {
+                            registrarAlumnos4.setVisible(true);
+                            this.setVisible(false);
+                        } else {
+                            JOptionPane.showMessageDialog(null,"Nombre y Apellido son campos obligatorios.");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null,"Ese DNI ya fue ingresado.");
                     }

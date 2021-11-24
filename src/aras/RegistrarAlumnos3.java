@@ -120,123 +120,123 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Alergias:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         txt_alergias.setBackground(new java.awt.Color(51, 102, 255));
         txt_alergias.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_alergias.setForeground(new java.awt.Color(255, 255, 255));
         txt_alergias.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_alergias.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_alergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 210, 25));
+        getContentPane().add(txt_alergias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 210, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Cobertura médica:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         txt_cobertura.setBackground(new java.awt.Color(51, 102, 255));
         txt_cobertura.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_cobertura.setForeground(new java.awt.Color(255, 255, 255));
         txt_cobertura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_cobertura.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_cobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 210, -1));
+        getContentPane().add(txt_cobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 210, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Padece de alguna condición médica:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         txt_condicion.setBackground(new java.awt.Color(51, 102, 255));
         txt_condicion.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_condicion.setForeground(new java.awt.Color(255, 255, 255));
         txt_condicion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_condicion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 210, -1));
+        getContentPane().add(txt_condicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 210, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Paga Inscripción:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Grupo sanguíneo:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
 
         buttonGroup1.add(jRadioButton_inscripcion);
         jRadioButton_inscripcion.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton_inscripcion.setText("SI");
-        getContentPane().add(jRadioButton_inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, -1));
+        getContentPane().add(jRadioButton_inscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("NO");
-        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, -1));
+        getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Paga Cuota:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, -1));
 
         buttonGroup2.add(jRadioButton_cuota);
         jRadioButton_cuota.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton_cuota.setText("SI");
-        getContentPane().add(jRadioButton_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+        getContentPane().add(jRadioButton_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("NO");
-        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, -1, -1));
+        getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
         jComboBox_sangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-", "0+", "A-", "A+", "B-", "B+", "AB" }));
-        getContentPane().add(jComboBox_sangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        getContentPane().add(jComboBox_sangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Observaciones:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
 
         txt_retira_con.setBackground(new java.awt.Color(51, 102, 255));
         txt_retira_con.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         txt_retira_con.setForeground(new java.awt.Color(255, 255, 255));
         txt_retira_con.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_retira_con.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(txt_retira_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 210, 25));
+        getContentPane().add(txt_retira_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 210, 25));
 
         jTextArea_observaciones.setColumns(20);
         jTextArea_observaciones.setRows(5);
         jScrollPane1.setViewportView(jTextArea_observaciones);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 210, 90));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 210, 90));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Se retira con:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("< Anterior");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 140, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 140, 50));
 
         jButton2.setBackground(new java.awt.Color(51, 102, 255));
         jButton2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Finalizar >");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 140, 50));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 140, 50));
         getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 500));
 
         pack();
@@ -355,7 +355,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
             Document documento = new Document(); //creo objeto de la clase document
             try {
                 String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Ficha" + apellido + nombre + ".pdf")); //complementamos la ruta
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Sistema de Registro/Fichas de Inscripción/Ficha" + apellido + nombre + ".pdf")); //complementamos la ruta
 
                 com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerFicha.jpg"); //agrego el header
                 header.scaleToFit(300, 900); //tamaño del header
@@ -451,7 +451,7 @@ public class RegistrarAlumnos3 extends javax.swing.JFrame {
                 documento.add(terminos);
 
                 documento.add(new Paragraph("Firma Madre, Padre o Tutor:\n",f));
-                documento.add(new Paragraph("Aclaración y Parentesco:                                                    DNI:",f));
+                documento.add(new Paragraph("Aclaración y Parentesco:                                                         DNI:",f));
                 
                 
 

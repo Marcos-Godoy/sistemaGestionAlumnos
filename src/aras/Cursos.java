@@ -39,7 +39,7 @@ public class Cursos extends javax.swing.JFrame {
     public Cursos() {
         initComponents();
         // metodos para poder modificar la interfaz visual por codigo
-        setSize(600,500); 
+        setSize(610,520); 
         setResizable(false);
         setTitle("Gestión de cursos");
         setLocationRelativeTo(null);
@@ -418,6 +418,8 @@ public class Cursos extends javax.swing.JFrame {
         });
         getContentPane().add(jButton_agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
+        jTable_niveles.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTable_niveles.setForeground(new java.awt.Color(102, 153, 255));
         jTable_niveles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -483,7 +485,7 @@ public class Cursos extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Asignar nivel por alumno:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

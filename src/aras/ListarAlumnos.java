@@ -54,7 +54,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Listado de alumnos");
         setLocationRelativeTo(null);
-        setSize(700,500);
+        setSize(710,510);
         //cuando se cierra la ventana, termina de ejecutarse el programa
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         
@@ -270,7 +270,7 @@ public class ListarAlumnos extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Curso");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 500));
+        getContentPane().add(jLabel_Wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -349,7 +349,7 @@ ObtenerDatosTabla();
             Document documento = new Document(); //creo objeto de la clase document
             try {
                 String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Sistema de Registro/Listados de Asistencia/Listado " + seleccion + ".pdf")); //complementamos la ruta
 
                 com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
                 header.scaleToFit(300, 900); //tamaño del header
@@ -443,7 +443,7 @@ ObtenerDatosTabla();
                 Document documento = new Document(); //creo objeto de la clase document
                 try {
                     String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Listado " + seleccion + ".pdf")); //complementamos la ruta
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Sistema de Registro/Listados de Asistencia/Listado " + seleccion + ".pdf")); //complementamos la ruta
 
                     com.itextpdf.text.Image header = com.itextpdf.text.Image.getInstance("src/images/BannerPDF.jpg"); //agrego el header
                     header.scaleToFit(300, 900); //tamaño del header
@@ -595,7 +595,7 @@ ObtenerDatosTabla();
         
         Connection cn = Conexion.conectar();
         String ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-        File file = new File(ruta + "/Desktop/Alumnos " + seleccion + ".xls");
+        File file = new File(ruta + "/Desktop/Sistema de Registro/Datos de Alumnos/Alumnos " + seleccion + ".xls");
         int row = 0;
         WritableSheet excelSheet = null;
         WritableWorkbook workbook = null;
@@ -779,7 +779,7 @@ ObtenerDatosTabla();
         //Se reutilizaran algunas de las variables usadas en el proceso anterior
         cn = Conexion.conectar();
         ruta = System.getProperty("user.home"); //ruta donde se guarda el archivo
-        file = new File(ruta + "/Desktop/CuatroVientosFamiliares.xls");
+        file = new File(ruta + "/Desktop/Sistema de Registro/Datos de Alumnos/CuatroVientosFamiliares.xls");
         row = 0;
         excelSheet = null;
         workbook = null;
